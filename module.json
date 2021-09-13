@@ -1,17 +1,17 @@
 {
-  "name": "module",
-  "title": "New Module",
-  "description": "",
+  "name": "metric-ruler-labels",
+  "title": "Additional Metric Ruler Labels",
+  "description": "A simple module that add additional metric conversions for your ruler. Supported units are (ft, ft., feet, mi, mi., miles)",
   "version": "This is auto replaced",
   "library": "false",
   "manifestPlusVersion": "1.0.0",
   "minimumCoreVersion": "0.8.8",
-  "compatibleCoreVersion": "0.8.8",
+  "compatibleCoreVersion": "0.8.9",
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "Roger",
+      "url": "https://github.com/Roger92",
+      "discord": "Roger#5198"
     }
   ],
   "dependencies": [
