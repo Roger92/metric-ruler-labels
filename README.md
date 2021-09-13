@@ -9,9 +9,19 @@
 
 # Roger's Additional Metric Ruler Labels
 
-This module adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI
+For everyone that uses the metric system in the real world and wants to know the metric distances without changing the DnD system.
 
-The following units are supported:
+GM:
+> There is a 20 feet wide gorge upon your party. What do you do?
+
+*You are asking yourself:* 
+> 20 feet ... is this wide? Should i try jumping across it?
+
+<br>
+This module will help you to better understand distances. <br>
+It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
+
+### The following units are supported:
 
 - ft, ft. and feet will get converted to meters (5 ft -> 1,5 m)
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
