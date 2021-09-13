@@ -16,4 +16,10 @@ The following units are supported:
 - ft, ft. and feet will get converted to meters (5 ft -> 1,5 m)
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
 
+## Example feet to meters
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/11605051/133088579-ca09a91c-ea11-4d2a-b53a-1e5adfac374a.gif)
+
+## Example miles to kilometers
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
+
 ## Changelog
