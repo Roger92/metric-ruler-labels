@@ -22,6 +22,15 @@ The following units are supported:
 ## Example miles to kilometers
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
 
+## Compatibility
+I only tested it with FoundryVTT 0.8.9 but it should work with other versions that the two dependencies support (0.8.5 and later)
+
+## Dependencies
+- libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
+- libRuler from ceawok https://foundryvtt.com/packages/libruler
+
 ## Planned
 Add this feature also to the measurement templates like cone, circle, rectangle and ray
+
 ## Changelog
+- v0.9.0 First realease with the conversions for miles and feet for the ruler tool.
