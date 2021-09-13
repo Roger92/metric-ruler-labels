@@ -12,7 +12,7 @@
 For everyone that uses the metric system in the real world and wants to know the metric distances without changing the DnD system.
 
 GM:
-> There is a 20 feet wide gorge upon your party. What do you do?
+> There is a 20 feet wide gorge in front of your party. What do you do?
 
 *You are asking yourself:* 
 > 20 feet ... is this wide? Should i try jumping across it?
