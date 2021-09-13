@@ -22,4 +22,6 @@ The following units are supported:
 ## Example miles to kilometers
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
 
+## Planned
+Add this feature also to the measurement templates like cone, circle, rectangle and ray
 ## Changelog
