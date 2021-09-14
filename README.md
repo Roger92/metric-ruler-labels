@@ -1,12 +1,8 @@
-![](https://img.shields.io/badge/Foundry-v0.8.9-informational)
-<!--- Downloads @ Latest Badge -->
-<!--- replace <user>/<repo> with your username/repository -->
-<!--- ![Latest Release Download Count](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/latest/module.zip) -->
-
-<!--- Forge Bazaar Install % Badge -->
-<!--- replace <your-module-name> with the `name` in your manifest -->
-<!--- ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fmetric-ruler-labels&colorB=4aa94a) -->
-
+[![Version (latest)](https://img.shields.io/github/v/release/Roger92/metric-ruler-labels)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
+[![Foundry Version](https://img.shields.io/badge/dynamic/json.svg?url=https://github.com/Roger92/metric-ruler-labels/releases/latest/download/module.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=blueviolet)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
+[![GitHub downloads (latest)](https://img.shields.io/badge/dynamic/json?label=Downloads@latest&query=assets[?(@.name.includes('zip'))].download_count&url=https://api.github.com/repos/Roger92/metric-ruler-labels/releases/latest&color=green)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
+[![Forge Install Base](https://img.shields.io/badge/dynamic/json?label=Forge%20Install%20Base&query=package.installs&suffix=%&url=https://forge-vtt.com/api/bazaar/package/metric-ruler-labels&colorB=brightgreen)](https://forge-vtt.com/)
+[![Ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coffee-%23FF5E5B?logo=Ko-fi&logoColor=white)](https://ko-fi.com/roger92)
 # Roger's Additional Metric Ruler Labels
 
 For everyone that uses the metric system in the real world and wants to know the metric distances without changing the DnD system.
@@ -51,7 +47,5 @@ Also thanks to those developers :)
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
-## Support
-This module is totally free of charge. Its my first one and it might not be perfect. But if this module helps you so much and is what you ever dreamed for, then feel free to tip me [a yummy coffee](https://ko-fi.com/roger92)
 ## Changelog
 - v0.9.0 First realease with the conversions for miles and feet for the ruler tool.
