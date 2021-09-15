@@ -44,6 +44,9 @@ I only tested it with FoundryVTT 0.8.9 but it should work with other versions th
 
 Also thanks to those developers :)
 
+## Planned
+Support for MeasureTemplate tool (cone, circle, ray) and for the package DragRuler.
+
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
