@@ -44,7 +44,7 @@ I only tested it with FoundryVTT 0.8.9 but it should work with other versions th
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
-Also thanks to those developers :)
+Also thanks to ruipin for the libWrapper module :)
 
 ## Planned
 Support for MeasureTemplate tool (cone, circle, ray) and for the package DragRuler.
