@@ -1,0 +1,16 @@
+{
+    "metric-ruler-labels":{
+        "settings": {
+            "dragRulerSupport": {
+                "name": "Zeige metrische Angaben bei DragRuler",
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt."
+            }
+        },
+        "dependencies": {
+            "libWrapper": {
+                "title": "Abhängigkeit libWrapper nicht gefunden!",
+                "infotext": "Das Modul 'Roger's Additional Metric Ruler Labels' benötigt das 'libruler' Modul. Bitte installiere und aktiviere es."
+            }
+        }
+    }
+}

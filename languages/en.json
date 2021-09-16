@@ -1,3 +1,16 @@
 {
-    "MODULE.hello": "hello"
+    "metric-ruler-labels":{
+        "settings": {
+            "dragRulerSupport": {
+                "name": "Show metric units on DragRuler",
+                "hint": "When enabled, additional metric units are also shown for the DragRuler package from  the author Stäbchenfisch."
+            }
+        },
+        "dependencies": {
+            "libWrapper": {
+                "title": "Dependency libWrapper not found!",
+                "infotext": "The module 'Roger's Additional Metric Ruler Labels' requires the 'libruler' module. Please install and activate it."
+            }
+        }
+    }
 }
