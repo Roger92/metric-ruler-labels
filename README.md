@@ -23,13 +23,16 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
 
 ## Example feet to meters
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/11605051/133088579-ca09a91c-ea11-4d2a-b53a-1e5adfac374a.gif)
+![Ruler](https://user-images.githubusercontent.com/11605051/133685368-75476211-907a-43fb-8aa9-400e7aa9171c.gif)
 
 ## Example miles to kilometers
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
 
 ## Support for other packages
+**DragRuler**<br>
 This module now supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
+![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
+
 
 ## Installation
 To install, follow these instructions:
