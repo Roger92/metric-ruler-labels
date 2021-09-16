@@ -5,7 +5,7 @@
 [![Ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coffee-%23FF5E5B?logo=Ko-fi&logoColor=white)](https://ko-fi.com/roger92)
 # Roger's Additional Metric Ruler Labels
 
-For everyone that uses the metric system in the real world and wants to know the metric distances without changing the DnD system.
+For everyone that uses the metric system in the real world and wants to know the metric distances without changing the underlying game system.
 
 GM:
 > A 20 feet wide gorge lies ahead of your party. What do you do?
