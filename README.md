@@ -75,6 +75,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 **v0.9.1**
+- Added support for FoundryVTT's MeasureTemplates
+
+**v0.9.1**
 - Added support for the DragRuler module by Stäbchenfisch ( you can activate/deactivate metric labels for this module in the settings)
 - All segments of the ruler now have metric labels
 - Added german localization
