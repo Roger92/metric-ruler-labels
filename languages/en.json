@@ -2,8 +2,12 @@
     "metric-ruler-labels":{
         "settings": {
             "dragRulerSupport": {
-                "name": "Show metric units on DragRuler",
+                "name": "Show on DragRuler",
                 "hint": "When enabled, additional metric units are also shown for the DragRuler package from  the author Stäbchenfisch."
+            },
+            "measureTemplateSupport": {
+                "name": "Show on Measure Templates",
+                "hint": "When enabled, additional metric units are also shown when using the measure templates (circle, cone, ray, rectangle)."
             }
         },
         "dependencies": {
