@@ -28,6 +28,9 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 ## Example miles to kilometers
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
 
+## Works with FoundryVTT's MeasureTemplates
+![measureTemplates](https://user-images.githubusercontent.com/11605051/133858694-eea1b96e-3524-4725-b889-37dec98e2a74.gif)
+
 ## Support for other packages
 **DragRuler**<br>
 This module now supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
@@ -50,7 +53,7 @@ I only tested it with FoundryVTT 0.8.9 but it should work with other versions th
 Also thanks to ruipin for the libWrapper module :)
 
 ## Planned
-Support for MeasureTemplate tool (cone, circle, ray) and for the package DragRuler.
+Nothing right now. :)
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
