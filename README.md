@@ -17,7 +17,22 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
-### The following units are supported:
+## Table of Contents
+
+  * [The following units are supported:](#the-following-units-are-supported)
+  * [Example feet to meters](#example-feet-to-meters)
+  * [Example miles to kilometers](#example-miles-to-kilometers)
+  * [Works with FoundryVTT's MeasureTemplates](#works-with-foundryvtts-measuretemplates)
+  * [Support for other packages](#support-for-other-packages)
+    +  [DragRuler](#dragruler)
+  * [Installation](#installation)
+  * [Compatibility](#compatibility)
+  * [Dependencies](#dependencies)
+  * [Planned](#planned)
+  * [Feedback](#feedback)
+  * [Changelog](#changelog)
+
+## The following units are supported
 
 - ft, ft. and feet will get converted to meters (5 ft -> 1,5 m)
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
@@ -25,14 +40,14 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 ## Example feet to meters
 ![Ruler](https://user-images.githubusercontent.com/11605051/133685368-75476211-907a-43fb-8aa9-400e7aa9171c.gif)
 
-## Example miles to kilometers
+## Example miles to kilometers 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
 
 ## Works with FoundryVTT's MeasureTemplates
 ![measureTemplates](https://user-images.githubusercontent.com/11605051/133858694-eea1b96e-3524-4725-b889-37dec98e2a74.gif)
 
 ## Support for other packages
-**DragRuler**<br>
+### DragRuler
 This module now supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
