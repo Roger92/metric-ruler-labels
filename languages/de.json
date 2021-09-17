@@ -2,8 +2,12 @@
     "metric-ruler-labels":{
         "settings": {
             "dragRulerSupport": {
-                "name": "Zeige metrische Angaben bei DragRuler",
+                "name": "Anzeige bei DragRuler",
                 "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt."
+            },
+            "measureTemplateSupport": {
+                "name": "Anzeige bei Schablonen",
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
             }
         },
         "dependencies": {

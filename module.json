@@ -1,7 +1,7 @@
 {
   "name": "metric-ruler-labels",
   "title": "Additional Metric Ruler Labels",
-  "description": "A simple module that add additional metric conversions for your ruler. Supported units are (ft, ft., feet, mi, mi., miles)",
+  "description": "A simple module that add additional metric conversions for your ruler and measureTemplates. Supported units are (ft, ft., feet, mi, mi., miles)",
   "version": "This is auto replaced",
   "library": "false",
   "manifestPlusVersion": "1.0.0",
@@ -24,7 +24,6 @@
     "/scripts/module.js"
   ],
   "scripts": [
-    "/scripts/lib/lib.js"
   ],
   "styles": [
     "/styles/module.css"
@@ -34,6 +33,11 @@
       "lang": "en",
       "name": "English",
       "path": "languages/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "languages/de.json"
     }
   ],
   "url": "This is auto replaced",
