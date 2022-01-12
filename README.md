@@ -17,6 +17,9 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
+## V9 - Compatability
+I didn't check the compatability to V9 yet.
+
 ## Table of Contents
 
   * [The following units are supported:](#the-following-units-are-supported)
