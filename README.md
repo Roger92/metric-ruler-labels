@@ -18,7 +18,7 @@ This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
 ## V9 - Compatability
-Its compatible with V9 - Checked ob Build 242.
+Its compatible with V9 - Checked ob Build 242. Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)
 
 ## Table of Contents
 
