@@ -41,8 +41,8 @@ Hooks.once('ready', () => {
             let wrappedResult = await wrapped(...args);
             let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
 
-            if(measureTemplateSupport && wrappedResult && wrappedResult.ruler){
-                wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
+            if(measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler){
+                wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
             }
             return wrappedResult;
         }, 'MIXED');
