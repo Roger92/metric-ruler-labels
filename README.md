@@ -77,6 +77,10 @@ Nothing right now. :)
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v1.1.0**
+- Added support for V9
+- Fixed MeasureTemplates support that didn't work anymore in V9
+
 **v1.0.0**
 - Added support for FoundryVTT's MeasureTemplates
 
