@@ -13,6 +13,10 @@
                 "name": "Disable Built-In Conversions",
                 "hint": "When checked, the built-in conversions will be disabled."
             },
+            "hideFoundryMeasurement": {
+                "name": "Hides the Measurements from Foundry",
+                "hint": "When checked, the original measurement from foundry will be hidden. You can't display two conversions if this is active."
+            },
             "useCustomConversions": {
                 "name": "Activates custom Conversions",
                 "hint": "Activates the Conversions that the DM can define. If built-in conversions are not disabled, then these will be shown in addition to the metric conversions."

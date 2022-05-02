@@ -13,6 +13,10 @@
                 "name": "Deaktiviere eingebaute Umwandlung",
                 "hint": "Wenn ausgewählt, wird die eingebaute metrische Umwandlung deaktiviert."
             },
+            "hideFoundryMeasurement": {
+                "name": "Verstecke die Messungen von Foundry ",
+                "hint": "Wenn ausgewählt, werden die Originalmessungen von Foundry nicht mehr angezeigt. Du kannst nicht zwei Umwandlungen anzeigen wenn dies aktiv ist."
+            },
             "useCustomConversions": {
                 "name": "Aktiviere Eigene Umwandlungen",
                 "hint": "Aktiviert die Umwandlungen, welche der DM konfigurieren kann. Wenn die metrischen Umwandlungen des Moduls nicht deaktiviert sind, werden diese zusätzlich angezeigt."

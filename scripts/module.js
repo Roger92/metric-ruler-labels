@@ -108,6 +108,14 @@ function registerSettings() {
         type: Boolean,
         default: true,
     });
+    game.settings.register("metric-ruler-labels", "hideFoundryMeasurement", {
+        name: "metric-ruler-labels.settings.hideFoundryMeasurement.name",
+        hint: "metric-ruler-labels.settings.hideFoundryMeasurement.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
     game.settings.register("metric-ruler-labels", "disableBuiltInConversion", {
         name: "metric-ruler-labels.settings.disableBuiltInConversion.name",
         hint: "metric-ruler-labels.settings.disableBuiltInConversion.hint",
@@ -177,11 +185,17 @@ function registerSettings() {
 function addMetricLabels(text){
     let regexFeet = /^(-?\d*\.?\d*)\s?(?:ft\.?|feet)\s?x?(\s?(-?\d*\.?\d*)\s?(?:ft\.?|feet))?(?:\[(-?\d*\.?\d*)\s?(?:ft\.?|feet)\])?$/;
     let regexMiles = /^(-?\d*\.?\d*)\s?(?:mi\.?|miles)\s?x?(\s?(-?\d*\.?\d*)\s?(?:mi\.?|miles))?(?:\[(-?\d*\.?\d*)\s(?:mi\.?|miles)\])?$/;
-
+    let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let regexResult = regexFeet.exec(text);
+
     if (regexResult && regexResult.length === 5 && regexResult[1]) {
+        if(hideFoundry){
+            text = "";
+        }else{
+            text += " \n "
+        }
         //Convert to meters and set label
-        text = text + " \n " + parseFloat(((regexResult[1] / 10) * 3).toFixed(2)) + " m";
+        text = text + parseFloat(((regexResult[1] / 10) * 3).toFixed(2)) + " m";
         if(regexResult[3]) {
             text = text + " x " + parseFloat(((regexResult[3] / 10) * 3).toFixed(2)) + " m";
         }else if(regexResult[4]) {
@@ -192,7 +206,12 @@ function addMetricLabels(text){
         regexResult = regexMiles.exec(text);
         //Convert to kilometers and set label
         if (regexResult && regexResult.length === 5 && regexResult[1]) {
-            text = text + " \n " + parseFloat((regexResult[1] / 0.62137).toFixed(2)) + " km";
+            if(hideFoundry){
+                text = "";
+            }else{
+                text += " \n "
+            }
+            text = text + parseFloat((regexResult[1] / 0.62137).toFixed(2)) + " km";
             if (regexResult[3]) {
                 text = text + " x " + parseFloat((regexResult[3] / 0.62137).toFixed(2)) + " km";
             }else if(regexResult[4]){
@@ -205,6 +224,7 @@ function addMetricLabels(text){
 }
 
 function addConvertedLabels(text){
+    let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
     let conversionFactorBig = game.settings.get("metric-ruler-labels", "customConversionFactorBig");
     let customConversionLabelSmall = game.settings.get("metric-ruler-labels", "customConversionLabelSmall");
@@ -215,16 +235,18 @@ function addConvertedLabels(text){
     originalLabelsSmall = originalLabelsSmall.replaceAll(",","|");
     originalLabelsBig = originalLabelsBig.replaceAll(".","\\.");
     originalLabelsBig = originalLabelsBig.replaceAll(",","|");
-
     let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:"+ originalLabelsSmall+")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:"+ originalLabelsSmall+"))?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:"+ originalLabelsSmall+")\\])?");
     let regexBig = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:"+ originalLabelsBig+")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:"+ originalLabelsBig+"))?(?:\\[(-?\\d*\\.?\\d*)\\s(?:"+ originalLabelsBig+")\\])?");
     let regexResult = regexSmall.exec(text);
-    console.log(regexSmall);
-    console.log(regexResult);
-    console.log(text);
+
     if (regexResult && regexResult.length === 5 && regexResult[1]) {
+        if(hideFoundry){
+            text = "";
+        }else{
+            text += " \n "
+        }
         //Convert to meters and set label
-        text = text + " \n " + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " "+customConversionLabelSmall;
+        text = text  + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " "+customConversionLabelSmall;
         if(regexResult[3]) {
             text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " "+customConversionLabelSmall;
         }else if(regexResult[4]) {
@@ -235,7 +257,12 @@ function addConvertedLabels(text){
         regexResult = regexBig.exec(text);
         //Convert to kilometers and set label
         if (regexResult && regexResult.length === 5 && regexResult[1]) {
-            text = text + " \n " + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " "+customConversionLabelBig;
+            if(hideFoundry){
+                text = "";
+            }else{
+                text += " \n "
+            }
+            text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " "+customConversionLabelBig;
             if (regexResult[3]) {
                 text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " "+customConversionLabelBig;
             }else if(regexResult[4]){
