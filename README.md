@@ -18,7 +18,7 @@ This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
 ## V9 - Compatability
-Its compatible with V9 - Checked ob Build 242.
+Its compatible with V9 - Checked on Build 269.
 
 ## Table of Contents
 
@@ -63,8 +63,7 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-I only tested it with FoundryVTT 0.8.9 but it should work with other versions that the two dependencies support (0.8.5 and later).
-
+Works with V9
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
@@ -77,6 +76,12 @@ Nothing right now. :)
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v2.0.0**
+- Added Support for custom conversions
+
+**v1.1.0**
+- Added Support for V9
+
 **v1.0.0**
 - Added support for FoundryVTT's MeasureTemplates
 
@@ -88,4 +93,4 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 - Removed libRuler as a dependency  (yay ... less dependencies are always better \\(°0°)/ )
 
 **v0.9.0**
-- First realease with the conversions for miles and feet for the ruler tool.
+- First release with the conversions for miles and feet for the ruler tool.

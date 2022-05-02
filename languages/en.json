@@ -8,6 +8,38 @@
             "measureTemplateSupport": {
                 "name": "Show on Measure Templates",
                 "hint": "When enabled, additional metric units are also shown when using the measure templates (circle, cone, ray, rectangle)."
+            },
+            "disableBuiltInConversion": {
+                "name": "Disable Built-In Conversions",
+                "hint": "When checked, the built-in conversions will be disabled."
+            },
+            "useCustomConversions": {
+                "name": "Activates custom Conversions",
+                "hint": "Activates the Conversions that the DM can define. If built-in conversions are not disabled, then these will be shown in addition to the metric conversions."
+            },
+            "customConversionOriginalLabelsSmall": {
+                "name": "Original Unit Labels: Small Unit",
+                "hint": "The original small unit labels that the module should convert. These are the labels that you see currently at the ruler. You can add more than one label as a comma separated string (without spaces). If you want to convert feet, a possible input could be 'ft.,feet' depending on the system that you use and what is configured in the scene."
+            },
+            "customConversionOriginalLabelsBig": {
+                "name": "Original Unit Labels: Big Unit",
+                "hint": "The original big unit labels that the module should convert. These are the labels that you see currently at the ruler. You can add more than one label as a comma separated string (without spaces). If you want to convert miles, a possible input could be 'mi.,miles' depending on the system that you use and what is configured in the scene."
+            },
+            "customConversionFactorSmall": {
+                "name": "Conversion Factor: Small Unit",
+                "hint": "The conversion factor for the smaller unit (e.g. feet to meters would be 0.3)."
+            },
+            "customConversionFactorBig": {
+                "name": "Conversion Factor: Big Unit",
+                "hint": "The conversion factor for the bigger unit (e.g. Miles to kilometers would be 1.61)"
+            },
+            "customConversionLabelSmall": {
+                "name": "Converted Label: Small Unit",
+                "hint": "The label for the converted smaller unit (e.g. m for meters)"
+            },
+            "customConversionLabelBig": {
+                "name": "Converted Label: Big Unit",
+                "hint": "The label for the converted bigger unit (e.g. km for kilometers)"
             }
         },
         "dependencies": {

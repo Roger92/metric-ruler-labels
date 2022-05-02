@@ -8,6 +8,38 @@
             "measureTemplateSupport": {
                 "name": "Anzeige bei Schablonen",
                 "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
+            },
+            "disableBuiltInConversion": {
+                "name": "Deaktiviere eingebaute Umwandlung",
+                "hint": "Wenn ausgewählt, wird die eingebaute metrische Umwandlung deaktiviert."
+            },
+            "useCustomConversions": {
+                "name": "Aktiviere Eigene Umwandlungen",
+                "hint": "Aktiviert die Umwandlungen, welche der DM konfigurieren kann. Wenn die metrischen Umwandlungen des Moduls nicht deaktiviert sind, werden diese zusätzlich angezeigt."
+            },
+            "customConversionOriginalLabelsSmall": {
+                "name": "Originales Textlabel: Kleine Maßeinheit",
+                "hint": "Das originale Textlabel für die kleine Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Fuß konvertieren willst, könnte eine mögliche Eingabe 'ft,feet,ft.' sein. Dies hängt von deinen Einstellungen in der Szene ab.",
+            },
+            "customConversionOriginalLabelsBig": {
+                "name": "Originales Textlabel: Große Maßeinheit",
+                "hint": "Das originale Textlabel für die große Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Meilen konvertieren willst, könnte eine mögliche Eingabe 'mi,miles,mi.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
+            },
+            "customConversionFactorSmall": {
+                "name": "Umwandlungsfaktor: Kleine Maßeinheit",
+                "hint": "Der Umwandlungsfaktor für die kleine Maßeinheit (z.B. Fuß zu Meter würde 0.3 sein)."
+            },
+            "customConversionFactorBig": {
+                "name": "Umwandlungsfaktor: Große Maßeinheit",
+                "hint": "Der Umwandlungsfaktor für die große Maßeinheit (z.B. Meilen zu Kilometern würde 1.61 sein)"
+            },
+            "customConversionLabelSmall": {
+                "name": "Umgewandeltes Textlabel: Kleine Maßeinheit",
+                "hint": "Das Textlabel für die umgewandelte kleine Maßeinheit (z.B. m für Meter)"
+            },
+            "customConversionLabelBig": {
+                "name": "Umgewandeltes Textlabel: Große Maßeinheit",
+                "hint": "Das Textlabel für die umgewandelte große Maßeinheit (z.B. km für Kilometer)"
             }
         },
         "dependencies": {
