@@ -63,7 +63,6 @@ Hooks.once('ready', () => {
             let dragRulerSupportActive = game.settings.get("metric-ruler-labels", "dragRulerSupport");
             let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
             let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-            console.log(useCustomConversions);
             if (wrappedResult.label) {
                 let segment = wrappedResult;
                 //Loop over all prior segments of the ruler
