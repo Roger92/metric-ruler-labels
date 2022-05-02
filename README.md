@@ -17,6 +17,9 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
+## NEW --- NEW --- NEW
+You can now add your custom measurement conversions if you want :) Have fun! See: [Customizable Conversions](#customizable-conversions)
+
 ## V9 - Compatability
 Its compatible with V9 - Checked on Build 269. Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)
 
@@ -98,6 +101,7 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 **v2.0.0**
 - Added Support for custom conversions
 
+**v1.1.0**
 - Added support for V9
 - Fixed MeasureTemplates support that didn't work anymore in V9
 
