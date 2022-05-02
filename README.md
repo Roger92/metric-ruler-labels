@@ -5,7 +5,7 @@
 [![Ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coffee-%23FF5E5B?logo=Ko-fi&logoColor=white)](https://ko-fi.com/roger92)
 # Roger's Additional Metric Ruler Labels
 
-For everyone that uses the metric system in the real world and wants to know the metric distances without changing the underlying game system.
+For everyone that uses the metric system in the real world and wants to know the metric distances without changing the underlying game system. Or do you want to add your own custom measurement conversions?
 
 GM:
 > A 20 feet wide gorge lies ahead of your party. What do you do?
@@ -26,6 +26,7 @@ Its compatible with V9 - Checked on Build 269. Please note that Release 1.1.0 an
   * [Example feet to meters](#example-feet-to-meters)
   * [Example miles to kilometers](#example-miles-to-kilometers)
   * [Works with FoundryVTT's MeasureTemplates](#works-with-foundryvtts-measuretemplates)
+  * [Customizable Conversions](#customizable-conversions)
   * [Support for other packages](#support-for-other-packages)
     +  [DragRuler](#dragruler)
   * [Installation](#installation)
@@ -48,6 +49,23 @@ Its compatible with V9 - Checked on Build 269. Please note that Release 1.1.0 an
 
 ## Works with FoundryVTT's MeasureTemplates
 ![measureTemplates](https://user-images.githubusercontent.com/11605051/133858694-eea1b96e-3524-4725-b889-37dec98e2a74.gif)
+
+## Customizable Conversions
+You can now add your own custom conversion with custom labels, etc. Just go to the settings and add all the information for your own conversion. 
+The module has the concept of a small and a big measurement unit. For example feet and miles. Or meters and kilometers. That way you can support normal maps, as well
+as bigger travelmaps. Fill in the original labels, so that the module can find the measurements, that it should convert with your custom factor. That way you will receive your own custom measurement with a label of your choice.
+
+Your players then can decide if they want to see the built-in metric conversion for feet and miles or your custom one, or just BOTH :). If you want to get rid of the original foundry measurements, then there is an option too. I hope this helps all the people that have some different szenarios than imperial to metric. <br>
+
+![image](https://user-images.githubusercontent.com/11605051/166329691-b33f6f5a-e5fa-4f7f-8ebc-073aeb7d3441.png) <br>
+
+![ThreeMeasurements](https://user-images.githubusercontent.com/11605051/166330492-28456d83-b469-489f-a2e4-e712a1bb1eeb.gif)<br>
+
+![TwoMeasurements](https://user-images.githubusercontent.com/11605051/166330502-27785408-efa2-4993-817c-1440f4cc61ec.gif)<br>
+
+![OneMeasurements](https://user-images.githubusercontent.com/11605051/166330507-911d8062-a191-491e-879d-e36fe5665cfd.gif)<br>
+
+![BigMeasureunit](https://user-images.githubusercontent.com/11605051/166330513-4dcf33fd-3672-4c7c-aa20-3ff9d8479647.gif)<br>
 
 ## Support for other packages
 ### DragRuler
