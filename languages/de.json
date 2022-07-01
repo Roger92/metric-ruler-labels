@@ -23,7 +23,7 @@
             },
             "customConversionOriginalLabelsSmall": {
                 "name": "Originales Textlabel: Kleine Maßeinheit",
-                "hint": "Das originale Textlabel für die kleine Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Fuß konvertieren willst, könnte eine mögliche Eingabe 'ft,feet,ft.' sein. Dies hängt von deinen Einstellungen in der Szene ab.",
+                "hint": "Das originale Textlabel für die kleine Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Fuß konvertieren willst, könnte eine mögliche Eingabe 'ft,feet,ft.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
             },
             "customConversionOriginalLabelsBig": {
                 "name": "Originales Textlabel: Große Maßeinheit",
