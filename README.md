@@ -98,6 +98,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v2.0.1**
+- Fixed German localization bug
+
 **v2.0.0**
 - Added Support for custom conversions
 
