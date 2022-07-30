@@ -60,7 +60,7 @@ as bigger travelmaps. Fill in the original labels, so that the module can find t
 
 Your players then can decide if they want to see the built-in metric conversion for feet and miles or your custom one, or just BOTH :). If you want to get rid of the original foundry measurements, then there is an option too. I hope this helps all the people that have some different szenarios than imperial to metric. <br>
 
-![image](https://user-images.githubusercontent.com/11605051/166329691-b33f6f5a-e5fa-4f7f-8ebc-073aeb7d3441.png) <br>
+![image](https://user-images.githubusercontent.com/11605051/181906692-b051eb17-a56d-40fa-b476-a30fb0db4e77.png) <br>
 
 ![ThreeMeasurements](https://user-images.githubusercontent.com/11605051/166330492-28456d83-b469-489f-a2e4-e712a1bb1eeb.gif)<br>
 
