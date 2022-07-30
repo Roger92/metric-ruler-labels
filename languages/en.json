@@ -1,5 +1,5 @@
 {
-    "metric-ruler-labels":{
+    "metric-ruler-labels": {
         "settings": {
             "dragRulerSupport": {
                 "name": "Show on DragRuler",
@@ -51,6 +51,10 @@
                 "title": "Dependency libWrapper not found!",
                 "infotext": "The module 'Roger's Additional Metric Ruler Labels' requires the 'libruler' module. Please install and activate it."
             }
+        },
+        "incompatibility": {
+            "title": "Installed foundry generation not supported! ",
+            "infotext": "This module does not officially support your current foundry generation. The module might not work correctly. Please check if there are updates available."
         }
     }
 }
