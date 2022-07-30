@@ -21,7 +21,7 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 You can now add your custom measurement conversions if you want :) Have fun! See: [Customizable Conversions](#customizable-conversions)
 
 ## V10 - Compatability
-The latest version is compatible with V10 - Testing 2  - Checked on Build 269. Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)
+The latest version is compatible with V10 - Checked on Testing 2. Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)
 
 ## Table of Contents
 
