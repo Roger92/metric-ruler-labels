@@ -74,7 +74,7 @@ Your players then can decide if they want to see the built-in metric conversion 
 
 ## Support for other packages
 ### DragRuler
-This module now supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
+This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
 
@@ -86,14 +86,14 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9
+Works with V9 + V10
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
-Also thanks to ruipin for the libWrapper module :)
+Also thanks to ruipin for the libWrapper and Stäbchenfisch for the DragRuler module :)
 
 ## Planned
-Maybe a travel time label extension :)
+Nothing yet. Feel free to recommend enhancements.
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
