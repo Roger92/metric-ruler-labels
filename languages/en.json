@@ -21,6 +21,26 @@
                 "name": "Activates custom Conversions",
                 "hint": "Activates the Conversions that the DM can define. If built-in conversions are not disabled, then these will be shown in addition to the metric conversions."
             },
+            "enableTravelTime": {
+                "name": "Activates travel time labels",
+                "hint": "Activates travel time labels on the normal ruler in the format daysSlow | daysNormal | daysFast."
+            },
+            "travelTimeDistanceLabel": {
+                "name": "The distance label of the ruler.",
+                "hint": "The label for which the module should calculate the travel time. With this the travel time would e.g. only be shown on a scene that uses miles. This refers to the label that is used by foundry or the one that is shown at the first position on your ruler. You can add more than one label as a comma separated string (without spaces)."
+            },
+            "travelTimePerDaySlow": {
+                "name": "Distance per day - Slow",
+                "hint": "The distance of the above label, that your group would travel at a small speed per day."
+            },
+            "travelTimePerDayNormal": {
+                "name": "Distance per day - Normal",
+                "hint": "he distance of the above label, that your group would travel at a normal speed per day."
+            },
+            "travelTimePerDayFast": {
+                "name": "Distance per day - Fast",
+                "hint": "he distance of the above label, that your group would travel at a Fast speed per day."
+            },
             "customConversionOriginalLabelsSmall": {
                 "name": "Original Unit Labels: Small Unit",
                 "hint": "The original small unit labels that the module should convert. These are the labels that you see currently at the ruler. You can add more than one label as a comma separated string (without spaces). If you want to convert feet, a possible input could be 'ft.,feet' depending on the system that you use and what is configured in the scene."
@@ -59,6 +79,9 @@
         "warnings": {
             "customConversionNoValues": {
                 "text": "No values for custom conversions in settings found"
+            },
+            "travelTimeNoValues": {
+                "text": "No values for travel time in settings found"
             }
         }
     }

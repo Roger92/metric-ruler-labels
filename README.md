@@ -100,6 +100,13 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v3.0.0**
+- New Travel time ruler option
+- Bugfix for gridless maps
+
+**v2.1.3**
+- Small Bugfix
+
 **v2.1.2**
 - DragRuler (By Stäbchenfisch) V10 Support
 - Support for moving of Measurement Templates

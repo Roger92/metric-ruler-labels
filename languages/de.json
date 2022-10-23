@@ -17,6 +17,26 @@
                 "name": "Verstecke die Messungen von Foundry ",
                 "hint": "Wenn ausgewählt, werden die Originalmessungen von Foundry nicht mehr angezeigt. Du kannst nicht zwei Umwandlungen anzeigen wenn dies aktiv ist."
             },
+            "enableTravelTime": {
+                "name": "Aktiviere Reisezeit Labels",
+                "hint": "Aktiviert Reisezeit Labels für das normale Lineal im Format TageLangsam | TageNormal | TageSchnell."
+            },
+            "travelTimeDistanceLabel": {
+                "name": "Das Distanzlabel des Lineals",
+                "hint": "Das Distanzlabel für welches das Modul die Reisezeiten berechnen soll. Dadurch können die Reisezeitangaben z.B. nur auf Szenen angezeigt werden, welche Meilen benutzen. Dies bezieht sich auf das Label, welches in Foundry genutzt wird bzw. das, welches als erstes am Lineal steht. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen)."
+            },
+            "travelTimePerDaySlow": {
+                "name": "Distanz pro Tag - Langsam",
+                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe an einem Tag mit langsamer Geschwindigkeit zurücklegt."
+            },
+            "travelTimePerDayNormal": {
+                "name": "Distanz pro Tag - Normal",
+                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe an einem Tag mit normaler Geschwindigkeit zurücklegt."
+            },
+            "travelTimePerDayFast": {
+                "name": "Distanz pro Tag - Schnell",
+                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe an einem Tag mit schneller Geschwindigkeit zurücklegt."
+            },
             "useCustomConversions": {
                 "name": "Aktiviere Eigene Umwandlungen",
                 "hint": "Aktiviert die Umwandlungen, welche der DM konfigurieren kann. Wenn die metrischen Umwandlungen des Moduls nicht deaktiviert sind, werden diese zusätzlich angezeigt."
@@ -60,6 +80,9 @@
     "warnings": {
         "customConversionNoValues": {
             "text": "Es wurden keine Werte für eigene Umwandlungen in den Einstellungen hinterlegt"
+        },
+        "travelTimeNoValues": {
+            "text": "Es wurden keine Werte für Reisezeit in den Einstellungen hinterlegt"
         }
     }
 }

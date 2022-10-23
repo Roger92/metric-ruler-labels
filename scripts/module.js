@@ -36,20 +36,11 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftDrop", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-                let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-                let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
 
                 if (measureTemplateSupport && wrappedResult._object && wrappedResult._object.ruler) {
-                    if (dontUseMetricConversions === false) {
-                        wrappedResult._object.ruler.text = addMetricLabels(wrappedResult._object.ruler.text);
-                    }
-                    if (useCustomConversions) {
-                        wrappedResult._object.ruler.text = addConvertedLabels(wrappedResult._object.ruler.text);
-                    }
-                    if (hideFoundry) {
-                        wrappedResult._object.ruler.text = hideFoundryLabel(wrappedResult._object.ruler.text)
-                    }
+                    wrappedResult._object.ruler.text = addMetricLabels(wrappedResult._object.ruler.text);
+                    wrappedResult._object.ruler.text = addConvertedLabels(wrappedResult._object.ruler.text);
+                    wrappedResult._object.ruler.text = hideFoundryLabel(wrappedResult._object.ruler.text)
                 }
 
                 return wrappedResult;
@@ -60,9 +51,6 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._onDragLeftMove", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-                let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-                let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
 
                 let rulers = game.canvas.controls.rulers.children;
                 for (let i = 0; i < rulers.length; i++) {
@@ -70,15 +58,9 @@ Hooks.once('ready', () => {
                     if (measureTemplateSupport && rulerSegments && Array.isArray(rulerSegments) && rulerSegments.length > 0) {
                         for (let i = 0; i < rulerSegments.length; i++) {
                             if (rulerSegments[i].label.text.split("\n").length === 1) {
-                                if (dontUseMetricConversions === false) {
-                                    rulerSegments[i].label.text = addMetricLabels(rulerSegments[i].label.text);
-                                }
-                                if (useCustomConversions) {
-                                    rulerSegments[i].label.text = addConvertedLabels(rulerSegments[i].label.text);
-                                }
-                                if (hideFoundry) {
-                                    rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text)
-                                }
+                                rulerSegments[i].label.text = addMetricLabels(rulerSegments[i].label.text);
+                                rulerSegments[i].label.text = addConvertedLabels(rulerSegments[i].label.text);
+                                rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text)
                             }
                         }
                     }
@@ -93,33 +75,18 @@ Hooks.once('ready', () => {
         libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype.refresh", async function (wrapped, ...args) {
             let wrappedResult = await wrapped(...args);
             let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-            let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-            let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-            let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
 
             if (foundryGeneration < 10) {
                 if (measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler) {
-                    if (dontUseMetricConversions === false) {
-                        wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
-                    }
-                    if (useCustomConversions) {
-                        wrappedResult.hud.ruler.text = addConvertedLabels(wrappedResult.hud.ruler.text);
-                    }
-                    if (hideFoundry) {
-                        wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text)
-                    }
+                    wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
+                    wrappedResult.hud.ruler.text = addConvertedLabels(wrappedResult.hud.ruler.text);
+                    wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text)
                 }
             } else {
                 if (measureTemplateSupport && wrappedResult && wrappedResult.ruler) {
-                    if (dontUseMetricConversions === false) {
-                        wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
-                    }
-                    if (useCustomConversions) {
-                        wrappedResult.ruler.text = addConvertedLabels(wrappedResult.ruler.text);
-                    }
-                    if (hideFoundry) {
-                        wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text)
-                    }
+                    wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
+                    wrappedResult.ruler.text = addConvertedLabels(wrappedResult.ruler.text);
+                    wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text)
                 }
             }
 
@@ -130,9 +97,7 @@ Hooks.once('ready', () => {
         libWrapper.register("metric-ruler-labels", "Ruler.prototype.measure", function (wrapped, ...args) {
             let wrappedResult = wrapped(...args);
             let dragRulerSupportActive = game.settings.get("metric-ruler-labels", "dragRulerSupport");
-            let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-            let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-            let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
+
             let foundryGeneration = game.release.generation;
 
             if (foundryGeneration < 10) {
@@ -140,44 +105,30 @@ Hooks.once('ready', () => {
                     let segment = wrappedResult;
                     //Loop over all prior segments of the ruler
                     do {
-                        if (dontUseMetricConversions === false) {
-                            segment.label.text = addMetricLabels(segment.label.text);
-                        }
-                        if (useCustomConversions) {
-                            segment.label.text = addConvertedLabels(segment.label.text);
-                        }
-                        if (hideFoundry) {
-                            segment.label.text = hideFoundryLabel(segment.label.text)
-                        }
+                        segment.label.text = addMetricLabels(segment.label.text);
+                        segment.label.text = addConvertedLabels(segment.label.text);
+                        segment.label.text = addTravelTime(segment.label.text);
+                        segment.label.text = hideFoundryLabel(segment.label.text)
+
                         // Go to prior segment and convert label -> For the case that the ruler has waypoints
                         segment = segment.prior_segment;
                     } while (segment !== undefined && Object.keys(segment).length > 0);
 
                 } else if (dragRulerSupportActive && Array.isArray(wrappedResult) && wrappedResult.length > 0) { //Handling for Dragruler Support
                     for (let i = 0; i < wrappedResult.length; i++) {
-                        if (dontUseMetricConversions === false) {
-                            wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
-                        }
-                        if (useCustomConversions) {
-                            wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
-                        }
-                        if (hideFoundry) {
-                            wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
-                        }
+                        wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
                 }
             } else {
                 if (Array.isArray(wrappedResult) && wrappedResult.length > 0) {
                     for (let i = 0; i < wrappedResult.length; i++) {
-                        if (dontUseMetricConversions === false) {
-                            wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
-                        }
-                        if (useCustomConversions) {
-                            wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
-                        }
-                        if (hideFoundry) {
-                            wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
-                        }
+                        wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
                 }
             }
@@ -192,9 +143,6 @@ Hooks.once('ready', () => {
             //Handling of DragRuler V10
             libWrapper.register("metric-ruler-labels", "Token.prototype._onDragLeftMove", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
-                let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-                let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-                let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
 
                 let rulers = game.canvas.controls.rulers.children;
                 for (let i = 0; i < rulers.length; i++) {
@@ -204,15 +152,10 @@ Hooks.once('ready', () => {
                         if (dragRulerSegments && Array.isArray(dragRulerSegments) && dragRulerSegments.length > 0) {
                             for (let i = 0; i < dragRulerSegments.length; i++) {
                                 if (dragRulerSegments[i].label.text.split("\n").length === 1) {
-                                    if (dontUseMetricConversions === false) {
-                                        dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
-                                    }
-                                    if (useCustomConversions) {
-                                        dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
-                                    }
-                                    if (hideFoundry) {
-                                        dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
-                                    }
+                                    dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
+                                    dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
+                                    dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text);
+                                    dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
                                 }
                             }
                         }
@@ -256,6 +199,46 @@ function registerSettings() {
         config: true,
         type: Boolean,
         default: false,
+    });
+    game.settings.register("metric-ruler-labels", "enableTravelTime", {
+        name: "metric-ruler-labels.settings.enableTravelTime.name",
+        hint: "metric-ruler-labels.settings.enableTravelTime.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
+    game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
+        name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
+        hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
+        scope: "client",
+        config: true,
+        type: String,
+        default: "mi",
+    });
+    game.settings.register("metric-ruler-labels", "travelTimePerDaySlow", {
+        name: "metric-ruler-labels.settings.travelTimePerDaySlow.name",
+        hint: "metric-ruler-labels.settings.travelTimePerDaySlow.hint",
+        scope: "client",
+        config: true,
+        type: Number,
+        default: 1,
+    });
+    game.settings.register("metric-ruler-labels", "travelTimePerDayNormal", {
+        name: "metric-ruler-labels.settings.travelTimePerDayNormal.name",
+        hint: "metric-ruler-labels.settings.travelTimePerDayNormal.hint",
+        scope: "client",
+        config: true,
+        type: Number,
+        default: 1,
+    });
+    game.settings.register("metric-ruler-labels", "travelTimePerDayFast", {
+        name: "metric-ruler-labels.settings.travelTimePerDayFast.name",
+        hint: "metric-ruler-labels.settings.travelTimePerDayFast.hint",
+        scope: "client",
+        config: true,
+        type: Number,
+        default: 1,
     });
     game.settings.register("metric-ruler-labels", "useCustomConversions", {
         name: "metric-ruler-labels.settings.useCustomConversions.name",
@@ -319,31 +302,33 @@ function addMetricLabels(text) {
     let regexFeet = /^(-?\d*\.?\d*)\s?(?:ft\.?|feet)\s?x?(\s?(-?\d*\.?\d*)\s?(?:ft\.?|feet))?(?:\[(-?\d*\.?\d*)\s?(?:ft\.?|feet)\])?$/;
     let regexMiles = /^(-?\d*\.?\d*)\s?(?:mi\.?|miles)\s?x?(\s?(-?\d*\.?\d*)\s?(?:mi\.?|miles))?(?:\[(-?\d*\.?\d*)\s(?:mi\.?|miles)\])?$/;
     let regexResult = regexFeet.exec(text.split("\n")[0]);
+    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
 
-    if (regexResult && regexResult.length === 5 && regexResult[1]) {
-        text += " \n "
-        //Convert to meters and set label
-        text = text + parseFloat(((regexResult[1] / 10) * 3).toFixed(2)) + " m";
-        if (regexResult[3]) {
-            text = text + " x " + parseFloat(((regexResult[3] / 10) * 3).toFixed(2)) + " m";
-        } else if (regexResult[4]) {
-            text = text + " [" + parseFloat(((regexResult[4] / 10) * 3).toFixed(2)) + " m]";
-        }
-    } else {
-        //Check if measurement is in miles
-        regexResult = regexMiles.exec(text);
-        //Convert to kilometers and set label
+    if (dontUseMetricConversions === false) {
         if (regexResult && regexResult.length === 5 && regexResult[1]) {
             text += " \n "
-            text = text + parseFloat((regexResult[1] / 0.62137).toFixed(2)) + " km";
+            //Convert to meters and set label
+            text = text + parseFloat(((regexResult[1] / 10) * 3).toFixed(2)) + " m";
             if (regexResult[3]) {
-                text = text + " x " + parseFloat((regexResult[3] / 0.62137).toFixed(2)) + " km";
+                text = text + " x " + parseFloat(((regexResult[3] / 10) * 3).toFixed(2)) + " m";
             } else if (regexResult[4]) {
-                text = text + " [" + parseFloat((regexResult[4] / 0.62137).toFixed(2)) + " km]";
+                text = text + " [" + parseFloat(((regexResult[4] / 10) * 3).toFixed(2)) + " m]";
+            }
+        } else {
+            //Check if measurement is in miles
+            regexResult = regexMiles.exec(text);
+            //Convert to kilometers and set label
+            if (regexResult && regexResult.length === 5 && regexResult[1]) {
+                text += " \n "
+                text = text + parseFloat((regexResult[1] / 0.62137).toFixed(2)) + " km";
+                if (regexResult[3]) {
+                    text = text + " x " + parseFloat((regexResult[3] / 0.62137).toFixed(2)) + " km";
+                } else if (regexResult[4]) {
+                    text = text + " [" + parseFloat((regexResult[4] / 0.62137).toFixed(2)) + " km]";
+                }
             }
         }
     }
-
     return text;
 }
 
@@ -354,58 +339,93 @@ function addConvertedLabels(text) {
     let customConversionLabelBig = game.settings.get("metric-ruler-labels", "customConversionLabelBig");
     let originalLabelsSmall = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsSmall");
     let originalLabelsBig = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsBig");
-    originalLabelsSmall = originalLabelsSmall.replaceAll(".", "\\.");
-    originalLabelsSmall = originalLabelsSmall.replaceAll(",", "|");
-    originalLabelsBig = originalLabelsBig.replaceAll(".", "\\.");
-    originalLabelsBig = originalLabelsBig.replaceAll(",", "|");
+    let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
 
-    let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + "))?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\])?");
-    let regexBig = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + "))?(?:\\[(-?\\d*\\.?\\d*)\\s(?:" + originalLabelsBig + ")\\])?");
-    let regexResult = regexSmall.exec(text.split("\n")[0]);
+    if (useCustomConversions) {
+        originalLabelsSmall = originalLabelsSmall.replaceAll(".", "\\.");
+        originalLabelsSmall = originalLabelsSmall.replaceAll(",", "|");
+        originalLabelsBig = originalLabelsBig.replaceAll(".", "\\.");
+        originalLabelsBig = originalLabelsBig.replaceAll(",", "|");
 
-    if ((!originalLabelsSmall && !conversionFactorSmall)
-        && (!originalLabelsBig && !conversionFactorBig)) {
-        text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text");
-    } else {
-        if (regexResult && regexResult.length === 5 && regexResult[1]) {
-            text += " \n "
-            //Convert to meters and set label
-            text = text + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-            if (regexResult[3]) {
-                text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-            } else if (regexResult[4]) {
-                text = text + " [" + parseFloat((regexResult[4] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall + "]";
-            }
+        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + "))?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\])?");
+        let regexBig = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + "))?(?:\\[(-?\\d*\\.?\\d*)\\s(?:" + originalLabelsBig + ")\\])?");
+        let regexResult = regexSmall.exec(text.split("\n")[0]);
+
+        if ((!originalLabelsSmall && !conversionFactorSmall)
+            && (!originalLabelsBig && !conversionFactorBig)) {
+            text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text");
         } else {
-            //Check if measurement is in miles
-            regexResult = regexBig.exec(text.split("\n")[0]);
-            //Convert to kilometers and set label
             if (regexResult && regexResult.length === 5 && regexResult[1]) {
                 text += " \n "
-                text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                //Convert to meters and set label
+                text = text + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
                 if (regexResult[3]) {
-                    text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                    text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
                 } else if (regexResult[4]) {
-                    text = text + " [" + parseFloat((regexResult[4] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig + "]";
+                    text = text + " [" + parseFloat((regexResult[4] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall + "]";
+                }
+            } else {
+                //Check if measurement is in miles
+                regexResult = regexBig.exec(text.split("\n")[0]);
+                //Convert to kilometers and set label
+                if (regexResult && regexResult.length === 5 && regexResult[1]) {
+                    text += " \n "
+                    text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                    if (regexResult[3]) {
+                        text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                    } else if (regexResult[4]) {
+                        text = text + " [" + parseFloat((regexResult[4] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig + "]";
+                    }
                 }
             }
         }
     }
-
     return text;
 }
 
-function hideFoundryLabel(text) {
-    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-    let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
+function addTravelTime(text) {
+    let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerDaySlow");
+    let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerDayNormal");
+    let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerDayFast");
+    let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
+    let travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
 
-    let labelLines = text.split("\n");
-    if ((useCustomConversions && dontUseMetricConversions === false && labelLines.length === 3)
-        || (useCustomConversions && dontUseMetricConversions && labelLines.length === 2)
-        || (useCustomConversions === false && dontUseMetricConversions === false && labelLines.length === 2)) {
-        labelLines.shift();
+    if (travelTimeActivated) {
+        travelTimeLabel = travelTimeLabel.replaceAll(".", "\\.");
+        travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
+
+
+        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])");
+        let regexResult = regexSmall.exec(text.split("\n")[0]);
+
+        if (!travelTimeLabel) {
+            text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
+        } else if (regexResult && regexResult.length === 3 && regexResult[1]) {
+            text += " \n "
+            //Calculate Traveltime in days
+            text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " Days";
+        }
     }
-    return labelLines.join("\n");
+    return text;
+}
+
+//IMPORTANT... ONLY USE AS LAST FUNCTION CALL
+function hideFoundryLabel(text) {
+    let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
+
+    if (hideFoundry) {
+        let labelLines = text.split("\n");
+        labelLines.shift();
+        return labelLines.join("\n");
+    } else {
+        return text;
+    }
+
+}
+function roundToQuarters(number){
+    return (Math.round(number * 4) / 4).toFixed(2);
 }
 
 function showIncompatibilityDialog(generation) {
