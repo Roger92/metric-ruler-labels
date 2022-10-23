@@ -19,9 +19,11 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 
 ## NEW --- NEW --- NEW
 You can now add your custom measurement conversions if you want :) Have fun! See: [Customizable Conversions](#customizable-conversions)
+Dragruler Support for V10 is back :)
 
 ## V10 - Compatability
-The latest version is compatible with V10 - Checked on Testing 2. Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)
+The latest version is compatible with V10 - Checked on Build 288. 
+Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not supported)
 
 ## Table of Contents
 
@@ -91,12 +93,17 @@ Works with V9
 Also thanks to ruipin for the libWrapper module :)
 
 ## Planned
-Nothing right now. :)
+Maybe a travel time label extension :)
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v2.1.2**
+- DragRuler (By Stäbchenfisch) V10 Support
+- Support for moving of Measurement Templates
+- Smaller Bugfixes
 
 **v2.1.0**
 - V10 Support
