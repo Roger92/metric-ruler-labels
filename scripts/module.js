@@ -147,7 +147,7 @@ Hooks.once('ready', () => {
                             segment.label.text = addConvertedLabels(segment.label.text);
                         }
                         if (hideFoundry) {
-                            wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
+                            segment.label.text = hideFoundryLabel(segment.label.text)
                         }
                         // Go to prior segment and convert label -> For the case that the ruler has waypoints
                         segment = segment.prior_segment;
