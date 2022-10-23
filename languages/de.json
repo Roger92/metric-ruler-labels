@@ -3,7 +3,7 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Anzeige bei DragRuler",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt."
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt. (Änderung nach Neuladen aktiv)"
             },
             "measureTemplateSupport": {
                 "name": "Anzeige bei Schablonen",

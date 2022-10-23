@@ -3,7 +3,7 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Show on DragRuler",
-                "hint": "When enabled, additional metric units are also shown for the DragRuler package from  the author Stäbchenfisch."
+                "hint": "When enabled, additional metric units are also shown for the DragRuler package from the author Stäbchenfisch. (Changes apply after reload) "
             },
             "measureTemplateSupport": {
                 "name": "Show on Measure Templates",
