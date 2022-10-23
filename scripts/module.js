@@ -54,8 +54,40 @@ Hooks.once('ready', () => {
 
                 return wrappedResult;
             }, 'MIXED');
-        }
 
+        } else {
+            //Handling of MeasureTemplate Drag (V10)
+            libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._onDragLeftMove", async function (wrapped, ...args) {
+                let wrappedResult = await wrapped(...args);
+                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
+                let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
+                let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
+                let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
+
+                let rulers = game.canvas.controls.rulers.children;
+                for (let i = 0; i < rulers.length; i++) {
+                    let rulerSegments = rulers[i].segments
+                    if (measureTemplateSupport && rulerSegments && Array.isArray(rulerSegments) && rulerSegments.length > 0) {
+                        for (let i = 0; i < rulerSegments.length; i++) {
+                            if (rulerSegments[i].label.text.split("\n").length === 1) {
+                                if (dontUseMetricConversions === false) {
+                                    rulerSegments[i].label.text = addMetricLabels(rulerSegments[i].label.text);
+                                }
+                                if (useCustomConversions) {
+                                    rulerSegments[i].label.text = addConvertedLabels(rulerSegments[i].label.text);
+                                }
+                                if (hideFoundry) {
+                                    rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text)
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                return wrappedResult;
+            }, 'MIXED');
+        }
 
         //Handling of MeasureTemplate Preview
         libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype.refresh", async function (wrapped, ...args) {
