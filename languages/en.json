@@ -49,12 +49,17 @@
         "dependencies": {
             "libWrapper": {
                 "title": "Dependency libWrapper not found!",
-                "infotext": "The module 'Roger's Additional Metric Ruler Labels' requires the 'libruler' module. Please install and activate it."
+                "infotext": "The module 'Roger's Additional Metric Ruler Labels' requires the 'libWrapper' module. Please install and activate it."
             }
         },
         "incompatibility": {
             "title": "Installed foundry generation not supported! ",
             "infotext": "This module does not officially support your current foundry generation. The module might not work correctly. Please check if there are updates available."
+        },
+        "warnings": {
+            "customConversionNoValues": {
+                "text": "No values for custom conversions in settings found"
+            }
         }
     }
 }

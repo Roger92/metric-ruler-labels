@@ -1,5 +1,5 @@
 {
-    "metric-ruler-labels":{
+    "metric-ruler-labels": {
         "settings": {
             "dragRulerSupport": {
                 "name": "Anzeige bei DragRuler",
@@ -45,16 +45,21 @@
                 "name": "Umgewandeltes Textlabel: Große Maßeinheit",
                 "hint": "Das Textlabel für die umgewandelte große Maßeinheit (z.B. km für Kilometer)"
             }
-        },
-        "dependencies": {
-            "libWrapper": {
-                "title": "Abhängigkeit libWrapper nicht gefunden!",
-                "infotext": "Das Modul 'Roger's Additional Metric Ruler Labels' benötigt das 'libruler' Modul. Bitte installiere und aktiviere es."
-            }
-        },
-        "incompatibility": {
-            "title": "Installierte Foundry Generation nicht unterstützt! ",
-            "infotext": "Dieses Modul unterstützt deine derzeit installierte Foundry generation nicht. Das Modul funktioniert vielleicht nicht korrekt. Bitte prüfe, ob es Updates gibt."
+        }
+    },
+    "dependencies": {
+        "libWrapper": {
+            "title": "Abhängigkeit libWrapper nicht gefunden!",
+            "infotext": "Das Modul 'Roger's Additional Metric Ruler Labels' benötigt das 'libWrapper' Modul. Bitte installiere und aktiviere es."
+        }
+    },
+    "incompatibility": {
+        "title": "Installierte Foundry Generation nicht unterstützt! ",
+        "infotext": "Dieses Modul unterstützt deine derzeit installierte Foundry generation nicht. Das Modul funktioniert vielleicht nicht korrekt. Bitte prüfe, ob es Updates gibt."
+    },
+    "warnings": {
+        "customConversionNoValues": {
+            "text": "Es wurden keine Werte für eigene Umwandlungen in den Einstellungen hinterlegt"
         }
     }
 }

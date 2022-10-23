@@ -286,7 +286,7 @@ function registerSettings() {
 function addMetricLabels(text) {
     let regexFeet = /^(-?\d*\.?\d*)\s?(?:ft\.?|feet)\s?x?(\s?(-?\d*\.?\d*)\s?(?:ft\.?|feet))?(?:\[(-?\d*\.?\d*)\s?(?:ft\.?|feet)\])?$/;
     let regexMiles = /^(-?\d*\.?\d*)\s?(?:mi\.?|miles)\s?x?(\s?(-?\d*\.?\d*)\s?(?:mi\.?|miles))?(?:\[(-?\d*\.?\d*)\s(?:mi\.?|miles)\])?$/;
-    let regexResult = regexFeet.exec(text);
+    let regexResult = regexFeet.exec(text.split("\n")[0]);
 
     if (regexResult && regexResult.length === 5 && regexResult[1]) {
         text += " \n "
@@ -326,30 +326,36 @@ function addConvertedLabels(text) {
     originalLabelsSmall = originalLabelsSmall.replaceAll(",", "|");
     originalLabelsBig = originalLabelsBig.replaceAll(".", "\\.");
     originalLabelsBig = originalLabelsBig.replaceAll(",", "|");
+
     let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + "))?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\])?");
     let regexBig = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + "))?(?:\\[(-?\\d*\\.?\\d*)\\s(?:" + originalLabelsBig + ")\\])?");
-    let regexResult = regexSmall.exec(text);
+    let regexResult = regexSmall.exec(text.split("\n")[0]);
 
-    if (regexResult && regexResult.length === 5 && regexResult[1]) {
-        text += " \n "
-        //Convert to meters and set label
-        text = text + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-        if (regexResult[3]) {
-            text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-        } else if (regexResult[4]) {
-            text = text + " [" + parseFloat((regexResult[4] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall + "]";
-        }
+    if ((!originalLabelsSmall && !conversionFactorSmall)
+        && (!originalLabelsBig && !conversionFactorBig)) {
+        text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text");
     } else {
-        //Check if measurement is in miles
-        regexResult = regexBig.exec(text);
-        //Convert to kilometers and set label
         if (regexResult && regexResult.length === 5 && regexResult[1]) {
             text += " \n "
-            text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+            //Convert to meters and set label
+            text = text + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
             if (regexResult[3]) {
-                text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
             } else if (regexResult[4]) {
-                text = text + " [" + parseFloat((regexResult[4] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig + "]";
+                text = text + " [" + parseFloat((regexResult[4] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall + "]";
+            }
+        } else {
+            //Check if measurement is in miles
+            regexResult = regexBig.exec(text.split("\n")[0]);
+            //Convert to kilometers and set label
+            if (regexResult && regexResult.length === 5 && regexResult[1]) {
+                text += " \n "
+                text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                if (regexResult[3]) {
+                    text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
+                } else if (regexResult[4]) {
+                    text = text + " [" + parseFloat((regexResult[4] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig + "]";
+                }
             }
         }
     }
