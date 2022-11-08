@@ -216,7 +216,7 @@ function registerSettings() {
         scope: "client",
         config: true,
         type: String,
-        default: "mi",
+        default: "mi.,mi,miles",
     });
     game.settings.register("metric-ruler-labels", "travelTimePerDaySlow", {
         name: "metric-ruler-labels.settings.travelTimePerDaySlow.name",
@@ -224,7 +224,7 @@ function registerSettings() {
         scope: "client",
         config: true,
         type: Number,
-        default: 1,
+        default: 18,
     });
     game.settings.register("metric-ruler-labels", "travelTimePerDayNormal", {
         name: "metric-ruler-labels.settings.travelTimePerDayNormal.name",
@@ -232,7 +232,7 @@ function registerSettings() {
         scope: "client",
         config: true,
         type: Number,
-        default: 1,
+        default: 24,
     });
     game.settings.register("metric-ruler-labels", "travelTimePerDayFast", {
         name: "metric-ruler-labels.settings.travelTimePerDayFast.name",
@@ -240,7 +240,7 @@ function registerSettings() {
         scope: "client",
         config: true,
         type: Number,
-        default: 1,
+        default: 30,
     });
     game.settings.register("metric-ruler-labels", "useCustomConversions", {
         name: "metric-ruler-labels.settings.useCustomConversions.name",
