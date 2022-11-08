@@ -108,7 +108,7 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
-**v3.0.0**
+**v3.0.2**
 - New Travel time ruler option
 - Bugfix for gridless maps
 
