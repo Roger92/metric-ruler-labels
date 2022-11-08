@@ -18,7 +18,7 @@ This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
 ## NEW --- NEW --- NEW
-You can now add your custom measurement conversions if you want :) Have fun! See: [Customizable Conversions](#customizable-conversions)
+You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Dragruler Support for V10 is back :)
 
 ## V10 - Compatability
@@ -32,6 +32,7 @@ Please note that Release 1.1.0 and above are not compatible with foundry version
   * [Example miles to kilometers](#example-miles-to-kilometers)
   * [Works with FoundryVTT's MeasureTemplates](#works-with-foundryvtts-measuretemplates)
   * [Customizable Conversions](#customizable-conversions)
+  * [Travel times](#travel-times)
   * [Support for other packages](#support-for-other-packages)
     +  [DragRuler](#dragruler)
   * [Installation](#installation)
@@ -72,9 +73,13 @@ Your players then can decide if they want to see the built-in metric conversion 
 
 ![BigMeasureunit](https://user-images.githubusercontent.com/11605051/166330513-4dcf33fd-3672-4c7c-aa20-3ff9d8479647.gif)<br>
 
+## Travel times
+You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
+and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed.
+
 ## Support for other packages
 ### DragRuler
-This module now supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
+This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
 
@@ -86,19 +91,26 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9
+Works with V9 + V10
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
-Also thanks to ruipin for the libWrapper module :)
+Also thanks to ruipin for the libWrapper and Stäbchenfisch for the DragRuler module :)
 
 ## Planned
-Maybe a travel time label extension :)
+Nothing yet. Feel free to recommend enhancements.
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v3.0.0**
+- New Travel time ruler option
+- Bugfix for gridless maps
+
+**v2.1.3**
+- Small Bugfix
 
 **v2.1.2**
 - DragRuler (By Stäbchenfisch) V10 Support
