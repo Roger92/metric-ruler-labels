@@ -18,7 +18,7 @@ This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
 ## NEW --- NEW --- NEW
-You can now add your custom measurement conversions if you want :) Have fun! See: [Customizable Conversions](#customizable-conversions)
+You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Dragruler Support for V10 is back :)
 
 ## V10 - Compatability
@@ -32,6 +32,7 @@ Please note that Release 1.1.0 and above are not compatible with foundry version
   * [Example miles to kilometers](#example-miles-to-kilometers)
   * [Works with FoundryVTT's MeasureTemplates](#works-with-foundryvtts-measuretemplates)
   * [Customizable Conversions](#customizable-conversions)
+  * [Travel times](#travel-times)
   * [Support for other packages](#support-for-other-packages)
     +  [DragRuler](#dragruler)
   * [Installation](#installation)
@@ -71,6 +72,10 @@ Your players then can decide if they want to see the built-in metric conversion 
 ![OneMeasurements](https://user-images.githubusercontent.com/11605051/166330507-911d8062-a191-491e-879d-e36fe5665cfd.gif)<br>
 
 ![BigMeasureunit](https://user-images.githubusercontent.com/11605051/166330513-4dcf33fd-3672-4c7c-aa20-3ff9d8479647.gif)<br>
+
+## Travel times
+You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
+and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed.
 
 ## Support for other packages
 ### DragRuler

@@ -144,23 +144,25 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "Token.prototype._onDragLeftMove", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
 
-                let rulers = game.canvas.controls.rulers.children;
-                for (let i = 0; i < rulers.length; i++) {
-
-                    if (rulers[i].isDragRuler) {
-                        let dragRulerSegments = rulers[i].segments
-                        if (dragRulerSegments && Array.isArray(dragRulerSegments) && dragRulerSegments.length > 0) {
-                            for (let i = 0; i < dragRulerSegments.length; i++) {
-                                if (dragRulerSegments[i].label.text.split("\n").length === 1) {
-                                    dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
-                                    dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
-                                    dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text);
-                                    dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
+                //Delay, so that drag-ruler does not overwrite
+                setTimeout(function () {
+                    let rulers = game.canvas.controls.rulers.children;
+                    for (let i = 0; i < rulers.length; i++) {
+                        if (rulers[i].isDragRuler) {
+                            let dragRulerSegments = rulers[i].segments;
+                            if (dragRulerSegments && Array.isArray(dragRulerSegments) && dragRulerSegments.length > 0) {
+                                for (let i = 0; i < dragRulerSegments.length; i++) {
+                                    if (dragRulerSegments[i].label.text.split("\n").length === 1) {
+                                        dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
+                                        dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
+                                        dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text);
+                                        dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
+                                    }
                                 }
                             }
                         }
                     }
-                }
+                }, 60);
                 return wrappedResult;
             }, 'WRAPPER');
         }
@@ -406,6 +408,7 @@ function addTravelTime(text) {
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " Days";
+            text = text.replaceAll("Infinity","-");
         }
     }
     return text;
@@ -424,7 +427,8 @@ function hideFoundryLabel(text) {
     }
 
 }
-function roundToQuarters(number){
+
+function roundToQuarters(number) {
     return (Math.round(number * 4) / 4).toFixed(2);
 }
 
