@@ -397,7 +397,7 @@ function addTravelTime(text) {
         travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
 
 
-        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])");
+        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])?");
         let regexResult = regexSmall.exec(text.split("\n")[0]);
 
         if (!travelTimeLabel) {
