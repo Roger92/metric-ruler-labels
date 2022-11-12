@@ -21,6 +21,10 @@
                 "name": "Aktiviere Reisezeit Labels",
                 "hint": "Aktiviert Reisezeit Labels für das normale Lineal im Format TageLangsam | TageNormal | TageSchnell."
             },
+            "travelTimeOnlyTotalTimeLastSegment": {
+                "name": "Zeige nur Gesamtzeit an letztem Segment",
+                "hint": "Wenn aktiv, wird am letzten Linealsegment nur die gesamte Reisezeit (der Teil in den eckigen Klammern) angezeigt, um Platz zu Sparen."
+            },
             "travelTimeDistanceLabel": {
                 "name": "Das Distanzlabel des Lineals",
                 "hint": "Das Distanzlabel für welches das Modul die Reisezeiten berechnen soll (das Distanzlabel, welches in der Szene konfiguriert ist). Dadurch können die Reisezeitangaben z.B. nur auf Szenen angezeigt werden, welche Meilen benutzen. Dies bezieht sich auf das Label, welches in Foundry genutzt wird bzw. das, welches als erstes am Lineal steht. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen)."
