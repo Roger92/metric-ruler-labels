@@ -470,7 +470,8 @@ function showIncompatibilityDialog(generation) {
 }
 
 /*
-Returns an Array of measurement data for the ruler.
+Returns an Array of measurement data for the ruler. The order of the segments is ascending. The first dawn ruler segment
+is on array position 0
  */
 export function getRulerData(){
     let foundryGeneration = game.release.generation;
