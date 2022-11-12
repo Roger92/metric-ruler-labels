@@ -7,6 +7,9 @@ In case there is an unknown unit nothing happens.
 
 Hooks.on("init", () => {
     registerSettings();
+    window.metricRuler = {
+        getRulerData:getRulerData
+    }
 });
 
 
@@ -118,7 +121,7 @@ Hooks.once('ready', () => {
                     for (let i = 0; i < wrappedResult.length; i++) {
                         wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
                         wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
-                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text,wrappedResult.length > 1);
                         wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
                 }
@@ -127,7 +130,7 @@ Hooks.once('ready', () => {
                     for (let i = 0; i < wrappedResult.length; i++) {
                         wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
                         wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
-                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text, wrappedResult.length > 1);
                         wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
                 }
@@ -155,7 +158,7 @@ Hooks.once('ready', () => {
                                     if (dragRulerSegments[i].label.text.split("\n").length === 1) {
                                         dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
                                         dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
-                                        dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text);
+                                        dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text,dragRulerSegments.length > 1);
                                         dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
                                     }
                                 }
@@ -213,31 +216,39 @@ function registerSettings() {
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
-        scope: "client",
+        scope: "world",
         config: true,
         type: String,
         default: "mi.,mi,miles",
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDaySlow", {
-        name: "metric-ruler-labels.settings.travelTimePerDaySlow.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDaySlow.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTime-TimeUnit", {
+        name: "metric-ruler-labels.settings.travelTime-TimeUnit.name",
+        hint: "metric-ruler-labels.settings.travelTime-TimeUnit.hint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "Days",
+    });
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitSlow", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitSlow.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitSlow.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 18,
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDayNormal", {
-        name: "metric-ruler-labels.settings.travelTimePerDayNormal.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDayNormal.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitNormal", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitNormal.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitNormal.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 24,
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDayFast", {
-        name: "metric-ruler-labels.settings.travelTimePerDayFast.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDayFast.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitFast", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitFast.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitFast.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 30,
@@ -385,31 +396,43 @@ function addConvertedLabels(text) {
     return text;
 }
 
-function addTravelTime(text) {
-    let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerDaySlow");
-    let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerDayNormal");
-    let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerDayFast");
+function addTravelTime(text,hasSegments = false) {
+    let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
+    let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
+    let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
     let travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
+    let timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
 
     if (travelTimeActivated) {
         travelTimeLabel = travelTimeLabel.replaceAll(".", "\\.");
         travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
 
-
-        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])");
-        let regexResult = regexSmall.exec(text.split("\n")[0]);
+        let regex = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])?");
+        let regexResult = regex.exec(text.split("\n")[0]);
 
         if (!travelTimeLabel) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
-        } else if (regexResult && regexResult.length === 3 && regexResult[1]) {
+        } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
             text += " \n "
             //Calculate Traveltime in days
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " Days";
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
+            text = text.replaceAll("Infinity","-");
+        }else if(regexResult && regexResult.length === 3 && regexResult[2] && hasSegments){
+            text += " \n "
+            //Calculate Traveltime in days
+            text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
+            text += " \n "
+            text = text +  "["+ roundToQuarters(parseFloat((regexResult[2] / conversionFactorSlow).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[2] / conversionFactorNormal).toFixed(2))) + " | "
+                + roundToQuarters(parseFloat((regexResult[2] / conversionFactorFast).toFixed(2))) + " " + timeUnit + "]";
             text = text.replaceAll("Infinity","-");
         }
+
     }
     return text;
 }
@@ -444,4 +467,69 @@ function showIncompatibilityDialog(generation) {
             }
         }
     }, {width: 600}).render(true);
+}
+
+/*
+Returns an Array of measurement data for the ruler. The order of the segments is ascending. The first dawn ruler segment
+is on array position 0
+ */
+export function getRulerData(){
+    let foundryGeneration = game.release.generation;
+
+    if (foundryGeneration >= 10) {
+        let rulerData = [];
+        let text = "";
+        let segments = canvas.controls.ruler.segments;
+        let regexFeet = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:ft\\.?|feet)");
+        let regexMiles = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:mi\\.?|miles|mile)");
+        let regexMeters = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:m\\.?|meters|meter)");
+        let regexKilometers = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:km\\.?|kilometers|kilometer)");
+
+        if(segments && segments.length > 0){
+            for (let i = 0; i < segments.length; i++) {
+
+                let regexMetersResult,regexKilometersResult;
+                //add Metric labels
+                text = addMetricLabels(segments[i].label.text.split("\n")[0].trim());
+
+                let regexFeetResult = regexFeet.exec(text.split("\n")[0].trim());
+                let regexMilesResult = regexMiles.exec(text.split("\n")[0].trim());
+
+                if(text.split("\n")[1]){
+                    regexMetersResult = regexMeters.exec(text.split("\n")[1].trim());
+                    regexKilometersResult = regexKilometers.exec(text.split("\n")[1].trim());
+                }else{
+                    //Fallback if user used directly meters or kilomenters
+                    regexMetersResult = regexMeters.exec(text.split("\n")[0].trim());
+                    regexKilometersResult = regexKilometers.exec(text.split("\n")[0].trim());
+                }
+
+                let feet = (regexFeetResult && regexFeetResult[1]) ? Number.parseFloat(regexFeetResult[1]) : null;
+                let miles = (regexMilesResult && regexMilesResult[1]) ? Number.parseFloat(regexMilesResult[1]) : null;
+                let meters = (regexMetersResult && regexMetersResult[1]) ? Number.parseFloat(regexMetersResult[1]) : null;
+                let kilometers = (regexKilometersResult && regexKilometersResult[1]) ? Number.parseFloat(regexKilometersResult[1]) : null;
+
+                if(feet && !miles){
+                    miles = feet / 5280;
+                }else if(miles && !feet){
+                    feet = miles * 5280;
+                }
+
+                if(meters && !kilometers){
+                    kilometers = meters/1000;
+                }else if(kilometers && !meters){
+                    meters = kilometers*1000;
+                }
+                rulerData.push({
+                    feet: feet.toFixed(2),
+                    miles: miles.toFixed(2),
+                    meters: meters.toFixed(2),
+                    kilometers:kilometers.toFixed(2)
+                })
+            }
+        }
+        return rulerData;
+    }else{
+        return [];
+    }
 }

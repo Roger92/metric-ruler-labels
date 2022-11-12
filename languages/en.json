@@ -27,19 +27,23 @@
             },
             "travelTimeDistanceLabel": {
                 "name": "The distance label of the ruler.",
-                "hint": "The label for which the module should calculate the travel time. With this the travel time would e.g. only be shown on a scene that uses miles. This refers to the label that is used by foundry or the one that is shown at the first position on your ruler. You can add more than one label as a comma separated string (without spaces)."
+                "hint": "The label for which the module should calculate the travel time (the distance label that is configured in the scene). With this the travel time would e.g. only be shown on a scene that uses miles. This refers to the label that is used by foundry or the one that is shown at the first position on your ruler. You can add more than one label as a comma separated string (without spaces)."
             },
-            "travelTimePerDaySlow": {
-                "name": "Distance per day - Slow",
-                "hint": "The distance of the above label, that your group would travel at a small speed per day."
+            "travelTime-TimeUnit": {
+                "name": "The time unit of the travel time",
+                "hint": "The time unit that will be shown on the ruler for the travel time. (Default: Days)"
             },
-            "travelTimePerDayNormal": {
-                "name": "Distance per day - Normal",
-                "hint": "he distance of the above label, that your group would travel at a normal speed per day."
+            "travelTimePerUnitSlow": {
+                "name": "Distance per time unit - Slow",
+                "hint": "The distance of the above label, that your group would travel at a small speed per time unit (Default: Day)."
             },
-            "travelTimePerDayFast": {
-                "name": "Distance per day - Fast",
-                "hint": "he distance of the above label, that your group would travel at a Fast speed per day."
+            "travelTimePerUnitNormal": {
+                "name": "Distance per time unit - Normal",
+                "hint": "he distance of the above label, that your group would travel at a normal speed per time unit (Default: Day)."
+            },
+            "travelTimePerUnitFast": {
+                "name": "Distance per time unit - Fast",
+                "hint": "he distance of the above label, that your group would travel at a Fast speed per time unit (Default: Day)."
             },
             "customConversionOriginalLabelsSmall": {
                 "name": "Original Unit Labels: Small Unit",

@@ -75,9 +75,9 @@ Your players then can decide if they want to see the built-in metric conversion 
 
 ## Travel times
 You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
-and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed.
+and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed. You can also define if you want to display the travel times in days, hours or whatever you want.
 
-![image](https://user-images.githubusercontent.com/11605051/200674734-ee096037-3858-46e6-a77e-0719ef86a9e5.png)
+![image](https://user-images.githubusercontent.com/11605051/201474769-004c764b-b3ff-45d2-9704-686c4bb7ecca.png)
 ![image](https://user-images.githubusercontent.com/11605051/200674864-8cab8a31-731b-47e0-9755-c9ca022793a9.png)
 
 ## Support for other packages
@@ -107,6 +107,11 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v3.1.0**
+- Travel time label customizable
+- Fixed bug where travel time did not display on ruler segments
+- Fixed bug where settings for conversions where available to players
 
 **v3.0.2**
 - New Travel time ruler option
