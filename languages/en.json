@@ -25,6 +25,10 @@
                 "name": "Activates travel time labels",
                 "hint": "Activates travel time labels on the normal ruler in the format daysSlow | daysNormal | daysFast."
             },
+            "travelTimeOnlyTotalTimeLastSegment": {
+                "name": "Only show total travel time on last Segment",
+                "hint": "When active, only the total travel time (the portion that is normally in the square brackets) will be shown on the last segment of a ruler. This way you can save some space on the screen."
+            },
             "travelTimeDistanceLabel": {
                 "name": "The distance label of the ruler.",
                 "hint": "The label for which the module should calculate the travel time (the distance label that is configured in the scene). With this the travel time would e.g. only be shown on a scene that uses miles. This refers to the label that is used by foundry or the one that is shown at the first position on your ruler. You can add more than one label as a comma separated string (without spaces)."
