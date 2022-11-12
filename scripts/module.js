@@ -213,31 +213,39 @@ function registerSettings() {
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
-        scope: "client",
+        scope: "world",
         config: true,
         type: String,
         default: "mi.,mi,miles",
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDaySlow", {
-        name: "metric-ruler-labels.settings.travelTimePerDaySlow.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDaySlow.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTime-TimeUnit", {
+        name: "metric-ruler-labels.settings.travelTime-TimeUnit.name",
+        hint: "metric-ruler-labels.settings.travelTime-TimeUnit.hint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "Days",
+    });
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitSlow", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitSlow.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitSlow.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 18,
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDayNormal", {
-        name: "metric-ruler-labels.settings.travelTimePerDayNormal.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDayNormal.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitNormal", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitNormal.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitNormal.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 24,
     });
-    game.settings.register("metric-ruler-labels", "travelTimePerDayFast", {
-        name: "metric-ruler-labels.settings.travelTimePerDayFast.name",
-        hint: "metric-ruler-labels.settings.travelTimePerDayFast.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTimePerUnitFast", {
+        name: "metric-ruler-labels.settings.travelTimePerUnitFast.name",
+        hint: "metric-ruler-labels.settings.travelTimePerUnitFast.hint",
+        scope: "world",
         config: true,
         type: Number,
         default: 30,
@@ -386,19 +394,19 @@ function addConvertedLabels(text) {
 }
 
 function addTravelTime(text,hasSegments = false) {
-    let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerDaySlow");
-    let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerDayNormal");
-    let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerDayFast");
+    let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
+    let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
+    let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
     let travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
+    let timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
 
     if (travelTimeActivated) {
         travelTimeLabel = travelTimeLabel.replaceAll(".", "\\.");
         travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
 
-
-        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])?");
-        let regexResult = regexSmall.exec(text.split("\n")[0]);
+        let regex = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])?");
+        let regexResult = regex.exec(text.split("\n")[0]);
 
         if (!travelTimeLabel) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
@@ -407,18 +415,18 @@ function addTravelTime(text,hasSegments = false) {
             //Calculate Traveltime in days
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " Days";
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
             text = text.replaceAll("Infinity","-");
         }else if(regexResult && regexResult.length === 3 && regexResult[2] && hasSegments){
             text += " \n "
             //Calculate Traveltime in days
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " Days";
+                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
             text += " \n "
             text = text +  "["+ roundToQuarters(parseFloat((regexResult[2] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorNormal).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[2] / conversionFactorFast).toFixed(2))) + " Days" + "]";
+                + roundToQuarters(parseFloat((regexResult[2] / conversionFactorFast).toFixed(2))) + " " + timeUnit + "]";
             text = text.replaceAll("Infinity","-");
         }
 
