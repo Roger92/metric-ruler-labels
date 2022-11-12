@@ -5,7 +5,7 @@
 [![Ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coffee-%23FF5E5B?logo=Ko-fi&logoColor=white)](https://ko-fi.com/roger92)
 # Roger's Additional Metric Ruler Labels
 
-For everyone that uses the metric system in the real world and wants to know the metric distances without changing the underlying game system. **Or do you want to add your own custom measurement conversions?**
+For everyone that uses the metric system in the real world and wants to know the metric distances without changing the underlying game system. **Or do you want to add your own custom measurement conversions? Or maybe travel times?**
 
 GM:
 > A 20 feet wide gorge lies ahead of your party. What do you do?
@@ -77,6 +77,9 @@ Your players then can decide if they want to see the built-in metric conversion 
 You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
 and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed. You can also define if you want to display the travel times in days, hours or whatever you want.
 
+![image](https://user-images.githubusercontent.com/11605051/200674734-ee096037-3858-46e6-a77e-0719ef86a9e5.png)
+![image](https://user-images.githubusercontent.com/11605051/200674864-8cab8a31-731b-47e0-9755-c9ca022793a9.png)
+
 ## Support for other packages
 ### DragRuler
 This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
@@ -110,7 +113,7 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 - Fixed bug where travel time did not display on ruler segments
 - Fixed bug where settings for conversions where available to players
 
-**v3.0.0**
+**v3.0.2**
 - New Travel time ruler option
 - Bugfix for gridless maps
 
