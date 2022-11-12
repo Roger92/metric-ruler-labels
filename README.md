@@ -110,6 +110,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v3.1.1**
+- Added option to only show the total travel time on the last ruler segment
+
 **v3.1.0**
 - Travel time label customizable
 - Fixed bug where travel time did not display on ruler segments
