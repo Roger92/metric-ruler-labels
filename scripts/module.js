@@ -7,6 +7,9 @@ In case there is an unknown unit nothing happens.
 
 Hooks.on("init", () => {
     registerSettings();
+    window.metricRuler = {
+        getRulerData:getRulerData
+    }
 });
 
 
@@ -464,4 +467,68 @@ function showIncompatibilityDialog(generation) {
             }
         }
     }, {width: 600}).render(true);
+}
+
+/*
+Returns an Array of measurement data for the ruler.
+ */
+export function getRulerData(){
+    let foundryGeneration = game.release.generation;
+
+    if (foundryGeneration >= 10) {
+        let rulerData = [];
+        let text = "";
+        let segments = canvas.controls.ruler.segments;
+        let regexFeet = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:ft\\.?|feet)");
+        let regexMiles = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:mi\\.?|miles|mile)");
+        let regexMeters = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:m\\.?|meters|meter)");
+        let regexKilometers = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:km\\.?|kilometers|kilometer)");
+
+        if(segments && segments.length > 0){
+            for (let i = 0; i < segments.length; i++) {
+
+                let regexMetersResult,regexKilometersResult;
+                //add Metric labels
+                text = addMetricLabels(segments[i].label.text.split("\n")[0].trim());
+
+                let regexFeetResult = regexFeet.exec(text.split("\n")[0].trim());
+                let regexMilesResult = regexMiles.exec(text.split("\n")[0].trim());
+
+                if(text.split("\n")[1]){
+                    regexMetersResult = regexMeters.exec(text.split("\n")[1].trim());
+                    regexKilometersResult = regexKilometers.exec(text.split("\n")[1].trim());
+                }else{
+                    //Fallback if user used directly meters or kilomenters
+                    regexMetersResult = regexMeters.exec(text.split("\n")[0].trim());
+                    regexKilometersResult = regexKilometers.exec(text.split("\n")[0].trim());
+                }
+
+                let feet = (regexFeetResult && regexFeetResult[1]) ? Number.parseFloat(regexFeetResult[1]) : null;
+                let miles = (regexMilesResult && regexMilesResult[1]) ? Number.parseFloat(regexMilesResult[1]) : null;
+                let meters = (regexMetersResult && regexMetersResult[1]) ? Number.parseFloat(regexMetersResult[1]) : null;
+                let kilometers = (regexKilometersResult && regexKilometersResult[1]) ? Number.parseFloat(regexKilometersResult[1]) : null;
+
+                if(feet && !miles){
+                    miles = feet / 5280;
+                }else if(miles && !feet){
+                    feet = miles * 5280;
+                }
+
+                if(meters && !kilometers){
+                    kilometers = meters/1000;
+                }else if(kilometers && !meters){
+                    meters = kilometers*1000;
+                }
+                rulerData.push({
+                    feet: feet.toFixed(2),
+                    miles: miles.toFixed(2),
+                    meters: meters.toFixed(2),
+                    kilometers:kilometers.toFixed(2)
+                })
+            }
+        }
+        return rulerData;
+    }else{
+        return [];
+    }
 }
