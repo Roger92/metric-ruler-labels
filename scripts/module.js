@@ -213,6 +213,14 @@ function registerSettings() {
         type: Boolean,
         default: false,
     });
+    game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
+        name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
+        hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
@@ -403,6 +411,7 @@ function addTravelTime(text,hasSegments = false) {
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
     let travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
     let timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
+    let travelTimeOnlyTotalTimeLastSegment = game.settings.get("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment");
 
     if (travelTimeActivated) {
         travelTimeLabel = travelTimeLabel.replaceAll(".", "\\.");
@@ -415,17 +424,20 @@ function addTravelTime(text,hasSegments = false) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
         } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
             text += " \n "
-            //Calculate Traveltime in days
+            //Calculate Traveltime
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
             text = text.replaceAll("Infinity","-");
         }else if(regexResult && regexResult.length === 3 && regexResult[2] && hasSegments){
-            text += " \n "
-            //Calculate Traveltime in days
-            text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
-                + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
+            //Calculate Traveltime
+            if(travelTimeOnlyTotalTimeLastSegment === false){
+                text += " \n "
+                text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
+                    + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
+                    + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
+            }
+            //Total Traveltime
             text += " \n "
             text = text +  "["+ roundToQuarters(parseFloat((regexResult[2] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorNormal).toFixed(2))) + " | "
@@ -470,8 +482,7 @@ function showIncompatibilityDialog(generation) {
 }
 
 /*
-Returns an Array of measurement data for the ruler. The order of the segments is ascending. The first dawn ruler segment
-is on array position 0
+Returns an Array of measurement data for the ruler.
  */
 export function getRulerData(){
     let foundryGeneration = game.release.generation;
