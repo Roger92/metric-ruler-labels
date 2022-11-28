@@ -110,6 +110,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v3.1.2**
+- Fixed bugs with disappearing labels, when dragruler is active and foundryLabels are disabled
+
 **v3.1.1**
 - Added option to only show the total travel time on the last ruler segment
 

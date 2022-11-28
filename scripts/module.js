@@ -455,7 +455,9 @@ function hideFoundryLabel(text) {
 
     if (hideFoundry) {
         let labelLines = text.split("\n");
-        labelLines.shift();
+        if(labelLines[0].startsWith(" ") === false){
+            labelLines.shift();
+        }
         return labelLines.join("\n");
     } else {
         return text;
