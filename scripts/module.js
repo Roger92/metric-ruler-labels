@@ -452,23 +452,10 @@ function addTravelTime(text,hasSegments = false) {
 //IMPORTANT... ONLY USE AS LAST FUNCTION CALL
 function hideFoundryLabel(text) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
-    let travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
-    let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
-    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
-    let activatedLabels = 1;
-    if(travelTimeActivated){
-        activatedLabels++;
-    }
-    if(useCustomConversions){
-        activatedLabels++;
-    }
-    if(dontUseMetricConversions === false){
-        activatedLabels++;
-    }
 
     if (hideFoundry) {
         let labelLines = text.split("\n");
-        if(labelLines === activatedLabels){
+        if(labelLines[0].startsWith(" ") === false){
             labelLines.shift();
         }
         return labelLines.join("\n");
