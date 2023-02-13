@@ -110,6 +110,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v3.1.5**
+- Fix for elevation ruler. Now displays metric conversions on drag ruler if elevation ruler is active.
+
 **v3.1.2**
 - Fixed bugs with disappearing labels, when dragruler is active and foundryLabels are disabled
 
