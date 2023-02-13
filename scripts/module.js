@@ -146,6 +146,7 @@ Hooks.once('ready', () => {
             //Handling of DragRuler V10
             libWrapper.register("metric-ruler-labels", "Token.prototype._onDragLeftMove", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
+                let elevationRulerActive = game.modules.get('elevationruler')?.active;
 
                 //Delay, so that drag-ruler does not overwrite
                 setTimeout(function () {
@@ -155,7 +156,7 @@ Hooks.once('ready', () => {
                             let dragRulerSegments = rulers[i].segments;
                             if (dragRulerSegments && Array.isArray(dragRulerSegments) && dragRulerSegments.length > 0) {
                                 for (let i = 0; i < dragRulerSegments.length; i++) {
-                                    if (dragRulerSegments[i].label.text.split("\n").length === 1) {
+                                    if (dragRulerSegments[i].label.text.split("\n").length === (elevationRulerActive ? 2 : 1)) {
                                         dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
                                         dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
                                         dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text,dragRulerSegments.length > 1);
@@ -452,11 +453,14 @@ function addTravelTime(text,hasSegments = false) {
 //IMPORTANT... ONLY USE AS LAST FUNCTION CALL
 function hideFoundryLabel(text) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
+    let elevationRulerActive = game.modules.get('elevationruler')?.active;
 
     if (hideFoundry) {
         let labelLines = text.split("\n");
-        if(labelLines[0].startsWith(" ") === false){
-            labelLines.shift();
+        if(labelLines[0].startsWith(" ") === false ){
+            if( !elevationRulerActive || (elevationRulerActive && !labelLines[0].startsWith("↕"))){
+                labelLines.shift();
+            }
         }
         return labelLines.join("\n");
     } else {
