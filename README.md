@@ -21,8 +21,8 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Dragruler Support for V10 is back :)
 
-## V10 - Compatability
-The latest version is compatible with V10 - Checked on Build 288. 
+## V11 - Compatability
+The latest version is compatible with V11. If you find problems with future subversions of V11, then please let me know.
 Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not supported)
 
 ## Table of Contents
@@ -96,7 +96,7 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9 + V10
+Works with V9 + V10 + V11
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
@@ -109,6 +109,9 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v3.1.6**
+- Compatibility with V11
 
 **v3.1.5**
 - Fix for elevation ruler. Now displays metric conversions on drag ruler if elevation ruler is active.
