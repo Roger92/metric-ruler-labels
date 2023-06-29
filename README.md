@@ -19,7 +19,7 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
-Dragruler Support for V10 is back :)
+Compatability with V11!!!
 
 ## V11 - Compatability
 The latest version is compatible with V11. If you find problems with future subversions of V11, then please let me know.
@@ -109,6 +109,9 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v3.1.7**
+- Fix for incompatibility dialog
 
 **v3.1.6**
 - Compatibility with V11
