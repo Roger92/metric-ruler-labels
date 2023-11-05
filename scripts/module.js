@@ -8,7 +8,7 @@ In case there is an unknown unit nothing happens.
 Hooks.on("init", () => {
     registerSettings();
     window.metricRuler = {
-        getRulerData:getRulerData
+        getRulerData: getRulerData
     }
 });
 
@@ -49,12 +49,13 @@ Hooks.once('ready', () => {
                 return wrappedResult;
             }, 'MIXED');
 
-        } else {
+        } else if (foundryGeneration === 10) {
             //Handling of MeasureTemplate Drag (V10)
-            libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._onDragLeftMove", async function (wrapped, ...args) {
+            libWrapper.register("metric-ruler-labels", "CONFIG.MeasuredTemplate.layerClass.prototype._onDragLeftDrop", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-
+                console.log("MeasuredTemplate.prototype._onDragLeftMove");
+                console.log(wrappedResult);
                 let rulers = game.canvas.controls.rulers.children;
                 for (let i = 0; i < rulers.length; i++) {
                     let rulerSegments = rulers[i].segments
@@ -72,35 +73,62 @@ Hooks.once('ready', () => {
 
                 return wrappedResult;
             }, 'MIXED');
+        } else if (foundryGeneration > 10) {
+            //Handling of MeasureTemplate Drag and Drop (V11)
+            libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
+                let wrappedResult = await wrapped(...args);
+                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
+                console.log("MeasuredTemplate.prototype._onDragLeftMove");
+                let templates = game.canvas.templates.children[0].children;
+                for (let i = 0; i < templates.length; i++) {
+                    if (measureTemplateSupport && templates[i].ruler && templates[i].ruler.text.split("\n").length === 1) {
+                        templates[i].ruler.text = addMetricLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = addConvertedLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = hideFoundryLabel(templates[i].ruler.text);
+                    }
+                }
+                templates = game.canvas.templates.children[1].children;
+                for (let i = 0; i < templates.length; i++) {
+                    if (measureTemplateSupport && templates[i].ruler && templates[i].ruler.text.split("\n").length === 1) {
+                        templates[i].ruler.text = addMetricLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = addConvertedLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = hideFoundryLabel(templates[i].ruler.text);
+                    }
+                }
+                return wrappedResult;
+            }, 'MIXED');
         }
 
-        //Handling of MeasureTemplate Preview
-        libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype.refresh", async function (wrapped, ...args) {
-            let wrappedResult = await wrapped(...args);
-            let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
 
-            if (foundryGeneration < 10) {
-                if (measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler) {
-                    wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
-                    wrappedResult.hud.ruler.text = addConvertedLabels(wrappedResult.hud.ruler.text);
-                    wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text)
+        if (foundryGeneration <= 10) {
+            //Handling of MeasureTemplate Preview
+            libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftMove", async function (wrapped, ...args) {
+                let wrappedResult = await wrapped(...args);
+                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
+                console.log("MeasuredTemplate.prototype.refresh");
+                console.log(wrappedResult);
+                if (foundryGeneration < 10) {
+                    if (measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler) {
+                        wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
+                        wrappedResult.hud.ruler.text = addConvertedLabels(wrappedResult.hud.ruler.text);
+                        wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text)
+                    }
+                } else if (foundryGeneration === 10) {
+                    if (measureTemplateSupport && wrappedResult && wrappedResult.ruler) {
+                        wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
+                        wrappedResult.ruler.text = addConvertedLabels(wrappedResult.ruler.text);
+                        wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text)
+                    }
                 }
-            } else {
-                if (measureTemplateSupport && wrappedResult && wrappedResult.ruler) {
-                    wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
-                    wrappedResult.ruler.text = addConvertedLabels(wrappedResult.ruler.text);
-                    wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text)
-                }
-            }
-
-            return wrappedResult;
-        }, 'MIXED');
+                return wrappedResult;
+            }, 'WRAPPER');
+        }
 
         //Handling of Ruler
         libWrapper.register("metric-ruler-labels", "Ruler.prototype.measure", function (wrapped, ...args) {
             let wrappedResult = wrapped(...args);
             let dragRulerSupportActive = game.settings.get("metric-ruler-labels", "dragRulerSupport");
-
+            console.log("Ruler.prototype.measure");
             let foundryGeneration = game.release.generation;
 
             if (foundryGeneration < 10) {
@@ -121,7 +149,7 @@ Hooks.once('ready', () => {
                     for (let i = 0; i < wrappedResult.length; i++) {
                         wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
                         wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
-                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text,wrappedResult.length > 1);
+                        wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text, wrappedResult.length > 1);
                         wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
                 }
@@ -159,7 +187,7 @@ Hooks.once('ready', () => {
                                     if (dragRulerSegments[i].label.text.split("\n").length === (elevationRulerActive ? 2 : 1)) {
                                         dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
                                         dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
-                                        dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text,dragRulerSegments.length > 1);
+                                        dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text, dragRulerSegments.length > 1);
                                         dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
                                     }
                                 }
@@ -171,7 +199,8 @@ Hooks.once('ready', () => {
             }, 'WRAPPER');
         }
     }
-});
+})
+;
 
 function registerSettings() {
     game.settings.register("metric-ruler-labels", "measureTemplateSupport", {
@@ -405,7 +434,7 @@ function addConvertedLabels(text) {
     return text;
 }
 
-function addTravelTime(text,hasSegments = false) {
+function addTravelTime(text, hasSegments = false) {
     let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
     let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
     let conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
@@ -429,10 +458,10 @@ function addTravelTime(text,hasSegments = false) {
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
-            text = text.replaceAll("Infinity","-");
-        }else if(regexResult && regexResult.length === 3 && regexResult[2] && hasSegments){
+            text = text.replaceAll("Infinity", "-");
+        } else if (regexResult && regexResult.length === 3 && regexResult[2] && hasSegments) {
             //Calculate Traveltime
-            if(travelTimeOnlyTotalTimeLastSegment === false){
+            if (travelTimeOnlyTotalTimeLastSegment === false) {
                 text += " \n "
                 text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                     + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
@@ -440,10 +469,10 @@ function addTravelTime(text,hasSegments = false) {
             }
             //Total Traveltime
             text += " \n "
-            text = text +  "["+ roundToQuarters(parseFloat((regexResult[2] / conversionFactorSlow).toFixed(2))) + " | "
+            text = text + "[" + roundToQuarters(parseFloat((regexResult[2] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorFast).toFixed(2))) + " " + timeUnit + "]";
-            text = text.replaceAll("Infinity","-");
+            text = text.replaceAll("Infinity", "-");
         }
 
     }
@@ -457,8 +486,8 @@ function hideFoundryLabel(text) {
 
     if (hideFoundry) {
         let labelLines = text.split("\n");
-        if(labelLines[0].startsWith(" ") === false ){
-            if( !elevationRulerActive || (elevationRulerActive && !labelLines[0].startsWith("↕"))){
+        if (labelLines[0].startsWith(" ") === false) {
+            if (!elevationRulerActive || (elevationRulerActive && !labelLines[0].startsWith("↕"))) {
                 labelLines.shift();
             }
         }
@@ -490,7 +519,7 @@ function showIncompatibilityDialog(generation) {
 /*
 Returns an Array of measurement data for the ruler.
  */
-export function getRulerData(){
+export function getRulerData() {
     let foundryGeneration = game.release.generation;
 
     if (foundryGeneration >= 10) {
@@ -502,20 +531,20 @@ export function getRulerData(){
         let regexMeters = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:m\\.?|meters|meter)");
         let regexKilometers = new RegExp("\\s?(-?\\d*\\.?\\d*)\\s?(?:km\\.?|kilometers|kilometer)");
 
-        if(segments && segments.length > 0){
+        if (segments && segments.length > 0) {
             for (let i = 0; i < segments.length; i++) {
 
-                let regexMetersResult,regexKilometersResult;
+                let regexMetersResult, regexKilometersResult;
                 //add Metric labels
                 text = addMetricLabels(segments[i].label.text.split("\n")[0].trim());
 
                 let regexFeetResult = regexFeet.exec(text.split("\n")[0].trim());
                 let regexMilesResult = regexMiles.exec(text.split("\n")[0].trim());
 
-                if(text.split("\n")[1]){
+                if (text.split("\n")[1]) {
                     regexMetersResult = regexMeters.exec(text.split("\n")[1].trim());
                     regexKilometersResult = regexKilometers.exec(text.split("\n")[1].trim());
-                }else{
+                } else {
                     //Fallback if user used directly meters or kilomenters
                     regexMetersResult = regexMeters.exec(text.split("\n")[0].trim());
                     regexKilometersResult = regexKilometers.exec(text.split("\n")[0].trim());
@@ -526,27 +555,27 @@ export function getRulerData(){
                 let meters = (regexMetersResult && regexMetersResult[1]) ? Number.parseFloat(regexMetersResult[1]) : null;
                 let kilometers = (regexKilometersResult && regexKilometersResult[1]) ? Number.parseFloat(regexKilometersResult[1]) : null;
 
-                if(feet && !miles){
+                if (feet && !miles) {
                     miles = feet / 5280;
-                }else if(miles && !feet){
+                } else if (miles && !feet) {
                     feet = miles * 5280;
                 }
 
-                if(meters && !kilometers){
-                    kilometers = meters/1000;
-                }else if(kilometers && !meters){
-                    meters = kilometers*1000;
+                if (meters && !kilometers) {
+                    kilometers = meters / 1000;
+                } else if (kilometers && !meters) {
+                    meters = kilometers * 1000;
                 }
                 rulerData.push({
                     feet: feet.toFixed(2),
                     miles: miles.toFixed(2),
                     meters: meters.toFixed(2),
-                    kilometers:kilometers.toFixed(2)
+                    kilometers: kilometers.toFixed(2)
                 })
             }
         }
         return rulerData;
-    }else{
+    } else {
         return [];
     }
 }
