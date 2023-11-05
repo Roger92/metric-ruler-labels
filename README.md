@@ -110,6 +110,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v3.1.8**
+- Fix for Measurement Templates on V11
+
 **v3.1.7**
 - Fix for incompatibility dialog
 
