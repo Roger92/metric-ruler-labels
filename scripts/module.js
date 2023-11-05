@@ -54,8 +54,8 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "CONFIG.MeasuredTemplate.layerClass.prototype._onDragLeftDrop", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                console.log("MeasuredTemplate.prototype._onDragLeftMove");
-                console.log(wrappedResult);
+                //console.log("MeasuredTemplate.prototype._onDragLeftMove");
+                //console.log(wrappedResult);
                 let rulers = game.canvas.controls.rulers.children;
                 for (let i = 0; i < rulers.length; i++) {
                     let rulerSegments = rulers[i].segments
@@ -78,7 +78,7 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                console.log("MeasuredTemplate.prototype._onDragLeftMove");
+                //console.log("MeasuredTemplate.prototype._onDragLeftMove");
                 let templates = game.canvas.templates.children[0].children;
                 for (let i = 0; i < templates.length; i++) {
                     if (measureTemplateSupport && templates[i].ruler && templates[i].ruler.text.split("\n").length === 1) {
@@ -105,8 +105,8 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftMove", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                console.log("MeasuredTemplate.prototype.refresh");
-                console.log(wrappedResult);
+                //console.log("MeasuredTemplate.prototype.refresh");
+                //console.log(wrappedResult);
                 if (foundryGeneration < 10) {
                     if (measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler) {
                         wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
@@ -128,7 +128,7 @@ Hooks.once('ready', () => {
         libWrapper.register("metric-ruler-labels", "Ruler.prototype.measure", function (wrapped, ...args) {
             let wrappedResult = wrapped(...args);
             let dragRulerSupportActive = game.settings.get("metric-ruler-labels", "dragRulerSupport");
-            console.log("Ruler.prototype.measure");
+            //console.log("Ruler.prototype.measure");
             let foundryGeneration = game.release.generation;
 
             if (foundryGeneration < 10) {
