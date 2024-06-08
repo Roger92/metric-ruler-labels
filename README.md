@@ -21,8 +21,8 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Compatability with V11!!!
 
-## V11 - Compatability
-The latest version is compatible with V11. If you find problems with future subversions of V11, then please let me know.
+## V12 - Compatability
+The latest version is compatible with V12. If you find problems with future subversions of V12, then please let me know.
 Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not supported)
 
 ## Table of Contents
@@ -109,6 +109,8 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v3.2.0**
+- V12 Compatibility
 
 **v3.1.9**
 - Just removed some console logs :)
