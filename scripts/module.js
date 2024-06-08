@@ -30,7 +30,7 @@ Hooks.once('ready', () => {
 
         //Check foundry generation
         let foundryGeneration = game.release.generation;
-        if (foundryGeneration < 9 || foundryGeneration > 11) {
+        if (foundryGeneration < 9 || foundryGeneration > 12) {
             showIncompatibilityDialog(foundryGeneration);
         }
 
