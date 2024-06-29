@@ -49,6 +49,11 @@
       "path": "languages/en.json"
     },
     {
+      "lang": "it",
+      "name": "Italiano",
+      "path": "languages/it.json"
+    },
+    {
       "lang": "de",
       "name": "Deutsch",
       "path": "languages/de.json"
