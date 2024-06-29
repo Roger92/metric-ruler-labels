@@ -1,0 +1,96 @@
+{
+    "metric-ruler-labels": {
+        "settings": {
+            "dragRulerSupport": {
+                "name": "Mostra in DragRuler",
+                "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive per il pacchetto DragRuler dell'autore Stäbchenfisch. (Le modifiche si applicano dopo il riavvio) "
+            },
+            "measureTemplateSupport": {
+                "name": "Mostra in Measure Templates",
+                "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive quando si utilizzano i modelli di misura (cerchio, cono, raggio, rettangolo)."
+            },
+            "disableBuiltInConversion": {
+                "name": "Disabilita Conversioni Integrate",
+                "hint": "Se selezionato, le conversioni integrate verranno disabilitate."
+            },
+            "hideFoundryMeasurement": {
+                "name": "Nascondi le Misurazioni da Foundry",
+                "hint": "Se selezionato, la misurazione originale di Foundry verrà nascosta. Non puoi visualizzare due conversioni se questo è attivo."
+            },
+            "useCustomConversions": {
+                "name": "Attiva Conversioni Personalizzate",
+                "hint": "Attiva le Conversioni che il DM può definire. Se le conversioni integrate non sono disabilitate, queste verranno visualizzate in aggiunta alle conversioni metriche."
+            },
+            "enableTravelTime": {
+                "name": "Attiva le etichette del tempo di viaggio",
+                "hint": "Attiva le etichette del tempo di viaggio sul righello normale nel formato daysSlow | giorniNormale | giorniVeloce."
+            },
+            "travelTimeOnlyTotalTimeLastSegment": {
+                "name": "Mostra solo il tempo di viaggio totale nell'ultimo segmento",
+                "hint": "Quando attivo, solo il tempo di viaggio totale (la parte che normalmente si trova tra parentesi quadre) verrà mostrato sull'ultimo segmento di un righello. In questo modo puoi risparmiare spazio sullo schermo."
+            },
+            "travelTimeDistanceLabel": {
+                "name": "L'etichetta della distanza del righello",
+                "hint": "L'etichetta per la quale il modulo deve calcolare il tempo di viaggio (l'etichetta della distanza configurata nella scena). In questo modo il tempo di viaggio sarebbe ad es. essere mostrato solo in una scena che utilizza miglia. Questo si riferisce all'etichetta utilizzata dalla fonderia o a quella mostrata nella prima posizione sul righello. Puoi aggiungere più di un'etichetta come stringa separata da virgole (senza spazi)."
+            },
+            "travelTime-TimeUnit": {
+                "name": "L'unità di tempo del tempo di viaggio",
+                "hint": "L'unità di tempo che verrà visualizzata sul righello per il tempo di viaggio. (Predefinito: Giorni)"
+            },
+            "travelTimePerUnitSlow": {
+                "name": "Distanza per unità di tempo - Lento",
+                "hint": "La distanza indicata nell'etichetta sopra, che il tuo gruppo percorrerebbe a una velocità lenta per unità di tempo (impostazione predefinita: giorno)."
+            },
+            "travelTimePerUnitNormal": {
+                "name": "Distanza per unità di tempo - Normale",
+                "hint": "La distanza indicata nell'etichetta sopra, che il tuo gruppo percorrerebbe a una velocità normale per unità di tempo (impostazione predefinita: giorno)."
+            },
+            "travelTimePerUnitFast": {
+                "name": "Distanza per unità di tempo - Veloce",
+                "hint": "La distanza indicata nell'etichetta sopra, che il tuo gruppo percorrerebbe a una velocità alta per unità di tempo (impostazione predefinita: giorno)."
+            },
+            "customConversionOriginalLabelsSmall": {
+                "name": "Etichette unità originali: unità piccola",
+                "hint": "La piccola unità originale etichetta ciò che il modulo deve convertire. Queste sono le etichette che vedi attualmente sul righello. Puoi aggiungere più di un'etichetta come stringa separata da virgole (senza spazi). Se vuoi convertire i piedi, un possibile input potrebbe essere 'ft.,feet' a seconda del sistema che usi e di cosa è configurato nella scena."
+            },
+            "customConversionOriginalLabelsBig": {
+                "name": "Etichette unità originali: unità grande",
+                "hint": "L'unità grande originale etichetta ciò che il modulo deve convertire. Queste sono le etichette che vedi attualmente sul righello. Puoi aggiungere più di un'etichetta come stringa separata da virgole (senza spazi). Se vuoi convertire miglia, un possibile input potrebbe essere 'mi.,miles' a seconda del sistema che usi e di cosa è configurato nella scena."
+            },
+            "customConversionFactorSmall": {
+                "name": "Fattore di conversione: unità piccola",
+                "hint": "Il fattore di conversione per l'unità più piccola (ad esempio, da piedi a metri sarebbe 0,3)"
+            },
+            "customConversionFactorBig": {
+                "name": "Fattore di conversione: unità grande",
+                "hint": "Il fattore di conversione per l'unità più grande (ad esempio, da Miglia a chilometri sarebbe 1,61)"
+            },
+            "customConversionLabelSmall": {
+                "name": "Etichetta convertita: Unità piccola",
+                "hint": "L'etichetta per l'unità più piccola convertita (ad esempio m per metri)"
+            },
+            "customConversionLabelBig": {
+                "name": "Etichetta convertita: Unità grande",
+                "hint": "L'etichetta per l'unità più grande convertita (ad esempio km per chilometri)"
+            }
+        },
+        "dependencies": {
+            "libWrapper": {
+                "title": "Dipendenza libWrapper non trovata!",
+                "infotext": "Il Modulo 'Roger's Additional Metric Ruler Labels' richiede il modulo 'libWrapper'. Per favore, installalo e attivalo."
+            }
+        },
+        "incompatibility": {
+            "title": "Versione installata di Foundry non supportata! ",
+            "infotext": "Questo modulo non supporta ufficialmente la tua attuale versione di Foundry. Il modulo potrebbe non funzionare correttamente. Si prega di verificare se siano disponibili aggiornamenti."
+        },
+        "warnings": {
+            "customConversionNoValues": {
+                "text": "Nessun valore trovato per le conversioni personalizzate nelle impostazioni"
+            },
+            "travelTimeNoValues": {
+                "text": "Nessun valore trovato per il tempo di viaggio nelle impostazioni"
+            }
+        }
+    }
+}
