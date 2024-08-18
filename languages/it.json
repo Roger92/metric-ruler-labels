@@ -3,11 +3,8 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Mostra in DragRuler",
-                "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive per il pacchetto DragRuler dell'autore Stäbchenfisch. (Le modifiche si applicano dopo il riavvio) "
-            },
-            "pf2eDragRulerSupport": {
-                "name": "Mostra in PF2e Token Drag Ruler",
-                "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive per il pacchetto PF2e Token Drag Ruler dell'autore 7H3LaughingMan. (Le modifiche si applicano dopo il riavvio) "
+                "hint": "Se attivato, vengono visualizzate informazioni metriche aggiuntive quando si utilizza un modulo righello di trascinamento. DragRuler (di Stäbchenfisch) e PF2e Token Drag Ruler (di 7H3LaughingMan) sono disponibili. (Le modifiche si applicano dopo il riavvio) ",
+                "disabled": "Disattivato"
             },
             "measureTemplateSupport": {
                 "name": "Mostra in Measure Templates",

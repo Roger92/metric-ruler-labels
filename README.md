@@ -109,6 +109,10 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v3.2.2**
+- Setting for Drag Ruler support is now a dropdown
+
 **v3.2.1**
 - Compatibility for PF2e Token Drag Ruler (and build in Drag Ruler of the pathfinder system)
 - Italian Language Support (Thx to GregoryWarn)

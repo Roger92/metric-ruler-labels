@@ -3,11 +3,8 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Anzeige bei DragRuler",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt. (Änderung nach Neuladen aktiv)"
-            },
-            "pf2eDragRulerSupport": {
-                "name": "Anzeige bei PF2e Token Drag Ruler",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls PF2e Token Drag Ruler (by 7H3LaughingMan) angezeigt. (Änderung nach Neuladen aktiv)"
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung eines Dragruler Moduls angezeigt. Zur Verfügung stehen DragRuler (by Stäbchenfisch) und PF2e Token Drag Ruler (by 7H3LaughingMan) (Änderung nach Neuladen aktiv)",
+                "disabled": "Deaktiviert"
             },
             "measureTemplateSupport": {
                 "name": "Anzeige bei Schablonen",
