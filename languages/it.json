@@ -5,6 +5,10 @@
                 "name": "Mostra in DragRuler",
                 "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive per il pacchetto DragRuler dell'autore Stäbchenfisch. (Le modifiche si applicano dopo il riavvio) "
             },
+            "pf2eDragRulerSupport": {
+                "name": "Mostra in PF2e Token Drag Ruler",
+                "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive per il pacchetto PF2e Token Drag Ruler dell'autore 7H3LaughingMan. (Le modifiche si applicano dopo il riavvio) "
+            },
             "measureTemplateSupport": {
                 "name": "Mostra in Measure Templates",
                 "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive quando si utilizzano i modelli di misura (cerchio, cono, raggio, rettangolo)."
