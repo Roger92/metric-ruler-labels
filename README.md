@@ -110,6 +110,11 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 **v3.2.0**
+- Compatibility for PF2e Token Drag Ruler (and build in Drag Ruler of the pathfinder system)
+- Italian Language Support (Thx to GregoryWarn)
+- Fixed warning for unsupported manifest field
+
+**v3.2.0**
 - V12 Compatibility
 
 **v3.1.9**
