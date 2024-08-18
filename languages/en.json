@@ -3,11 +3,8 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Show on DragRuler",
-                "hint": "When enabled, additional metric units are also shown for the DragRuler package from the author Stäbchenfisch. (Changes apply after reload) "
-            },
-            "pf2eDragRulerSupport": {
-                "name": "Show on PF2e Token Drag Ruler",
-                "hint": "When enabled, additional metric units are also shown for the PF2e Token Drag Ruler package from the author 7H3LaughingMan. (Changes apply after reload) "
+                "hint": "If activated, additional metric information is displayed when using a drag ruler module. DragRuler (by Stäbchenfisch) and PF2e Token Drag Ruler (by 7H3LaughingMan) are available (change active after reload)",
+                "disabled": "Disabled"
             },
             "measureTemplateSupport": {
                 "name": "Show on Measure Templates",
