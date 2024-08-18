@@ -5,6 +5,10 @@
                 "name": "Show on DragRuler",
                 "hint": "When enabled, additional metric units are also shown for the DragRuler package from the author Stäbchenfisch. (Changes apply after reload) "
             },
+            "pf2eDragRulerSupport": {
+                "name": "Show on PF2e Token Drag Ruler",
+                "hint": "When enabled, additional metric units are also shown for the PF2e Token Drag Ruler package from the author 7H3LaughingMan. (Changes apply after reload) "
+            },
             "measureTemplateSupport": {
                 "name": "Show on Measure Templates",
                 "hint": "When enabled, additional metric units are also shown when using the measure templates (circle, cone, ray, rectangle)."

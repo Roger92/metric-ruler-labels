@@ -54,8 +54,6 @@ Hooks.once('ready', () => {
             libWrapper.register("metric-ruler-labels", "CONFIG.MeasuredTemplate.layerClass.prototype._onDragLeftDrop", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
                 let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                //console.log("MeasuredTemplate.prototype._onDragLeftMove");
-                //console.log(wrappedResult);
                 let rulers = game.canvas.controls.rulers.children;
                 for (let i = 0; i < rulers.length; i++) {
                     let rulerSegments = rulers[i].segments
@@ -168,8 +166,10 @@ Hooks.once('ready', () => {
         }, 'WRAPPER');
 
         let dragRulerSupportActive = game.settings.get("metric-ruler-labels", "dragRulerSupport")
+        let pf2eDragRulerSupportActive = game.settings.get("metric-ruler-labels", "pf2eDragRulerSupport")
 
-        if (foundryGeneration >= 10 && dragRulerSupportActive) {
+        //Dragruler p2fe game.canvas.dragRuler.rulers.children
+        if (foundryGeneration >= 10 && (dragRulerSupportActive || pf2eDragRulerSupportActive)) {
 
             //Handling of DragRuler V10
             libWrapper.register("metric-ruler-labels", "Token.prototype._onDragLeftMove", function (wrapped, ...args) {
@@ -178,9 +178,15 @@ Hooks.once('ready', () => {
 
                 //Delay, so that drag-ruler does not overwrite
                 setTimeout(function () {
-                    let rulers = game.canvas.controls.rulers.children;
+                    let rulers = [];
+                    if (dragRulerSupportActive) {
+                        rulers = game.canvas.controls.rulers.children;
+
+                    } else if (pf2eDragRulerSupportActive) {
+                        rulers = game.canvas.dragRuler.rulers.children;
+                    }
                     for (let i = 0; i < rulers.length; i++) {
-                        if (rulers[i].isDragRuler) {
+                        if ((rulers[i].isDragRuler && dragRulerSupportActive) || pf2eDragRulerSupportActive) {
                             let dragRulerSegments = rulers[i].segments;
                             if (dragRulerSegments && Array.isArray(dragRulerSegments) && dragRulerSegments.length > 0) {
                                 for (let i = 0; i < dragRulerSegments.length; i++) {
@@ -195,6 +201,7 @@ Hooks.once('ready', () => {
                         }
                     }
                 }, 60);
+
                 return wrappedResult;
             }, 'WRAPPER');
         }
@@ -214,6 +221,14 @@ function registerSettings() {
     game.settings.register("metric-ruler-labels", "dragRulerSupport", {
         name: "metric-ruler-labels.settings.dragRulerSupport.name",
         hint: "metric-ruler-labels.settings.dragRulerSupport.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+    });
+    game.settings.register("metric-ruler-labels", "pf2eDragRulerSupport", {
+        name: "metric-ruler-labels.settings.pf2eDragRulerSupport.name",
+        hint: "metric-ruler-labels.settings.pf2eDragRulerSupport.hint",
         scope: "client",
         config: true,
         type: Boolean,

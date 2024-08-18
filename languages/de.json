@@ -5,6 +5,10 @@
                 "name": "Anzeige bei DragRuler",
                 "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls DragRuler (by Stäbchenfisch) angezeigt. (Änderung nach Neuladen aktiv)"
             },
+            "pf2eDragRulerSupport": {
+                "name": "Anzeige bei PF2e Token Drag Ruler",
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung des Moduls PF2e Token Drag Ruler (by 7H3LaughingMan) angezeigt. (Änderung nach Neuladen aktiv)"
+            },
             "measureTemplateSupport": {
                 "name": "Anzeige bei Schablonen",
                 "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
