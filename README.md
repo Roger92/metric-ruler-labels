@@ -19,7 +19,7 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
-Compatability with V11!!!
+Compatability with V12!!!
 
 ## V12 - Compatability
 The latest version is compatible with V12. If you find problems with future subversions of V12, then please let me know.
