@@ -89,7 +89,6 @@ You can enable/disable the labels in the settings.
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
 
-
 ## Installation
 To install, follow these instructions:
 
