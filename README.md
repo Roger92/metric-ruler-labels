@@ -86,6 +86,7 @@ To save some space you can also toggle on the option to only show the total trav
 ### DragRuler
 This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch as well as the drag measurement from the PF2E system, and modules that built up on this.
 You can enable/disable the labels in the settings.
+![image](https://github.com/user-attachments/assets/ff01749e-893b-46c7-abca-bbab90ee6267)
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
 
