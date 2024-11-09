@@ -42,7 +42,7 @@ Hooks.once('ready', () => {
 
                 if (measureTemplateSupport && wrappedResult._object && wrappedResult._object.ruler) {
                     wrappedResult._object.ruler.text = addMetricLabels(wrappedResult._object.ruler.text);
-                    wrappedResult._object.ruler.text = addConvertedLabels(wrappedResult._object.ruler.text);
+                    wrappedResult._object.ruler.text = addCustomConversionLabels(wrappedResult._object.ruler.text);
                     wrappedResult._object.ruler.text = hideFoundryLabel(wrappedResult._object.ruler.text)
                 }
 
@@ -61,7 +61,7 @@ Hooks.once('ready', () => {
                         for (let i = 0; i < rulerSegments.length; i++) {
                             if (rulerSegments[i].label.text.split("\n").length === 1) {
                                 rulerSegments[i].label.text = addMetricLabels(rulerSegments[i].label.text);
-                                rulerSegments[i].label.text = addConvertedLabels(rulerSegments[i].label.text);
+                                rulerSegments[i].label.text = addCustomConversionLabels(rulerSegments[i].label.text);
                                 rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text)
                             }
                         }
@@ -80,7 +80,7 @@ Hooks.once('ready', () => {
                 for (let i = 0; i < templates.length; i++) {
                     if (measureTemplateSupport && templates[i].ruler && templates[i].ruler.text.split("\n").length === 1) {
                         templates[i].ruler.text = addMetricLabels(templates[i].ruler.text);
-                        templates[i].ruler.text = addConvertedLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = addCustomConversionLabels(templates[i].ruler.text);
                         templates[i].ruler.text = hideFoundryLabel(templates[i].ruler.text);
                     }
                 }
@@ -88,7 +88,7 @@ Hooks.once('ready', () => {
                 for (let i = 0; i < templates.length; i++) {
                     if (measureTemplateSupport && templates[i].ruler && templates[i].ruler.text.split("\n").length === 1) {
                         templates[i].ruler.text = addMetricLabels(templates[i].ruler.text);
-                        templates[i].ruler.text = addConvertedLabels(templates[i].ruler.text);
+                        templates[i].ruler.text = addCustomConversionLabels(templates[i].ruler.text);
                         templates[i].ruler.text = hideFoundryLabel(templates[i].ruler.text);
                     }
                 }
@@ -105,13 +105,13 @@ Hooks.once('ready', () => {
                 if (foundryGeneration < 10) {
                     if (measureTemplateSupport && wrappedResult && wrappedResult.hud.ruler) {
                         wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text);
-                        wrappedResult.hud.ruler.text = addConvertedLabels(wrappedResult.hud.ruler.text);
+                        wrappedResult.hud.ruler.text = addCustomConversionLabels(wrappedResult.hud.ruler.text);
                         wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text)
                     }
                 } else if (foundryGeneration === 10) {
                     if (measureTemplateSupport && wrappedResult && wrappedResult.ruler) {
                         wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text);
-                        wrappedResult.ruler.text = addConvertedLabels(wrappedResult.ruler.text);
+                        wrappedResult.ruler.text = addCustomConversionLabels(wrappedResult.ruler.text);
                         wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text)
                     }
                 }
@@ -131,7 +131,7 @@ Hooks.once('ready', () => {
                     //Loop over all prior segments of the ruler
                     do {
                         segment.label.text = addMetricLabels(segment.label.text);
-                        segment.label.text = addConvertedLabels(segment.label.text);
+                        segment.label.text = addCustomConversionLabels(segment.label.text);
                         segment.label.text = addTravelTime(segment.label.text);
                         segment.label.text = hideFoundryLabel(segment.label.text)
 
@@ -142,7 +142,7 @@ Hooks.once('ready', () => {
                 } else if ((dragRulerSupport === "dragRulerSupport") && Array.isArray(wrappedResult) && wrappedResult.length > 0) { //Handling for Dragruler Support
                     for (let i = 0; i < wrappedResult.length; i++) {
                         wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
-                        wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addCustomConversionLabels(wrappedResult[i].label.text);
                         wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text, wrappedResult.length > 1);
                         wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
@@ -151,7 +151,7 @@ Hooks.once('ready', () => {
                 if (Array.isArray(wrappedResult) && wrappedResult.length > 0) {
                     for (let i = 0; i < wrappedResult.length; i++) {
                         wrappedResult[i].label.text = addMetricLabels(wrappedResult[i].label.text);
-                        wrappedResult[i].label.text = addConvertedLabels(wrappedResult[i].label.text);
+                        wrappedResult[i].label.text = addCustomConversionLabels(wrappedResult[i].label.text);
                         wrappedResult[i].label.text = addTravelTime(wrappedResult[i].label.text, wrappedResult.length > 1);
                         wrappedResult[i].label.text = hideFoundryLabel(wrappedResult[i].label.text)
                     }
@@ -187,7 +187,7 @@ Hooks.once('ready', () => {
                                 for (let i = 0; i < dragRulerSegments.length; i++) {
                                     if (dragRulerSegments[i].label.text.split("\n").length === (elevationRulerActive ? 2 : 1)) {
                                         dragRulerSegments[i].label.text = addMetricLabels(dragRulerSegments[i].label.text);
-                                        dragRulerSegments[i].label.text = addConvertedLabels(dragRulerSegments[i].label.text);
+                                        dragRulerSegments[i].label.text = addCustomConversionLabels(dragRulerSegments[i].label.text);
                                         dragRulerSegments[i].label.text = addTravelTime(dragRulerSegments[i].label.text, dragRulerSegments.length > 1);
                                         dragRulerSegments[i].label.text = hideFoundryLabel(dragRulerSegments[i].label.text)
                                     }
@@ -223,7 +223,7 @@ function registerSettings() {
         choices:{
             "noDragRulerSupport": "metric-ruler-labels.settings.dragRulerSupport.disabled",
             "dragRulerSupport" : "Drag Ruler (by Staebchenfish)",
-            "pf2eDragRulerSupport" : "PF2e Token Drag Ruler (by 7H3LaughingMan)"
+            "pf2eDragRulerSupport" : "PF2e Drag Ruler (System built in or others) "
         }
     });
     game.settings.register("metric-ruler-labels", "hideFoundryMeasurement", {
@@ -356,41 +356,46 @@ function registerSettings() {
     });
 }
 
-function addMetricLabels(text) {
-    let regexFeet = /^(-?\d*\.?\d*)\s?(?:ft\.?|feet)\s?x?(\s?(-?\d*\.?\d*)\s?(?:ft\.?|feet))?(?:\[(-?\d*\.?\d*)\s?(?:ft\.?|feet)\])?$/;
-    let regexMiles = /^(-?\d*\.?\d*)\s?(?:mi\.?|miles)\s?x?(\s?(-?\d*\.?\d*)\s?(?:mi\.?|miles))?(?:\[(-?\d*\.?\d*)\s(?:mi\.?|miles)\])?$/;
-    let regexResult = regexFeet.exec(text.split("\n")[0]);
-    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
 
-    if (dontUseMetricConversions === false) {
-        if (regexResult && regexResult.length === 5 && regexResult[1]) {
+/**
+ * Adds metric labels to a given text by converting distances in the first line of the text.
+ *
+ * This function checks if built-in metric conversions are enabled and, if so, converts any distances
+ * found in the first line of the input text from imperial units ("ft.","ft","feet" and "ft.","ft","feet") to metric units ("m" and "km").
+ * The converted values are appended as additional lines to the original text.
+ *
+ * @param {string} text -  The text that contains the distances (e.g. the ruler label)
+ * @returns {string} The input text with appended metric conversions, if applicable.
+ */
+function addMetricLabels(text) {
+    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
+    const textLines = text ? text.split("\n") : "";
+    if (dontUseMetricConversions === false && textLines.length > 0) {
+        let convertedText = convertDistanceString(textLines[0],["ft.","ft","feet"],"m",0.3);
+        if(convertedText !== textLines[0]){
             text += " \n "
-            //Convert to meters and set label
-            text = text + parseFloat(((regexResult[1] / 10) * 3).toFixed(2)) + " m";
-            if (regexResult[3]) {
-                text = text + " x " + parseFloat(((regexResult[3] / 10) * 3).toFixed(2)) + " m";
-            } else if (regexResult[4]) {
-                text = text + " [" + parseFloat(((regexResult[4] / 10) * 3).toFixed(2)) + " m]";
-            }
-        } else {
-            //Check if measurement is in miles
-            regexResult = regexMiles.exec(text);
-            //Convert to kilometers and set label
-            if (regexResult && regexResult.length === 5 && regexResult[1]) {
-                text += " \n "
-                text = text + parseFloat((regexResult[1] / 0.62137).toFixed(2)) + " km";
-                if (regexResult[3]) {
-                    text = text + " x " + parseFloat((regexResult[3] / 0.62137).toFixed(2)) + " km";
-                } else if (regexResult[4]) {
-                    text = text + " [" + parseFloat((regexResult[4] / 0.62137).toFixed(2)) + " km]";
-                }
-            }
+            text += convertedText;
+        }
+        convertedText = convertDistanceString(textLines[0],["mi.","mi","miles"],"km",1.61);
+        if(convertedText !== textLines[0]){
+            text += " \n "
+            text += convertedText;
         }
     }
     return text;
 }
 
-function addConvertedLabels(text) {
+/**
+ * Adds custom conversion labels to a given text based on user-defined conversion settings.
+ *
+ * This function retrieves custom conversion factors and labels from game settings and applies
+ * these conversions to the first line of the input text. If conversions are applicable, they
+ * are appended as additional lines to the original text.
+ *
+ * @param {string} text -  The text that contains the distances (e.g. the ruler label)
+ * @returns {string} The input text with appended custom conversions, if applicable.
+ */
+function addCustomConversionLabels(text) {
     let conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
     let conversionFactorBig = game.settings.get("metric-ruler-labels", "customConversionFactorBig");
     let customConversionLabelSmall = game.settings.get("metric-ruler-labels", "customConversionLabelSmall");
@@ -400,40 +405,26 @@ function addConvertedLabels(text) {
     let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
 
     if (useCustomConversions) {
-        originalLabelsSmall = originalLabelsSmall.replaceAll(".", "\\.");
-        originalLabelsSmall = originalLabelsSmall.replaceAll(",", "|");
-        originalLabelsBig = originalLabelsBig.replaceAll(".", "\\.");
-        originalLabelsBig = originalLabelsBig.replaceAll(",", "|");
+        originalLabelsSmall = originalLabelsSmall === "" ? null : originalLabelsSmall.split(",");
+        originalLabelsBig = originalLabelsBig === "" ? null : originalLabelsBig.split(",");
 
-        let regexSmall = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + "))?(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsSmall + ")\\])?");
-        let regexBig = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + ")\\s?x?(\\s?(-?\\d*\\.?\\d*)\\s?(?:" + originalLabelsBig + "))?(?:\\[(-?\\d*\\.?\\d*)\\s(?:" + originalLabelsBig + ")\\])?");
-        let regexResult = regexSmall.exec(text.split("\n")[0]);
-
+        const textLines = text ? text.split("\n") : "";
         if ((!originalLabelsSmall && !conversionFactorSmall)
-            && (!originalLabelsBig && !conversionFactorBig)) {
+            && (!originalLabelsBig && !originalLabelsBig)) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text");
-        } else {
-            if (regexResult && regexResult.length === 5 && regexResult[1]) {
-                text += " \n "
-                //Convert to meters and set label
-                text = text + parseFloat((regexResult[1] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-                if (regexResult[3]) {
-                    text = text + " x " + parseFloat((regexResult[3] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall;
-                } else if (regexResult[4]) {
-                    text = text + " [" + parseFloat((regexResult[4] * conversionFactorSmall).toFixed(2)) + " " + customConversionLabelSmall + "]";
-                }
-            } else {
-                //Check if measurement is in miles
-                regexResult = regexBig.exec(text.split("\n")[0]);
-                //Convert to kilometers and set label
-                if (regexResult && regexResult.length === 5 && regexResult[1]) {
+        } else if(textLines.length > 0) {
+            if(originalLabelsBig && originalLabelsBig){
+                let convertedText = convertDistanceString(textLines[0],originalLabelsSmall,customConversionLabelSmall,conversionFactorSmall);
+                if(convertedText !== textLines[0]){
                     text += " \n "
-                    text = text + parseFloat((regexResult[1] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
-                    if (regexResult[3]) {
-                        text = text + " x " + parseFloat((regexResult[3] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig;
-                    } else if (regexResult[4]) {
-                        text = text + " [" + parseFloat((regexResult[4] * conversionFactorBig).toFixed(2)) + " " + customConversionLabelBig + "]";
-                    }
+                    text += convertedText;
+                }
+            }
+            if(originalLabelsBig && originalLabelsBig){
+                let convertedText = convertDistanceString(textLines[0],originalLabelsBig,customConversionLabelBig,conversionFactorBig);
+                if(convertedText !== textLines[0]){
+                    text += " \n "
+                    text += convertedText;
                 }
             }
         }
@@ -441,6 +432,18 @@ function addConvertedLabels(text) {
     return text;
 }
 
+/**
+ * Adds travel time calculations to the given text based on the travel distance.
+ *
+ * This function checks if the travel time feature is enabled in the game settings, and if so,
+ * it calculates the travel time for a given distance using different speed factors (slow, normal, fast).
+ * The calculated travel times are added to the input text as a new line. The function also handles segment-based travel
+ * time calculations, if applicable.
+ *
+ * @param {string} text - The input text, typically containing a distance with a specific travel time label.
+ * @param {boolean} [hasSegments=false] - A flag indicating whether the input text contains segments (optional).
+ * @returns {string} The input text with added travel time calculations and/or segment times.
+ */
 function addTravelTime(text, hasSegments = false) {
     let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
     let conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
@@ -451,7 +454,7 @@ function addTravelTime(text, hasSegments = false) {
     let travelTimeOnlyTotalTimeLastSegment = game.settings.get("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment");
 
     if (travelTimeActivated) {
-        travelTimeLabel = travelTimeLabel.replaceAll(".", "\\.");
+        travelTimeLabel = travelTimeLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
 
         let regex = new RegExp("(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\s(?:\\[(-?\\d*\\.?\\d*)\\s?(?:" + travelTimeLabel + ")\\])?");
@@ -460,15 +463,17 @@ function addTravelTime(text, hasSegments = false) {
         if (!travelTimeLabel) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
         } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
+            //The Ruler only has one segment
             text += " \n "
-            //Calculate Traveltime
+            //Calculate Traveltimes
             text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
             text = text.replaceAll("Infinity", "-");
         } else if (regexResult && regexResult.length === 3 && regexResult[2] && hasSegments) {
-            //Calculate Traveltime
+            //The Ruler has multiple segments
             if (travelTimeOnlyTotalTimeLastSegment === false) {
+                //Calculate Traveltime
                 text += " \n "
                 text = text + roundToQuarters(parseFloat((regexResult[1] / conversionFactorSlow).toFixed(2))) + " | "
                     + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
@@ -485,7 +490,16 @@ function addTravelTime(text, hasSegments = false) {
     }
     return text;
 }
-
+/**
+ * Removes the first line (which is the Foundry measurement label) from the given text if the corresponding setting is enabled.
+ *
+ * This function checks if the "hideFoundryMeasurement" setting is enabled. If it is, it removes
+ * the first line of the input text, unless it starts with the special "↕" character used by the elevation ruler.
+ * IMPORTANT: This function should only be called after all label conversions are done
+ *
+ * @param {string} text - The input text containing the measurement label to be potentially hidden.
+ * @returns {string} The input text with the Foundry label hidden, if applicable.
+ */
 //IMPORTANT... ONLY USE AS LAST FUNCTION CALL
 function hideFoundryLabel(text) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
@@ -505,6 +519,49 @@ function hideFoundryLabel(text) {
 
 }
 
+/**
+ * Converts distance strings within a text from one unit to another using a conversion factor.
+ *
+ * @param {string} text - The text that contains the distances (e.g. the ruler label)
+ * @param {string[]} searchLabels - An array of units to search for in the text (e.g., ["ft", "ft.", "feet"]).
+ * @param {string} newLabel - The new unit label to replace the found units with (e.g., "meter").
+ * @param {number} conversionFactor - The factor by which to multiply the numeric distance values for conversion. (e.g. 3 for the conversion from feet to meters)
+ * @returns {string} The modified text with the converted distance values and new unit labels.
+ *
+ * @example
+ * // Example usage:
+ * const text = "5 ft [5 ft] x 5 ft [5 ft]";
+ * const result = convertDistanceString(text, ["ft", "ft.", "feet"], "meter", 3);
+ * console.log(result); // "1.50 m [1.50 m] x 1.50 m [1.50 m]"
+ */
+function convertDistanceString(text,searchLabels,newLabel,conversionFactor){
+    //Sort labels so that more specific ones come first
+    searchLabels.sort((a, b) => b.length - a.length);
+
+    // Escape labels for regex
+    searchLabels = searchLabels.map(label => label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+    // creates a regex that searches for the label with a number in front of it
+    const regex = new RegExp("(-?\\d*\\.?\\d+)(\\s*)(" + searchLabels.join('|') + ")", 'g');
+
+    //Searches for the sections where we have a distance followed by a label and replaces them.
+    return text.replace(regex, (match, distance, whiteSpaces) => {
+        const convertedDistance = (parseFloat(distance) * conversionFactor).toFixed(2);
+        //Return the converted string with the same format as the old one
+        return convertedDistance + whiteSpaces + newLabel;
+    });
+}
+
+/**
+ * Rounds a number to the nearest quarter (0.25).
+ *
+ * This function rounds the provided number to the nearest quarter (0.25) by multiplying it by 4,
+ * rounding to the nearest integer, and then dividing it by 4. The result is then returned as a
+ * string with exactly two decimal places.
+ *
+ * @param {number} number - The number to be rounded.
+ * @returns {string} The rounded number as a string with two decimal places.
+ */
 function roundToQuarters(number) {
     return (Math.round(number * 4) / 4).toFixed(2);
 }
@@ -523,8 +580,19 @@ function showIncompatibilityDialog(generation) {
     }, {width: 600}).render(true);
 }
 
-/*
-Returns an Array of measurement data for the ruler.
+/**
+ * Retrieves and converts ruler data from the current Foundry canvas, based on the active segments.
+ *
+ * This function checks the current Foundry release generation and, if version 10 or greater, retrieves
+ * the ruler data (in feet, miles, meters, and kilometers) from the segments of the ruler. It then converts
+ * between different units as necessary and returns the data in a structured format.
+ *
+ * @returns {Array<Object>} An array of objects containing the converted ruler data, with the following properties:
+ *   - `feet` {string} The distance in feet.
+ *   - `miles` {string} The distance in miles.
+ *   - `meters` {string} The distance in meters.
+ *   - `kilometers` {string} The distance in kilometers.
+ *   Returns an empty array if Foundry version is lower than 10 or if no segments are available.
  */
 export function getRulerData() {
     let foundryGeneration = game.release.generation;

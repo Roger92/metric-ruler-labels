@@ -23,7 +23,7 @@ Compatability with V12!!!
 
 ## V12 - Compatability
 The latest version is compatible with V12. If you find problems with future subversions of V12, then please let me know.
-Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not supported)
+Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not officially supported)
 
 ## Table of Contents
 
@@ -84,8 +84,10 @@ To save some space you can also toggle on the option to only show the total trav
 
 ## Support for other packages
 ### DragRuler
-This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch. You can enable/disable the labels in the settings.
+This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch as well as the drag measurement from the PF2E system, and modules that built up on this.
+You can enable/disable the labels in the settings.
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
+
 
 
 ## Installation
@@ -109,6 +111,9 @@ Nothing yet. Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v3.3.0**
+- Changed the way the labels are converted, so that it should work with more different variations out of the box.
+
 **v3.2.2**
 - Setting for Drag Ruler support is now a dropdown
 

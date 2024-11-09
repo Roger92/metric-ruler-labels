@@ -3,7 +3,7 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Anzeige bei DragRuler",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung eines Dragruler Moduls angezeigt. Zur Verfügung stehen DragRuler (by Stäbchenfisch) und PF2e Token Drag Ruler (by 7H3LaughingMan) (Änderung nach Neuladen aktiv)",
+                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung eines Dragruler Moduls angezeigt. Zur Verfügung stehen DragRuler (by Stäbchenfisch) und PF2e Drag Ruler (System built-in oder andere) (Änderung nach Neuladen aktiv)",
                 "disabled": "Deaktiviert"
             },
             "measureTemplateSupport": {
