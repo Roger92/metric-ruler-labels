@@ -85,7 +85,8 @@ To save some space you can also toggle on the option to only show the total trav
 ## Support for other packages
 ### DragRuler
 This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch as well as the drag measurement from the PF2E system, and modules that built up on this.
-You can enable/disable the labels in the settings.
+It should work with modules like [EasyRegions](https://foundryvtt.com/packages/easy-regions) or [PF2e Drag Measurement Action Icon
+](https://foundryvtt.com/packages/pf2e-drag-measurement-action-icon) You can enable/disable the labels in the settings. 
 ![image](https://github.com/user-attachments/assets/ff01749e-893b-46c7-abca-bbab90ee6267)
 ![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
 
@@ -105,7 +106,8 @@ Works with V9 + V10 + V11
 Also thanks to ruipin for the libWrapper and Stäbchenfisch for the DragRuler module :)
 
 ## Planned
-Nothing yet. Feel free to recommend enhancements.
+Feel free to recommend enhancements.
+ - Maybe better support for elevation ruler if my users see a need there :)
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
