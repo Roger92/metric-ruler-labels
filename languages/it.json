@@ -3,7 +3,7 @@
         "settings": {
             "dragRulerSupport": {
                 "name": "Mostra in DragRuler",
-                "hint": "Se attivato, vengono visualizzate informazioni metriche aggiuntive quando si utilizza un modulo righello di trascinamento. DragRuler (di Stäbchenfisch) e PF2e Token Drag Ruler (di 7H3LaughingMan) sono disponibili. (Le modifiche si applicano dopo il riavvio) ",
+                "hint": "Se attivato, vengono visualizzate informazioni metriche aggiuntive quando si utilizza un modulo righello di trascinamento. DragRuler (di Stäbchenfisch) e PF2e Drag Ruler (sistema incorporato o altro) sono disponibili. (Le modifiche si applicano dopo il riavvio) ",
                 "disabled": "Disattivato"
             },
             "measureTemplateSupport": {
