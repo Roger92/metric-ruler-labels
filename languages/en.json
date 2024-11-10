@@ -2,9 +2,11 @@
     "metric-ruler-labels": {
         "settings": {
             "dragRulerSupport": {
-                "name": "Show on DragRuler",
-                "hint": "If activated, additional metric information is displayed when using a drag ruler module. DragRuler (by Stäbchenfisch) and PF2e Drag Ruler (system built-in or others) are available (change active after reload)",
-                "disabled": "Disabled"
+                "name": "Support for DragRuler modules",
+                "hint": "This activates the support for certain Drag Ruler modules. E.g. DragRuler (by Stäbchenfisch) or PF2e Token Drag Ruler (by 7H3LaughingMan). Modules like Elevation Ruler (by caewok) should work out of the box. Changes take effect after reload.",
+                "disabled": "Disabled",
+                "dragRuler":"Drag Ruler (by Staebchenfish)",
+                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
             },
             "measureTemplateSupport": {
                 "name": "Show on Measure Templates",
@@ -12,7 +14,7 @@
             },
             "disableBuiltInConversion": {
                 "name": "Disable Built-In Conversions",
-                "hint": "When checked, the built-in conversions will be disabled."
+                "hint": "When checked, the built-in metric conversions of this module will be disabled."
             },
             "hideFoundryMeasurement": {
                 "name": "Hides the Measurements from Foundry",

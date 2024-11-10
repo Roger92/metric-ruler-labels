@@ -2,9 +2,11 @@
     "metric-ruler-labels": {
         "settings": {
             "dragRulerSupport": {
-                "name": "Anzeige bei DragRuler",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung eines Dragruler Moduls angezeigt. Zur Verfügung stehen DragRuler (by Stäbchenfisch) und PF2e Drag Ruler (System built-in oder andere) (Änderung nach Neuladen aktiv)",
-                "disabled": "Deaktiviert"
+                "name": "Unterstützung für DragRuler-Module",
+                "hint": "Aktiviert die Unterstützung für bestimmte Drag Ruler Module. Z.B. DragRuler (von Stäbchenfisch) oder PF2e Token Drag Ruler (von 7H3LaughingMan). Module wie Elevation Ruler (von caewok) sollten direkt funktionieren. Änderungen werden nach einem Reload wirksam.",
+                "disabled": "Deaktiviert",
+                "dragRuler":"Drag Ruler (by Staebchenfish)",
+                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
             },
             "measureTemplateSupport": {
                 "name": "Anzeige bei Schablonen",
@@ -12,7 +14,7 @@
             },
             "disableBuiltInConversion": {
                 "name": "Deaktiviere eingebaute Umwandlung",
-                "hint": "Wenn ausgewählt, wird die eingebaute metrische Umwandlung deaktiviert."
+                "hint": "Wenn ausgewählt, wird die bereits eingebaute metrische Umwandlung dieses Moduls deaktiviert."
             },
             "hideFoundryMeasurement": {
                 "name": "Verstecke die Messungen von Foundry ",

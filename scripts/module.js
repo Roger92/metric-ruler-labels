@@ -119,7 +119,7 @@ Hooks.once('ready', () => {
             }, 'WRAPPER');
         }
 
-        //Handling of Ruler
+        //Handling of Ruler + Elevation Ruler
         libWrapper.register("metric-ruler-labels", "Ruler.prototype.measure", function (wrapped, ...args) {
             let wrappedResult = wrapped(...args);
             let dragRulerSupport = game.settings.get("metric-ruler-labels", "dragRulerSupport");
@@ -163,7 +163,7 @@ Hooks.once('ready', () => {
 
         let dragRulerSupport = game.settings.get("metric-ruler-labels", "dragRulerSupport")
 
-        //Dragruler p2fe game.canvas.dragRuler.rulers.children
+        //Dragruler + p2fe Drag Measurement game.canvas.dragRuler.rulers.children
         if (foundryGeneration >= 10 && (dragRulerSupport !== "noDragRulerSupport")) {
 
             //Handling of DragRuler V10
@@ -174,10 +174,10 @@ Hooks.once('ready', () => {
                 //Delay, so that drag-ruler does not overwrite
                 setTimeout(function () {
                     let rulers = [];
-                    if (dragRulerSupport === "dragRulerSupport") {
+                    if (dragRulerSupport === "dragRulerSupport" && game.canvas.controls.rulers) {
                         rulers = game.canvas.controls.rulers.children;
 
-                    } else if (dragRulerSupport === "pf2eDragRulerSupport") {
+                    } else if (dragRulerSupport === "pf2eDragRulerSupport" && game.canvas.dragRuler && game.canvas.dragRuler.rulers) {
                         rulers = game.canvas.dragRuler.rulers.children;
                     }
                     for (let i = 0; i < rulers.length; i++) {
@@ -222,8 +222,8 @@ function registerSettings() {
         default: "dragRulerSupport",
         choices:{
             "noDragRulerSupport": "metric-ruler-labels.settings.dragRulerSupport.disabled",
-            "dragRulerSupport" : "Drag Ruler (by Staebchenfish)",
-            "pf2eDragRulerSupport" : "PF2e Drag Ruler (System built in or others) "
+            "dragRulerSupport" : "metric-ruler-labels.settings.dragRulerSupport.dragRuler",
+            "pf2eDragRulerSupport" : "metric-ruler-labels.settings.dragRulerSupport.pf2eTokenDragRuler"
         }
     });
     game.settings.register("metric-ruler-labels", "hideFoundryMeasurement", {
@@ -410,17 +410,17 @@ function addCustomConversionLabels(text) {
 
         const textLines = text ? text.split("\n") : "";
         if ((!originalLabelsSmall && !conversionFactorSmall)
-            && (!originalLabelsBig && !originalLabelsBig)) {
+            && (!originalLabelsBig && !conversionFactorBig)) {
             text += " \n " + game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text");
         } else if(textLines.length > 0) {
-            if(originalLabelsBig && originalLabelsBig){
+            if(originalLabelsSmall && conversionFactorSmall){
                 let convertedText = convertDistanceString(textLines[0],originalLabelsSmall,customConversionLabelSmall,conversionFactorSmall);
                 if(convertedText !== textLines[0]){
                     text += " \n "
                     text += convertedText;
                 }
             }
-            if(originalLabelsBig && originalLabelsBig){
+            if(originalLabelsBig && conversionFactorBig){
                 let convertedText = convertDistanceString(textLines[0],originalLabelsBig,customConversionLabelBig,conversionFactorBig);
                 if(convertedText !== textLines[0]){
                     text += " \n "
