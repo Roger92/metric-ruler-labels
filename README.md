@@ -113,6 +113,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v3.3.1**
+- Cleanup of manifest.json to remove a warning because of deprecated/unknown field
+
 **v3.3.0**
 - Changed the way the labels are converted, so that it should work with more different variations out of the box.
 
