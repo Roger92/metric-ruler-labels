@@ -30,9 +30,6 @@
       }
     ]
   },
-  "conflicts": [
-    
-  ],
   "esmodules": [
     "/scripts/module.js"
   ],
