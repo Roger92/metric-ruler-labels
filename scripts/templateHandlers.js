@@ -12,7 +12,7 @@ function handlePreV10MeasurementTemplates(wrappedResult) {
     if (wrappedResult._object && wrappedResult._object.ruler) {
         wrappedResult._object.ruler.text = addMetricLabels(wrappedResult._object.ruler.text).text;
         wrappedResult._object.ruler.text = addCustomConversionLabels(wrappedResult._object.ruler.text).text;
-        wrappedResult._object.ruler.text = hideFoundryLabel(wrappedResult._object.ruler.text)
+        wrappedResult._object.ruler.text = hideFoundryLabel(wrappedResult._object.ruler.text).text
     }
 
     return wrappedResult;
@@ -34,7 +34,7 @@ function handleV10MeasurementTemplates() {
                 if (rulerSegments[i].label.text.split("\n").length === 1) {
                     rulerSegments[i].label.text = addMetricLabels(rulerSegments[i].label.text).text;
                     rulerSegments[i].label.text = addCustomConversionLabels(rulerSegments[i].label.text).text;
-                    rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text)
+                    rulerSegments[i].label.text = hideFoundryLabel(rulerSegments[i].label.text).text
                 }
             }
         }
@@ -57,7 +57,7 @@ function handleV13MeasurementTemplates() {
             if (template.ruler && template.ruler.text.split("\n").length === 1) {
                 template.ruler.text = addMetricLabels(template.ruler.text).text;
                 template.ruler.text = addCustomConversionLabels(template.ruler.text).text;
-                template.ruler.text = hideFoundryLabel(template.ruler.text);
+                template.ruler.text = hideFoundryLabel(template.ruler.text).text;
             }
         }
     }
@@ -78,7 +78,7 @@ function handleV11ToV12MeasurementTemplates() {
             if (template.ruler && template.ruler.text.split("\n").length === 1) {
                 template.ruler.text = addMetricLabels(template.ruler.text).text;
                 template.ruler.text = addCustomConversionLabels(template.ruler.text).text;
-                template.ruler.text = hideFoundryLabel(template.ruler.text);
+                template.ruler.text = hideFoundryLabel(template.ruler.text).text;
             }
         }
     }
@@ -97,13 +97,13 @@ function handlePreV11TemplatePreview(foundryGeneration, wrappedResult) {
         if (wrappedResult && wrappedResult.hud.ruler) {
             wrappedResult.hud.ruler.text = addMetricLabels(wrappedResult.hud.ruler.text).text;
             wrappedResult.hud.ruler.text = addCustomConversionLabels(wrappedResult.hud.ruler.text).text;
-            wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text);
+            wrappedResult.hud.ruler.text = hideFoundryLabel(wrappedResult.hud.ruler.text).text;
         }
     } else if (foundryGeneration === 10) {
         if (wrappedResult && wrappedResult.ruler) {
             wrappedResult.ruler.text = addMetricLabels(wrappedResult.ruler.text).text;
             wrappedResult.ruler.text = addCustomConversionLabels(wrappedResult.ruler.text).text;
-            wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text);
+            wrappedResult.ruler.text = hideFoundryLabel(wrappedResult.ruler.text).text;
         }
     }
     return wrappedResult;

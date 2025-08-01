@@ -116,7 +116,9 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
  * @param {string} text - The input text, typically containing a distance with a specific travel time label.
  * @param {boolean} [hasSegments=false] - A flag indicating whether the input text contains segments (optional).
  * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
- * @returns {string} Object containing the modified text and conversion information
+ * @returns {Object} Object containing the modified text and conversion information
+ * @returns {string} Object.text - The input text with appended metric conversions, if applicable
+ * @returns {boolean} Object.converted - Signs that a conversion was applied
  */
 function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = false) {
     let conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
@@ -127,7 +129,7 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
     let timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
     let travelTimeOnlyTotalTimeLastSegment = game.settings.get("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment");
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
-
+    let converted = false;
     if (travelTimeActivated) {
         travelTimeLabel = travelTimeLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
@@ -137,6 +139,7 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
 
         if (!travelTimeLabel) {
             text += " "+separator+" " + game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
+            converted = true;
         } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
             //The Ruler only has one segment
             text += " "+separator+" "
@@ -145,6 +148,7 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[1] / conversionFactorFast).toFixed(2))) + " " + timeUnit;
             text = text.replaceAll("Infinity", "-");
+            converted = true;
         } else if (regexResult && regexResult.length === 3 && regexResult[2] && hasSegments) {
             //The Ruler has multiple segments
             if (travelTimeOnlyTotalTimeLastSegment === false) {
@@ -160,10 +164,11 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorNormal).toFixed(2))) + " | "
                 + roundToQuarters(parseFloat((regexResult[2] / conversionFactorFast).toFixed(2))) + " " + timeUnit + "]";
             text = text.replaceAll("Infinity", "-");
+            converted = true;
         }
 
     }
-    return text;
+    return {text:text,converted:converted};
 
 }
 /**
@@ -175,11 +180,14 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
  * @returns {string} The input text with the Foundry label hidden, if applicable.
  */
 function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false) {
-    let conversion = convertDistanceString(text,[""],"",conversionFactor);
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
-
-    return text + separator + conversion
-
+    let separator = useBreakInsteadOfNewline ? "<br><br>" : "\n\n";
+    let textSplitted =text.split(separator);
+    if(textSplitted.length >= 1){
+        let conversion = convertDistanceString(textSplitted[0],[""],"",conversionFactor);
+        return text + separator + conversion
+    }else{
+        return text;
+    }
 }
 
 /**
@@ -190,15 +198,17 @@ function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = 
  * IMPORTANT: This function should only be called after all label conversions are done
  *
  * @param {string} text - The input text containing the measurement label to be potentially hidden.
- * @returns {string} The input text with the Foundry labels hidden, if applicable.
  * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
+ * @returns {Object} Object containing the modified text and conversion information
+ * @returns {string} Object.text - The input text with the hidden Foundry label, if applicable.
+ * @returns {boolean} Object.converted - Signs that a conversion was applied
  */
 //IMPORTANT... ONLY USE AS LAST FUNCTION CALL
 function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let elevationRulerActive = game.modules.get('elevationruler')?.active;
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
-
+    let converted = false;
     if (hideFoundry) {
         let labelLines = text.split(separator);
         if (labelLines[0].startsWith(" ") === false) {
@@ -206,11 +216,11 @@ function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
                 labelLines.shift();
             }
         }
-        return labelLines.join(separator);
+        converted = true;
+        return { text:labelLines.join(separator), converted:converted };
     } else {
-        return text;
+        return { text:text, converted:converted };
     }
-
 }
 
 /**
@@ -267,3 +277,4 @@ export {
     hideFoundryLabel,
     convertDeltaStrings
 };
+

@@ -17,8 +17,11 @@ import {
     handleFoundryV13Rulers,
     handlePreV10Ruler,
     handleV10To12DragRuler,
-    handleV10ToV12Ruler
+    handleV10ToV12Ruler,
+    setCurrentMinWidth,
+    adjustLabelCSSClass
 } from "./rulerHandlers.js";
+import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
 
 
 Hooks.on("init", () => {
@@ -28,23 +31,18 @@ Hooks.on("init", () => {
     }
 });
 
-Hooks.once('ready', () => {
+Hooks.once('ready',  () => {
+    let foundryGeneration = game.release.generation;
+
     if (!game.modules.get('lib-wrapper')?.active && game.user.isGM) {
-        new Dialog({
-            title: `Roger's Additional Metric Ruler Labels`,
-            content: "<h2>" + game.i18n.localize("metric-ruler-labels.dependencies.libWrapper.title") + "</h2>" +
-                "<p>" + game.i18n.localize("metric-ruler-labels.dependencies.libWrapper.infotext") + "</p> <br>",
-            buttons: {
-                dismiss: {
-                    icon: '<i class="fas fa-times"></i>',
-                    label: "Got it!"
-                }
-            }
-        }, {width: 600}).render(true);
+        if(foundryGeneration >= 13){
+            libWrapperNotFoundDialogV2();
+        }else{
+            libWrapperNotFoundDialog();
+        }
     } else {
 
         //Check foundry generation
-        let foundryGeneration = game.release.generation;
         if (foundryGeneration < 9 || foundryGeneration > 13) {
             showIncompatibilityDialog(foundryGeneration);
         }
@@ -120,12 +118,20 @@ Hooks.once('ready', () => {
         //=============================================================================
 
         if(foundryGeneration >= 13) {
+            initializeV13RulerCSS();
             libWrapper.register("metric-ruler-labels", "foundry.canvas.interaction.Ruler.prototype._refresh", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
                 let rulers = document.getElementsByClassName("distance-ruler-labels");
                 setTimeout(() => {
                     handleFoundryV13Rulers(rulers)
-                }, 20);
+                }, 5);
+                return wrappedResult;
+
+            }, 'WRAPPER');
+            libWrapper.register("metric-ruler-labels", "foundry.canvas.interaction.Ruler.prototype._onDragStart", function (wrapped, ...args) {
+                let wrappedResult = wrapped(...args);
+                setCurrentMinWidth(0);
+                adjustLabelCSSClass();
                 return wrappedResult;
 
             }, 'WRAPPER');
@@ -151,15 +157,23 @@ Hooks.once('ready', () => {
         //=============================================================================
 
         if(foundryGeneration >= 13){
+            initializeV13RulerCSS();
             //Handling of Token Drag
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.Token.prototype._refreshRuler", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
                 let rulers = document.getElementsByClassName("token-ruler-labels");
                 //Delay, so that ruler labels are not overwritten
                 setTimeout(() => {
-                    handleFoundryV13Rulers(rulers)
+                    handleFoundryV13Rulers(rulers);
                 }, 5);
                 return wrappedResult;
+            }, 'WRAPPER');
+            libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.Token.prototype._onDragStart", function (wrapped, ...args) {
+                let wrappedResult = wrapped(...args);
+                setCurrentMinWidth(0);
+                adjustLabelCSSClass();
+                return wrappedResult;
+
             }, 'WRAPPER');
         }else if (foundryGeneration >= 10 && foundryGeneration < 13) {
             //Dragruler + p2fe Drag Measurement
@@ -339,22 +353,24 @@ function registerSettings() {
     });
 }
 
-
-
-
-
-function showIncompatibilityDialog(generation) {
-    new Dialog({
-        title: `Roger's Additional Metric Ruler Labels`,
-        content: "<h2>" + game.i18n.localize("metric-ruler-labels.incompatibility.title") + "<br> Current Generation: " + generation + " </h2>" +
-            "<p>" + game.i18n.localize("metric-ruler-labels.incompatibility.infotext") + "</p> <br>",
-        buttons: {
-            dismiss: {
-                icon: '<i class="fas fa-times"></i>',
-                label: "Got it!"
+/**
+ * Updates the CSS rules of the existing stylesheets in the document to apply specific modifications for ruler labels.
+ * The method scans through all the stylesheets to locate a specific rule containing "metric-ruler-labels" in their href property.
+ * Once identified, it applies new rules to update the alignment and padding for measurement waypoint labels and icons.
+ *
+ * @return {void} No return value. The function modifies the stylesheets directly.
+ */
+function initializeV13RulerCSS(){
+    let CSSSheets = document.styleSheets;
+    for(let i = 0; i < CSSSheets.length; i++){
+        for (let j = 0; j < CSSSheets[i].cssRules.length; j++) {
+            if(CSSSheets[i].cssRules[j].href && CSSSheets[i].cssRules[j].href.includes("metric-ruler-labels")){
+                let sheet = CSSSheets[i].cssRules[j].styleSheet;
+                sheet.insertRule("#measurement .waypoint-label{align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;}",0);
+                sheet.insertRule("#measurement .waypoint-label .icon{align-self: center !important}",1);
             }
         }
-    }, {width: 600}).render(true);
+    }
 }
 
 /**
