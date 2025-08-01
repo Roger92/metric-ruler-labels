@@ -17,15 +17,14 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
-## V13 - Compatability
-Planned end of July :) 
-
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
-Compatability with V12!!!
+Compatability with V13!!!
 
-## V12 - Compatability
-The latest version is compatible with V12. If you find problems with future subversions of V12, then please let me know.
+## V13 - Compatability
+The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
+There might be some not 100% smooth UI behaviors with the new ruler labels of V13, but i will try to minimize weird behavior in later minor releases
+
 Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not officially supported)
 
 ## Table of Contents
@@ -116,6 +115,10 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.0.0**
+- Support for V13 :)
+- There might be some not 100% smooth UI things with the new ruler labels of V13, but i will try to minimize weird behavior in subsequent minor releases 
+
 **v3.3.1**
 - Cleanup of manifest.json to remove a warning because of deprecated/unknown field
 
