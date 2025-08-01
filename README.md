@@ -101,7 +101,7 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9 + V10 + V11
+Works with V9 to V13
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
