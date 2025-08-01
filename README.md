@@ -17,9 +17,6 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
-## V13 - Compatability
-Planned end of July :) 
-
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Compatability with V13!!!
