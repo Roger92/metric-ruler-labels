@@ -6,7 +6,7 @@
   "version": "This is auto replaced",
   "library": "false",
   "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "12",
+  "compatibleCoreVersion": "13",
     "compatibility": {
     "minimum": "9",
     "verified": "13",
