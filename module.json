@@ -6,11 +6,11 @@
   "version": "This is auto replaced",
   "library": "false",
   "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "12",
+  "compatibleCoreVersion": "13",
     "compatibility": {
     "minimum": "9",
-    "verified": "12",
-    "maximum": "12"
+    "verified": "13",
+    "maximum": "13"
   },
   "authors": [
     {

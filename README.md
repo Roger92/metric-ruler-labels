@@ -101,7 +101,7 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9 + V10 + V11
+Works with V9 to V13
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
@@ -115,6 +115,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.0.1**
+- Fixed module.json
+  
 **v4.0.0**
 - Support for V13 :)
 - There might be some not 100% smooth UI things with the new ruler labels of V13, but i will try to minimize weird behavior in subsequent minor releases 
