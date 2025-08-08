@@ -22,7 +22,7 @@ import {
     adjustLabelCSSClass
 } from "./rulerHandlers.js";
 import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
-
+import {safeGetCSSRules} from "./helper.js";
 
 Hooks.on("init", () => {
     registerSettings();
@@ -362,12 +362,21 @@ function registerSettings() {
  */
 function initializeV13RulerCSS(){
     let CSSSheets = document.styleSheets;
+    let found = false;
     for(let i = 0; i < CSSSheets.length; i++){
+        if(found){
+            break;
+        }
+        if(safeGetCSSRules(CSSSheets[i]) === null){
+            continue;
+        }
         for (let j = 0; j < CSSSheets[i].cssRules.length; j++) {
             if(CSSSheets[i].cssRules[j].href && CSSSheets[i].cssRules[j].href.includes("metric-ruler-labels")){
                 let sheet = CSSSheets[i].cssRules[j].styleSheet;
                 sheet.insertRule("#measurement .waypoint-label{align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;}",0);
                 sheet.insertRule("#measurement .waypoint-label .icon{align-self: center !important}",1);
+                found = true;
+                break;
             }
         }
     }
@@ -447,3 +456,4 @@ export function getRulerData() {
         return [];
     }
 }
+
