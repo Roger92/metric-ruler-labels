@@ -115,6 +115,12 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.0.3**
+- Fixed CSS access errors that caused the libwrapper hook registration to fail
+
+**v4.0.2**
+- Fixed module.json
+
 **v4.0.1**
 - Fixed module.json
   
