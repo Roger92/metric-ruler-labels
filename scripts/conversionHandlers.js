@@ -1,3 +1,7 @@
+import {
+    formatWithSeparators,
+    parseLocalizedNumber
+} from "./helper.js";
 /**
  * Adds metric labels to a given text by converting distances in the first line of the text.
  *
@@ -246,11 +250,15 @@ function convertDistanceString(text,searchLabels,newLabel,conversionFactor){
     searchLabels = searchLabels.map(label => label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
     // creates a regex that searches for the label with a number in front of it
-    const regex = new RegExp("(-?\\d*\\.?\\d+)(\\s*)(" + searchLabels.join('|') + ")", 'g');
+    // Support both US (e.g., 1,234.56) and EU (e.g., 1.234,56) formats by capturing digits with optional ',' and '.'
+    const regex = new RegExp("(-?[\\d.,]+)(\\s*)(" + searchLabels.join('|') + ")", 'g');
 
     //Searches for the sections where we have a distance followed by a label and replaces them.
     return text.replace(regex, (match, distance, whiteSpaces) => {
-        const convertedDistance = Number(parseFloat(distance) * conversionFactor).toFixed(2).replace(/\.?0+$/, '');
+        const { value, decimalSep, thousandSep, hadThousandSep } = parseLocalizedNumber(distance);
+        if (isNaN(value)) return match; // fallback: don't change if parsing failed
+        const converted = Number(value * conversionFactor);
+        const convertedDistance = formatWithSeparators(converted, decimalSep, thousandSep, hadThousandSep);
         //Return the converted string with the same format as the old one
         return convertedDistance + whiteSpaces + newLabel;
     });
@@ -275,6 +283,11 @@ export {
     addCustomConversionLabels,
     addTravelTime,
     hideFoundryLabel,
-    convertDeltaStrings
+    convertDeltaStrings,
+    convertDistanceString
 };
 
+// Node/CommonJS compatibility for simple test runner
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports.convertDistanceString = convertDistanceString;
+}
