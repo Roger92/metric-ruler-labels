@@ -11,7 +11,7 @@ GM:
 > A 20 feet wide gorge lies ahead of your party. What do you do?
 
 *You are asking yourself:* 
-> 20 feet ... is this wide? Should i try jumping across it?
+> 20 feet ... is this wide? Should I try jumping across it?
 
 <br>
 This module will help you to better understand distances. <br>
@@ -23,9 +23,9 @@ Compatability with V13!!!
 
 ## V13 - Compatability
 The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
-There might be some not 100% smooth UI behaviors with the new ruler labels of V13, but i will try to minimize weird behavior in later minor releases
+There might be some not 100% smooth UI behaviors with the new ruler labels of V13, but I will try to minimize weird behavior in later minor releases
 
-Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9 but its not officially supported)
+Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9, but it's not officially supported)
 
 ## Table of Contents
 
@@ -60,8 +60,8 @@ Please note that Release 1.1.0 and above are not compatible with foundry version
 
 ## Customizable Conversions
 You can now add your own custom conversion with custom labels, etc. Just go to the settings and add all the information for your own conversion. 
-The module has the concept of a small and a big measurement unit. For example feet and miles. Or meters and kilometers. That way you can support normal maps, as well
-as bigger travelmaps. Fill in the original labels, so that the module can find the measurements, that it should convert with your custom factor. That way you will receive your own custom measurement with a label of your choice.
+The module has the concept of a small and a big measurement unit. For example, feet and miles. Or meters and kilometers. That way you can support normal maps, as well
+as bigger travelmaps. Fill in the original labels so that the module can find the measurements that it should convert with your custom factor. That way you will receive your own custom measurement with a label of your choice.
 
 Your players then can decide if they want to see the built-in metric conversion for feet and miles or your custom one, or just BOTH :). If you want to get rid of the original foundry measurements, then there is an option too. I hope this helps all the people that have some different szenarios than imperial to metric. <br>
 
@@ -77,9 +77,9 @@ Your players then can decide if they want to see the built-in metric conversion 
 
 ## Travel times
 You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
-and then the distances for that measuring unit that your group would travel on a slow, normal and fast travel speed. You can also define if you want to display the travel times in days, hours or whatever you want.
+and then the distances for that measuring unit that your group would travel at a slow, normal and fast travel speed. You can also define if you want to display the travel times in days, hours or whatever you want.
 
-To save some space you can also toggle on the option to only show the total travel time on the last segment of a ruler, instead of both the total and the travel time to this segment from the previous one.
+To save some space, you can also toggle on the option to only show the total travel time on the last segment of a ruler, instead of both the total and the travel time to this segment from the previous one.
 
 ![image](https://user-images.githubusercontent.com/11605051/201475836-7053e1f9-991e-4727-b0e0-f308c194e757.png)
 ![image](https://user-images.githubusercontent.com/11605051/200674864-8cab8a31-731b-47e0-9755-c9ca022793a9.png)
