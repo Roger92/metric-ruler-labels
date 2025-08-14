@@ -375,6 +375,7 @@ function initializeV13RulerCSS(){
                 let sheet = CSSSheets[i].cssRules[j].styleSheet;
                 sheet.insertRule("#measurement .waypoint-label{align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;}",0);
                 sheet.insertRule("#measurement .waypoint-label .icon{align-self: center !important}",1);
+                sheet.insertRule("#measurement .waypoint-label div.img{align-self: center !important}",1);
                 found = true;
                 break;
             }
