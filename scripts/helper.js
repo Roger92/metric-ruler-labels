@@ -1,3 +1,21 @@
+let commaUsedAsDecimalSeparator = false;
+
+/**
+ * Gets whether comma is used as decimal separator
+ * @returns {boolean} True if comma is used as decimal separator, false otherwise
+ */
+function getCommaUsedAsDecimalSeparator() {
+    return commaUsedAsDecimalSeparator;
+}
+
+/**
+ * Sets whether comma should be used as decimal separator
+ * @param {boolean} useComma - True to use comma as decimal separator, false to use period
+ */
+function setCommaUsedAsDecimalSeparator(useComma) {
+    commaUsedAsDecimalSeparator = useComma;
+}
+
 /**
  * Safely retrieves the CSS rules from a given stylesheet.
  *
@@ -46,6 +64,7 @@ function parseLocalizedNumber(numStr){
         // Treat as decimal if there is only one occurrence and 1 or 2 digits follow (e.g., 10,2 or 10,25)
         if (commaCount === 1 && (digitsAfter === 1 || digitsAfter === 2)) {
             decimalSep = ',';
+            setCommaUsedAsDecimalSeparator(true);
         } else {
             thousandSep = ',';
             decimalSep = '.'; // default for parsing
@@ -62,8 +81,12 @@ function parseLocalizedNumber(numStr){
             decimalSep = '.'; // no decimal, but keep '.' for JS parsing
         }
     } else {
-        // No separators
-        decimalSep = '.';
+        // No separators, but use comma if it was used as a decimal separator before
+        if(getCommaUsedAsDecimalSeparator() === true){
+            decimalSep = ',';
+        }else{
+            decimalSep = '.';
+        }
     }
 
     const hadThousandSep = thousandSep ? numStr.includes(thousandSep) : false;
