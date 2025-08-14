@@ -9,7 +9,7 @@ import {
  * found in the first line of the input text from imperial units ("ft.","ft","feet" and "ft.","ft","feet") to metric units ("m" and "km").
  * The converted values are appended as additional lines to the original text.
  *
- * @param {string} text -  The text that contains the distances (e.g. the ruler label)
+ * @param {string} text - The text that contains the distances (e.g. the ruler label)
  * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
  * @returns {Object} Object containing the modified text and conversion information
  * @returns {string} Object.text - The input text with appended metric conversions, if applicable
