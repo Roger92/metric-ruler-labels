@@ -102,6 +102,7 @@ To install, follow these instructions:
 
 ## Compatibility
 Works with V9 to V13
+
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
@@ -115,6 +116,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.0**
+- Support for localized distances. The module now also works if you use a foundry localization that uses the comma as decimal separator
+
 **v4.0.3**
 - Fixed CSS access errors that caused the libwrapper hook registration to fail
 
