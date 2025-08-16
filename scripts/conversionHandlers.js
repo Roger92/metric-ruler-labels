@@ -275,7 +275,7 @@ function truncToTenth(value) {
 function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, wrapInBrackets = false, roundToNearestQuarter = false) {
 
     const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(distanceString);
-    const slowNum = roundToNearestQuarter ? Math.abs((Number(value / conversionFactorSlow))) : Math.abs(truncToTenth(Number(value / conversionFactorSlow)));
+    const slowNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorSlow))) : Math.abs(truncToTenth(Number(value / conversionFactorSlow)));
     const normalNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorNormal))) : Math.abs(truncToTenth(Number(value / conversionFactorNormal)));
     const fastNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorFast))) : Math.abs(truncToTenth(Number(value / conversionFactorFast)));
 
