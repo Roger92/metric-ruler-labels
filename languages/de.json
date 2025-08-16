@@ -24,6 +24,10 @@
                 "name": "Aktiviere Reisezeit Labels",
                 "hint": "Aktiviert Reisezeit Labels für das normale Lineal im Format TageLangsam | TageNormal | TageSchnell."
             },
+            "travelTimeRoundToFullQuarters": {
+              "name": "Reisezeit in vollen Vierteln anzeigen",
+              "hint": "Zeigt die Reisezeit in vollen Vierteln an (z.B. 0,2 Tage -> 0 Tage, 1,1 Tage -> 1 Tag, 1,3 Tage -> 1,25 Tage). Ansonsten wird die Reisezeit mit einer Dezimalstelle angezeigt."
+            },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Zeige nur Gesamtzeit an letztem Segment",
                 "hint": "Wenn aktiv, wird am letzten Linealsegment nur die gesamte Reisezeit (der Teil in den eckigen Klammern) angezeigt, um Platz zu Sparen."

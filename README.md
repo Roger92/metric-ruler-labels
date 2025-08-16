@@ -19,7 +19,7 @@ It adds additional labels for the metric measurements to your ruler. It is not c
 
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
-Compatability with V13!!!
+Compatability with V13 and localized numbers, that use a comma as decimal separator!!!
 
 ## V13 - Compatability
 The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
@@ -116,6 +116,10 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.1**
+- V13 Ruler Labels now also work on hosted FoundryVTT instances like "The Forge"
+- Fixed a bug with travel time in combination with localized numbers, that use a comma as decimal separator
+
 **v4.1.0**
 - Support for localized distances. The module now also works if you use a foundry localization that uses the comma as decimal separator
 

@@ -5,7 +5,7 @@ import {
     convertDeltaStrings,
     hideFoundryLabel
 } from "./conversionHandlers.js";
-import {safeGetCSSRules} from "./helper.js";
+import {updateRuntimeRule,removeRuntimeRule} from "./helper.js";
 
 let currentMinWidth = 0;
 
@@ -26,7 +26,7 @@ function setCurrentMinWidth(value) {
 }
 
 /**
-/**
+ /**
  * Handles the modification and formatting of Foundry V13 ruler and token-drag measurements.
  * Applies metric conversions, custom conversions, travel time calculations,
  * and hides default Foundry labels where appropriate.
@@ -187,42 +187,18 @@ function handleV10ToV12Ruler(wrappedResult) {
 }
 
 function adjustLabelCSSClass(numberOfActiveConversions = null,paddingPx=0,minWidthPx= null,hideFoundryLabel = false){
-    let CSSSheets = document.styleSheets;
     let cssHeight = numberOfActiveConversions ? (numberOfActiveConversions * 30) + (2 * paddingPx) : null
-    let found = false;
     if(cssHeight && hideFoundryLabel === false){
         cssHeight += 30;
     }
-    for(let i = 0; i < CSSSheets.length; i++){
-        if(found){
-            break;
-        }
-        if(safeGetCSSRules(CSSSheets[i]) === null){
-            continue;
-        }
-        for (let j = 0; j < CSSSheets[i].cssRules.length; j++) {
-            if(CSSSheets[i].cssRules[j].href && CSSSheets[i].cssRules[j].href.includes("metric-ruler-labels")){
-                let sheet = CSSSheets[i].cssRules[j].styleSheet;
-                let rules = sheet.cssRules;
-                for(let k = 0; k < rules.length; k++){
-                    let rule = rules[k];
-                    if(rule.selectorText === "#measurement .waypoint-label"){
-                        console.log("meep")
-                        if(cssHeight){
-                            CSSSheets[i].cssRules[j].styleSheet.rules[k].style.setProperty("height", cssHeight + "px","important");
-                        }
-                        //CSSSheets[i].cssRules[j].styleSheet.rules[k].style.setProperty("padding-left", "40px","important");
-                        if(minWidthPx){
-                            CSSSheets[i].cssRules[j].styleSheet.rules[k].style.setProperty("min-width", minWidthPx + "px","important");
-                        }else{
-                            CSSSheets[i].cssRules[j].styleSheet.rules[k].style.removeProperty("min-width");
-                        }
-                        found = true;
-                        break;
-                    }
-                }
-            }
-        }
+
+    if(cssHeight){
+        updateRuntimeRule("#measurement .waypoint-label","height:"+cssHeight + "px!important");
+    }
+    if(minWidthPx){
+        updateRuntimeRule("#measurement .waypoint-label","min-width:"+minWidthPx + "px!important");
+    }else{
+        removeRuntimeRule("#measurement .waypoint-label","min-width");
     }
 }
 
