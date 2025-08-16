@@ -28,6 +28,10 @@
                 "name": "Attiva le etichette del tempo di viaggio",
                 "hint": "Attiva le etichette del tempo di viaggio sul righello normale nel formato daysSlow | giorniNormale | giorniVeloce."
             },
+            "travelTimeRoundToFullQuarters": {
+              "name": "Visualizza tempo di viaggio in quarti interi",
+              "hint": "Visualizza il tempo di viaggio in quarti interi (Es., 0.2 giorni -> 0 giorni, 1.1 giorni -> 1 giorno, 1.3 giorni -> 1.25 giorni). Altrimenti il tempo di viaggio avrà 1 decimale."
+            },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Mostra solo il tempo di viaggio totale nell'ultimo segmento",
                 "hint": "Quando attivo, solo il tempo di viaggio totale (la parte che normalmente si trova tra parentesi quadre) verrà mostrato sull'ultimo segmento di un righello. In questo modo puoi risparmiare spazio sullo schermo."

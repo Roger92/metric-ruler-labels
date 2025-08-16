@@ -28,6 +28,10 @@
                 "name": "Activates travel time labels",
                 "hint": "Activates travel time labels on the normal ruler in the format daysSlow | daysNormal | daysFast."
             },
+            "travelTimeRoundToFullQuarters": {
+              "name": "Display travel time as full quarters",
+              "hint": "Displays the traveltime as full quarters (E.g., 0.2 days -> 0 day, 1.1 days -> 1 day, 1.3 days -> 1.25 days). Otherwise the travel time will have 1 decimal place."
+            },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Only show total travel time on last Segment",
                 "hint": "When active, only the total travel time (the portion that is normally in the square brackets) will be shown on the last segment of a ruler. This way you can save some space on the screen."

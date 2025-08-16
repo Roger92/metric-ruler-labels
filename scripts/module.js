@@ -22,7 +22,7 @@ import {
     adjustLabelCSSClass
 } from "./rulerHandlers.js";
 import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
-import {safeGetCSSRules} from "./helper.js";
+import {initializeRuntimeStyle,updateRuntimeRule} from "./helper.js";
 
 Hooks.on("init", () => {
     registerSettings();
@@ -118,7 +118,7 @@ Hooks.once('ready',  () => {
         //=============================================================================
 
         if(foundryGeneration >= 13) {
-            initializeV13RulerCSS();
+            initializeV13RulerCSSV2();
             libWrapper.register("metric-ruler-labels", "foundry.canvas.interaction.Ruler.prototype._refresh", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
                 let rulers = document.getElementsByClassName("distance-ruler-labels");
@@ -157,7 +157,7 @@ Hooks.once('ready',  () => {
         //=============================================================================
 
         if(foundryGeneration >= 13){
-            initializeV13RulerCSS();
+            initializeV13RulerCSSV2();
             //Handling of Token Drag
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.Token.prototype._refreshRuler", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
@@ -173,7 +173,6 @@ Hooks.once('ready',  () => {
                 setCurrentMinWidth(0);
                 adjustLabelCSSClass();
                 return wrappedResult;
-
             }, 'WRAPPER');
         }else if (foundryGeneration >= 10 && foundryGeneration < 13) {
             //Dragruler + p2fe Drag Measurement
@@ -246,6 +245,14 @@ function registerSettings() {
         config: true,
         type: Boolean,
         default: false,
+    });
+    game.settings.register("metric-ruler-labels", "travelTimeRoundToFullQuarters", {
+        name: "metric-ruler-labels.settings.travelTimeRoundToFullQuarters.name",
+        hint: "metric-ruler-labels.settings.travelTimeRoundToFullQuarters.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
     });
     game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
         name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
@@ -353,35 +360,18 @@ function registerSettings() {
     });
 }
 
+
 /**
- * Updates the CSS rules of the existing stylesheets in the document to apply specific modifications for ruler labels.
- * The method scans through all the stylesheets to locate a specific rule containing "metric-ruler-labels" in their href property.
- * Once identified, it applies new rules to update the alignment and padding for measurement waypoint labels and icons.
- *
- * @return {void} No return value. The function modifies the stylesheets directly.
+ * Initializes CSS rules for ruler/waypoint labels in Foundry VTT V13.
+ * Applies styling to align and pad labels properly.
  */
-function initializeV13RulerCSS(){
-    let CSSSheets = document.styleSheets;
-    let found = false;
-    for(let i = 0; i < CSSSheets.length; i++){
-        if(found){
-            break;
-        }
-        if(safeGetCSSRules(CSSSheets[i]) === null){
-            continue;
-        }
-        for (let j = 0; j < CSSSheets[i].cssRules.length; j++) {
-            if(CSSSheets[i].cssRules[j].href && CSSSheets[i].cssRules[j].href.includes("metric-ruler-labels")){
-                let sheet = CSSSheets[i].cssRules[j].styleSheet;
-                sheet.insertRule("#measurement .waypoint-label{align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;}",0);
-                sheet.insertRule("#measurement .waypoint-label .icon{align-self: center !important}",1);
-                sheet.insertRule("#measurement .waypoint-label div.img{align-self: center !important}",1);
-                found = true;
-                break;
-            }
-        }
-    }
+function initializeV13RulerCSSV2() {
+    initializeRuntimeStyle();
+    updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;")
+    updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
+    updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
 }
+
 
 /**
  * Retrieves and converts ruler data from the current Foundry canvas, based on the active segments.
