@@ -116,6 +116,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.2**
+- Fixed a small whoopsie :D
+
 **v4.1.1**
 - V13 Ruler Labels now also work on hosted FoundryVTT instances like "The Forge"
 - Fixed a bug with travel time in combination with localized numbers, that use a comma as decimal separator
