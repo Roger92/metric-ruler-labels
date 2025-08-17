@@ -117,6 +117,10 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 **v4.1.2**
+- Changed handling for V13 CSS
+- Improved the handling when multiple rulers are visible. Now every ruler is handled separately, when it comes to CSS updates.
+
+**v4.1.2**
 - Fixed a small whoopsie :D
 
 **v4.1.1**
