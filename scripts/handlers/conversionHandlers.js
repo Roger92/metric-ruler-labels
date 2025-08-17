@@ -1,6 +1,6 @@
 import {
     formatWithSeparators, parseLocalizedNumber
-} from "./helper.js";
+} from "../helpers/helper.js";
 
 /**
  * Adds metric labels to a given text by converting distances in the first line of the text.
