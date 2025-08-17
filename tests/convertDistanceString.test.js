@@ -1,10 +1,12 @@
 import assert from 'assert';
 // Ensure helper functions are available globally or via CommonJS before loading conversionHandlers
-import '../scripts/helper.js';
-import {convertDistanceString} from '../scripts/conversionHandlers.js';
+import { setCommaUsedAsDecimalSeparator } from '../scripts/helpers/helper.js';
+import {convertDistanceString} from '../scripts/handlers/conversionHandlers.js';
 
 function test(name, fn){
   try {
+    // Reset decimal separator usage before each test as required
+    setCommaUsedAsDecimalSeparator(false);
     fn();
     console.log(`✓ ${name}`);
   } catch (e) {
@@ -136,6 +138,18 @@ test('Multiple matches EU with thousands and decimals with spacing preserved', (
   // 3.400 * 0.3 = 1.020 and 12.345,67 * 0.3 -> 3.703,7 with EU separators
   assert.strictEqual(out, '1.020  m [1.020 m] x 3.703,7 m [3.703,7 m]');
 });
+
+// Single decimal (EU) and then a number without decimals, to test if comma is remembered from first number
+test('EU single decimal and then a number without decimals (comma should be remembered from first number): 11 ft -> 3,3 m', () => {
+    let input = '10,2 ft';
+    let out = convertDistanceString(input, labels, 'm', 0.3);
+    input = '11 ft';
+    out = convertDistanceString(input, labels, 'm', 0.3);
+
+    // 11 * 0,3 = 3,3
+    assert.strictEqual(out, '3,3 m');
+});
+
 
 if (process.exitCode) {
   process.exit(process.exitCode);

@@ -5,25 +5,8 @@ import {
     convertDeltaStrings,
     hideFoundryLabel
 } from "./conversionHandlers.js";
-import {updateRuntimeRule,removeRuntimeRule} from "./helper.js";
-
-let currentMinWidth = 0;
-
-/**
- * Gets the current minimum width value.
- * @returns {number} The current minimum width value.
- */
-function getCurrentMinWidth() {
-    return currentMinWidth;
-}
-
-/**
- * Sets the current minimum width value.
- * @param {number} value - The new minimum width value to set.
- */
-function setCurrentMinWidth(value) {
-    currentMinWidth = value;
-}
+import {setCssVarById,removeCssVarById} from "../helpers/cssHelper.js";
+import { getCurrentMinWidth, setCurrentMinWidth, cleanUpMinWidths } from "../helpers/cssHelper.js";
 
 /**
  /**
@@ -90,9 +73,9 @@ function handleFoundryV13Rulers(rulers){
                             conversion = hideFoundryLabel(measurement.delta.innerHTML,true);
                             measurement.delta.innerHTML = conversion.text;
                         }
-                        if(getCurrentMinWidth() < measurement.total.parentNode.clientWidth){
-                            setCurrentMinWidth(measurement.total.parentNode.clientWidth);
-                            adjustLabelCSSClass(numberOfActiveConversions,8,getCurrentMinWidth());
+                        if(getCurrentMinWidth(rulers[i].id) < measurement.total.parentNode.clientWidth){
+                            setCurrentMinWidth(rulers[i].id,measurement.total.parentNode.clientWidth);
+                            adjustLabelCSS(rulers[i].id,numberOfActiveConversions,8,getCurrentMinWidth(rulers[i].id));
                         }
                     }
                 }
@@ -186,21 +169,32 @@ function handleV10ToV12Ruler(wrappedResult) {
     return wrappedResult;
 }
 
-function adjustLabelCSSClass(numberOfActiveConversions = null,paddingPx=0,minWidthPx= null,hideFoundryLabel = false){
+/**
+ * Adjusts CSS styling for ruler labels based on specified parameters.
+ *
+ * @param {string} elementID - The ID of the element to adjust CSS for
+ * @param {number|null} numberOfActiveConversions - Number of active unit conversions (determines label height). Null means no height adjustment.
+ * @param {number} paddingPx - Padding in pixels to add to the height calculation. Default 0.
+ * @param {number|null} minWidthPx - Minimum width in pixels for the label. Null means no min-width set.
+ * @param {boolean} hideFoundryLabel - Whether the Foundry label is hidden. Default false.
+ * @returns {void} This function does not return a value. It directly modifies CSS variables.
+ */
+function adjustLabelCSS(elementID, numberOfActiveConversions = null, paddingPx = 0, minWidthPx = null, hideFoundryLabel = false) {
     let cssHeight = numberOfActiveConversions ? (numberOfActiveConversions * 30) + (2 * paddingPx) : null
-    if(cssHeight && hideFoundryLabel === false){
+    if (cssHeight && hideFoundryLabel === false) {
         cssHeight += 30;
     }
 
-    if(cssHeight){
-        updateRuntimeRule("#measurement .waypoint-label","height:"+cssHeight + "px!important");
+    if (cssHeight) {
+        setCssVarById(elementID, "--waypoint-label-height", cssHeight + "px")
     }
-    if(minWidthPx){
-        updateRuntimeRule("#measurement .waypoint-label","min-width:"+minWidthPx + "px!important");
-    }else{
-        removeRuntimeRule("#measurement .waypoint-label","min-width");
+    if (minWidthPx) {
+        setCssVarById(elementID, "--waypoint-label-min-width", minWidthPx + "px")
+    } else {
+        removeCssVarById(elementID, "--waypoint-label-min-width");
     }
 }
+
 
 export {
     handleFoundryV13Rulers,
@@ -209,5 +203,6 @@ export {
     handleV10To12DragRuler,
     getCurrentMinWidth,
     setCurrentMinWidth,
-    adjustLabelCSSClass
+    cleanUpMinWidths,
+    adjustLabelCSS
 };

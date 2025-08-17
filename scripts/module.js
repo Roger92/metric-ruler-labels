@@ -1,28 +1,20 @@
-/*
-This package converts measurements of the ruler tool from feet to meters and from miles to kilometers.
-5 ft -> 1.5 meter
-1  mile -> 1,61 kilometers
-In case there is an unknown unit nothing happens.
- */
-
 import {
     handlePreV10MeasurementTemplates,
     handleV10MeasurementTemplates,
     handleV13MeasurementTemplates,
     handleV11ToV12MeasurementTemplates,
     handlePreV11TemplatePreview
-} from './templateHandlers.js';
-import {addMetricLabels} from "./conversionHandlers.js";
+} from './handlers/templateHandlers.js';
+import {addMetricLabels} from "./handlers/conversionHandlers.js";
 import {
     handleFoundryV13Rulers,
     handlePreV10Ruler,
     handleV10To12DragRuler,
     handleV10ToV12Ruler,
-    setCurrentMinWidth,
-    adjustLabelCSSClass
-} from "./rulerHandlers.js";
+    cleanUpMinWidths,
+} from "./handlers/rulerHandlers.js";
 import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
-import {initializeRuntimeStyle,updateRuntimeRule} from "./helper.js";
+import {initializeRuntimeStyle,updateRuntimeRule} from "./helpers/cssHelper.js";
 
 Hooks.on("init", () => {
     registerSettings();
@@ -130,10 +122,8 @@ Hooks.once('ready',  () => {
             }, 'WRAPPER');
             libWrapper.register("metric-ruler-labels", "foundry.canvas.interaction.Ruler.prototype._onDragStart", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
-                setCurrentMinWidth(0);
-                adjustLabelCSSClass();
+                cleanUpMinWidths();
                 return wrappedResult;
-
             }, 'WRAPPER');
         }else{
             //Handling of Ruler + Elevation Ruler
@@ -170,8 +160,7 @@ Hooks.once('ready',  () => {
             }, 'WRAPPER');
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.Token.prototype._onDragStart", function (wrapped, ...args) {
                 let wrappedResult = wrapped(...args);
-                setCurrentMinWidth(0);
-                adjustLabelCSSClass();
+                cleanUpMinWidths();
                 return wrappedResult;
             }, 'WRAPPER');
         }else if (foundryGeneration >= 10 && foundryGeneration < 13) {
@@ -195,6 +184,21 @@ Hooks.once('ready',  () => {
     }
 });
 
+/**
+ * Initializes CSS rules for ruler/waypoint labels in Foundry VTT V13.
+ * Applies styling to align and pad labels properly.
+ */
+function initializeV13RulerCSSV2() {
+    initializeRuntimeStyle();
+    updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;min-width: var(--waypoint-label-min-width, 0px) !important;height: var(--waypoint-label-height) !important")
+    updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
+    updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
+}
+/**
+ * Registers all module settings in Foundry VTT.
+ * @function registerSettings
+ * @description Registers various configuration settings for the metric ruler labels module
+ */
 function registerSettings() {
     let foundryGeneration = game.release.generation;
 
@@ -359,19 +363,6 @@ function registerSettings() {
         default: "km",
     });
 }
-
-
-/**
- * Initializes CSS rules for ruler/waypoint labels in Foundry VTT V13.
- * Applies styling to align and pad labels properly.
- */
-function initializeV13RulerCSSV2() {
-    initializeRuntimeStyle();
-    updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;")
-    updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
-    updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
-}
-
 
 /**
  * Retrieves and converts ruler data from the current Foundry canvas, based on the active segments.
