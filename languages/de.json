@@ -1,103 +1,108 @@
 {
-    "metric-ruler-labels": {
-        "settings": {
-            "dragRulerSupport": {
-                "name": "Unterstützung für DragRuler-Module",
-                "hint": "Aktiviert die Unterstützung für bestimmte Drag Ruler Module. Z.B. DragRuler (von Stäbchenfisch) oder PF2e Token Drag Ruler (von 7H3LaughingMan). Module wie Elevation Ruler (von caewok) sollten direkt funktionieren. Änderungen werden nach einem Reload wirksam.",
-                "disabled": "Deaktiviert",
-                "dragRuler":"Drag Ruler (by Staebchenfish)",
-                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
-            },
-            "measureTemplateSupport": {
-                "name": "Anzeige bei Schablonen",
-                "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
-            },
-            "disableBuiltInConversion": {
-                "name": "Deaktiviere eingebaute Umwandlung",
-                "hint": "Wenn ausgewählt, wird die bereits eingebaute metrische Umwandlung dieses Moduls deaktiviert."
-            },
-            "hideFoundryMeasurement": {
-                "name": "Verstecke die Messungen von Foundry ",
-                "hint": "Wenn ausgewählt, werden die Originalmessungen von Foundry nicht mehr angezeigt. Du kannst nicht zwei Umwandlungen anzeigen wenn dies aktiv ist."
-            },
-            "enableTravelTime": {
-                "name": "Aktiviere Reisezeit Labels",
-                "hint": "Aktiviert Reisezeit Labels für das normale Lineal im Format TageLangsam | TageNormal | TageSchnell."
-            },
-            "travelTimeRoundToFullQuarters": {
-              "name": "Reisezeit in vollen Vierteln anzeigen",
-              "hint": "Zeigt die Reisezeit in vollen Vierteln an (z.B. 0,2 Tage -> 0 Tage, 1,1 Tage -> 1 Tag, 1,3 Tage -> 1,25 Tage). Ansonsten wird die Reisezeit mit einer Dezimalstelle angezeigt."
-            },
-            "travelTimeOnlyTotalTimeLastSegment": {
-                "name": "Zeige nur Gesamtzeit an letztem Segment",
-                "hint": "Wenn aktiv, wird am letzten Linealsegment nur die gesamte Reisezeit (der Teil in den eckigen Klammern) angezeigt, um Platz zu Sparen."
-            },
-            "travelTimeDistanceLabel": {
-                "name": "Das Distanzlabel des Lineals",
-                "hint": "Das Distanzlabel für welches das Modul die Reisezeiten berechnen soll (das Distanzlabel, welches in der Szene konfiguriert ist). Dadurch können die Reisezeitangaben z.B. nur auf Szenen angezeigt werden, welche Meilen benutzen. Dies bezieht sich auf das Label, welches in Foundry genutzt wird bzw. das, welches als erstes am Lineal steht. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen)."
-            },
-            "travelTime-TimeUnit": {
-                "name": "Die Zeiteinheit für die Reisezeit",
-                "hint": "Die Zeiteinheit, welche für die Reisezeit am Lineal angezeicht wird (Default: Tage)"
-            },
-            "travelTimePerUnitSlow": {
-                "name": "Distanz pro Zeiteinheit - Langsam",
-                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit langsamer Geschwindigkeit zurücklegt."
-            },
-            "travelTimePerUnitNormal": {
-                "name": "Distanz pro Zeiteinheit - Normal",
-                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit normaler Geschwindigkeit zurücklegt."
-            },
-            "travelTimePerUnitFast": {
-                "name": "Distanz pro Zeiteinheit - Schnell",
-                "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit schneller Geschwindigkeit zurücklegt."
-            },
-            "useCustomConversions": {
-                "name": "Aktiviere Eigene Umwandlungen",
-                "hint": "Aktiviert die Umwandlungen, welche der DM konfigurieren kann. Wenn die metrischen Umwandlungen des Moduls nicht deaktiviert sind, werden diese zusätzlich angezeigt."
-            },
-            "customConversionOriginalLabelsSmall": {
-                "name": "Originales Textlabel: Kleine Maßeinheit",
-                "hint": "Das originale Textlabel für die kleine Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Fuß konvertieren willst, könnte eine mögliche Eingabe 'ft,feet,ft.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
-            },
-            "customConversionOriginalLabelsBig": {
-                "name": "Originales Textlabel: Große Maßeinheit",
-                "hint": "Das originale Textlabel für die große Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Meilen konvertieren willst, könnte eine mögliche Eingabe 'mi,miles,mi.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
-            },
-            "customConversionFactorSmall": {
-                "name": "Umwandlungsfaktor: Kleine Maßeinheit",
-                "hint": "Der Umwandlungsfaktor für die kleine Maßeinheit (z.B. Fuß zu Meter würde 0.3 sein)."
-            },
-            "customConversionFactorBig": {
-                "name": "Umwandlungsfaktor: Große Maßeinheit",
-                "hint": "Der Umwandlungsfaktor für die große Maßeinheit (z.B. Meilen zu Kilometern würde 1.61 sein)"
-            },
-            "customConversionLabelSmall": {
-                "name": "Umgewandeltes Textlabel: Kleine Maßeinheit",
-                "hint": "Das Textlabel für die umgewandelte kleine Maßeinheit (z.B. m für Meter)"
-            },
-            "customConversionLabelBig": {
-                "name": "Umgewandeltes Textlabel: Große Maßeinheit",
-                "hint": "Das Textlabel für die umgewandelte große Maßeinheit (z.B. km für Kilometer)"
-            }
-        }
-    },
-    "dependencies": {
-        "libWrapper": {
-            "title": "Abhängigkeit libWrapper nicht gefunden!",
-            "infotext": "Das Modul 'Roger's Additional Metric Ruler Labels' benötigt das 'libWrapper' Modul. Bitte installiere und aktiviere es."
-        }
-    },
-    "incompatibility": {
-        "title": "Installierte Foundry Generation nicht unterstützt! ",
-        "infotext": "Dieses Modul unterstützt deine derzeit installierte Foundry generation nicht. Das Modul funktioniert vielleicht nicht korrekt. Bitte prüfe, ob es Updates gibt."
-    },
-    "warnings": {
-        "customConversionNoValues": {
-            "text": "Es wurden keine Werte für eigene Umwandlungen in den Einstellungen hinterlegt"
-        },
-        "travelTimeNoValues": {
-            "text": "Es wurden keine Werte für Reisezeit in den Einstellungen hinterlegt"
-        }
+  "metric-ruler-labels": {
+    "settings": {
+      "dragRulerSupport": {
+        "name": "Unterstützung für DragRuler-Module",
+        "hint": "Aktiviert die Unterstützung für bestimmte Drag Ruler Module. Z.B. DragRuler (von Stäbchenfisch) oder PF2e Token Drag Ruler (von 7H3LaughingMan). Module wie Elevation Ruler (von caewok) sollten direkt funktionieren. Änderungen werden nach einem Reload wirksam.",
+        "disabled": "Deaktiviert",
+        "dragRuler":"Drag Ruler (by Staebchenfish)",
+        "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
+      },
+      "measureTemplateSupport": {
+        "name": "Anzeige bei Schablonen",
+        "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
+      },
+      "disableBuiltInConversion": {
+        "name": "Deaktiviere eingebaute Umwandlung",
+        "hint": "Wenn ausgewählt, wird die bereits eingebaute metrische Umwandlung dieses Moduls deaktiviert."
+      },
+      "hideFoundryMeasurement": {
+        "name": "Verstecke die Messungen von Foundry ",
+        "hint": "Wenn ausgewählt, werden die Originalmessungen von Foundry nicht mehr angezeigt. Du kannst nicht zwei Umwandlungen anzeigen wenn dies aktiv ist."
+      },
+      "enableTravelTime": {
+        "name": "Aktiviere Reisezeit Labels",
+        "hint": "Aktiviert Reisezeit Labels für das normale Lineal im Format TageLangsam | TageNormal | TageSchnell."
+      },
+      "travelTimeRoundingMode": {
+        "name": "Rundungsmodus für Reisezeiten",
+        "hint": "Der Art der Rundung, welche für die Reisezeiten durchgeführt wird. WICHTIG: Es wird nicht normal gerundet, sondern immer auf VOLLE Teileinheiten abgerundet. Es werden also die Tage dargestellt, welche auf der Wegstrecke wirklich vergangen sind. (Beispiel Viertel Tage:  0,2 Tage -> 0 Tage, 1,1 Tage -> 1 Tag, 1,3 Tage -> 1,25 Tage).",
+        "roundToFullTenths": "Zehntel",
+        "roundToFullQuarters": "Viertel",
+        "roundToFullHalves": "Halbe",
+        "roundToFull": "Volle",
+        "noSpecialRounding": "Kein spezielles Runden"
+      },
+      "travelTimeOnlyTotalTimeLastSegment": {
+        "name": "Zeige nur Gesamtzeit an letztem Segment",
+        "hint": "Wenn aktiv, wird am letzten Linealsegment nur die gesamte Reisezeit (der Teil in den eckigen Klammern) angezeigt, um Platz zu Sparen."
+      },
+      "travelTimeDistanceLabel": {
+        "name": "Das Distanzlabel des Lineals",
+        "hint": "Das Distanzlabel für welches das Modul die Reisezeiten berechnen soll (das Distanzlabel, welches in der Szene konfiguriert ist). Dadurch können die Reisezeitangaben z.B. nur auf Szenen angezeigt werden, welche Meilen benutzen. Dies bezieht sich auf das Label, welches in Foundry genutzt wird bzw. das, welches als erstes am Lineal steht. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen)."
+      },
+      "travelTime-TimeUnit": {
+        "name": "Die Zeiteinheit für die Reisezeit",
+        "hint": "Die Zeiteinheit, welche für die Reisezeit am Lineal angezeicht wird (Default: Tage)"
+      },
+      "travelTimePerUnitSlow": {
+        "name": "Distanz pro Zeiteinheit - Langsam",
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit langsamer Geschwindigkeit zurücklegt."
+      },
+      "travelTimePerUnitNormal": {
+        "name": "Distanz pro Zeiteinheit - Normal",
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit normaler Geschwindigkeit zurücklegt."
+      },
+      "travelTimePerUnitFast": {
+        "name": "Distanz pro Zeiteinheit - Schnell",
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit schneller Geschwindigkeit zurücklegt."
+      },
+      "useCustomConversions": {
+        "name": "Aktiviere Eigene Umwandlungen",
+        "hint": "Aktiviert die Umwandlungen, welche der DM konfigurieren kann. Wenn die metrischen Umwandlungen des Moduls nicht deaktiviert sind, werden diese zusätzlich angezeigt."
+      },
+      "customConversionOriginalLabelsSmall": {
+        "name": "Originales Textlabel: Kleine Maßeinheit",
+        "hint": "Das originale Textlabel für die kleine Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Fuß konvertieren willst, könnte eine mögliche Eingabe 'ft,feet,ft.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
+      },
+      "customConversionOriginalLabelsBig": {
+        "name": "Originales Textlabel: Große Maßeinheit",
+        "hint": "Das originale Textlabel für die große Maßeinheit, welches das Modul konvertieren soll. Dies ist das Label, welches du derzeit z.B. beim Maßstab siehst. Du kannst kommagetrennt mehrere Labels angeben (ohne Leerzeichen). Wenn du z.B. Meilen konvertieren willst, könnte eine mögliche Eingabe 'mi,miles,mi.' sein. Dies hängt von deinen Einstellungen in der Szene ab."
+      },
+      "customConversionFactorSmall": {
+        "name": "Umwandlungsfaktor: Kleine Maßeinheit",
+        "hint": "Der Umwandlungsfaktor für die kleine Maßeinheit (z.B. Fuß zu Meter würde 0.3 sein)."
+      },
+      "customConversionFactorBig": {
+        "name": "Umwandlungsfaktor: Große Maßeinheit",
+        "hint": "Der Umwandlungsfaktor für die große Maßeinheit (z.B. Meilen zu Kilometern würde 1.61 sein)"
+      },
+      "customConversionLabelSmall": {
+        "name": "Umgewandeltes Textlabel: Kleine Maßeinheit",
+        "hint": "Das Textlabel für die umgewandelte kleine Maßeinheit (z.B. m für Meter)"
+      },
+      "customConversionLabelBig": {
+        "name": "Umgewandeltes Textlabel: Große Maßeinheit",
+        "hint": "Das Textlabel für die umgewandelte große Maßeinheit (z.B. km für Kilometer)"
+      }
     }
+  },
+  "dependencies": {
+    "libWrapper": {
+      "title": "Abhängigkeit libWrapper nicht gefunden!",
+      "infotext": "Das Modul 'Roger's Additional Metric Ruler Labels' benötigt das 'libWrapper' Modul. Bitte installiere und aktiviere es."
+    }
+  },
+  "incompatibility": {
+    "title": "Installierte Foundry Generation nicht unterstützt! ",
+    "infotext": "Dieses Modul unterstützt deine derzeit installierte Foundry generation nicht. Das Modul funktioniert vielleicht nicht korrekt. Bitte prüfe, ob es Updates gibt."
+  },
+  "warnings": {
+    "customConversionNoValues": {
+      "text": "Es wurden keine Werte für eigene Umwandlungen in den Einstellungen hinterlegt"
+    },
+    "travelTimeNoValues": {
+      "text": "Es wurden keine Werte für Reisezeit in den Einstellungen hinterlegt"
+    }
+  }
 }
