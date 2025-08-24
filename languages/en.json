@@ -28,9 +28,14 @@
                 "name": "Activates travel time labels",
                 "hint": "Activates travel time labels on the normal ruler in the format daysSlow | daysNormal | daysFast."
             },
-            "travelTimeRoundToFullQuarters": {
-              "name": "Display travel time as full quarters",
-              "hint": "Displays the traveltime as full quarters (E.g., 0.2 days -> 0 day, 1.1 days -> 1 day, 1.3 days -> 1.25 days). Otherwise the travel time will have 1 decimal place."
+            "travelTimeRoundingMode": {
+                "name": "Rounding mode for travel times",
+                "hint": "The type of rounding applied to travel times. IMPORTANT: This is not standard rounding; values are always rounded down to full sub-units. This shows the days that actually elapsed along the route. (Example quarter days: 0.2 days -> 0 days, 1.1 days -> 1 day, 1.3 days -> 1.25 days).",
+                "roundToFullTenths": "Tenths",
+                "roundToFullQuarters": "Quarters",
+                "roundToFullHalves": "Halves",
+                "roundToFull": "Full",
+                "noSpecialRounding": "No special rounding"
             },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Only show total travel time on last Segment",

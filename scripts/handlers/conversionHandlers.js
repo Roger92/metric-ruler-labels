@@ -113,7 +113,7 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
     const travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
     const timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
     const travelTimeOnlyTotalTimeLastSegment = game.settings.get("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment");
-    const travelTimeRoundToFullQuarters = game.settings.get("metric-ruler-labels", "travelTimeRoundToFullQuarters");
+    const travelTimeRoundingMode = game.settings.get("metric-ruler-labels", "travelTimeRoundingMode");
     const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
 
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
@@ -132,17 +132,17 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
 
         } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
             // One Segment
-            text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundToFullQuarters));
+            text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundingMode));
             text = text.replaceAll("Infinity", "-");
             converted = true;
 
         } else if (regexResult && regexResult.length === 3 && regexResult[2] && hasSegments) {
             // Multiple Segments
             if (travelTimeOnlyTotalTimeLastSegment === false) {
-                text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundToFullQuarters));
+                text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundingMode));
             }
             // Total Time
-            text = appendLine(text, separator, buildTravelTimeLine(regexResult[2], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, true,travelTimeRoundToFullQuarters));
+            text = appendLine(text, separator, buildTravelTimeLine(regexResult[2], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, true,travelTimeRoundingMode));
             text = text.replaceAll("Infinity", "-");
             converted = true;
         }
@@ -239,6 +239,69 @@ function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
 
 
 /**
+ * Rounds travel time values based on the specified rounding mode.
+ *
+ * @param {number} value - The travel time value to round
+ * @param {string} roundingMode - The rounding mode to use:
+ *   - "roundToFullTenths" - Truncates to nearest tenth
+ *   - "roundToFullQuarters" - Rounds down to nearest quarter
+ *   - "roundToFullHalves" - Rounds down to nearest half
+ *   - "roundToFull" - Truncates to whole number
+ *   - "noSpecialRounding" - Rounds to one decimal place
+ * @returns {number} The rounded absolute value
+ */
+function roundTravelTimes(value, roundingMode) {
+    switch (roundingMode) {
+        case "roundToFullTenths":
+            return Math.abs(truncToTenth(value));
+        case "roundToFullQuarters":
+            return Math.abs(floorToQuarter(value));
+        case "roundToFullHalves":
+            return Math.abs(floorToHalf(value));
+        case "roundToFull":
+            return Math.abs(truncToFull(value));
+        case "noSpecialRounding":
+            return Math.abs(roundToOneDecimal(value));
+        default:
+            return Math.abs(value);
+    }
+}
+
+
+
+/**
+ * Rounds a number to one decimal place.
+ *
+ * @param {number} value - The number to round
+ * @returns {number} The number rounded to one decimal place
+ */
+function roundToOneDecimal(value) {
+    return Math.round((value + Number.EPSILON) * 10) / 10
+}
+
+/**
+ * Truncates a number to a whole number by removing decimal places.
+ *
+ * @param {number} value - The number to truncate
+ * @returns {number} The truncated whole number
+ */
+function truncToFull(value) {
+    return Math.trunc(value);
+}
+
+/**
+ * Rounds a number down to the nearest half.
+ *
+ * @param {number} value - The number to round down
+ * @param {number} [fractionDigits=2] - Number of decimal places to round to
+ * @returns {number} The number rounded down to nearest half
+ */
+function floorToHalf(value, fractionDigits = 2) {
+    // Small EPSILON to handle floating-point inaccuracies
+    return Number((Math.floor((value + Number.EPSILON) * 2) / 2).toFixed(fractionDigits));
+}
+
+/**
  * Rounds a number down to the nearest quarter.
  *
  * @param {number} value - The number to round down
@@ -269,15 +332,16 @@ function truncToTenth(value) {
  * @param {number} conversionFactorFast - Conversion factor for fast travel speed
  * @param {string} timeUnit - The time unit to display (e.g. "h" for hours)
  * @param {boolean} [wrapInBrackets=false] - Whether to wrap the result in brackets
- * @param {boolean} [roundToNearestQuarter=false] - Whether to round times to nearest quarter
+ * @param {string} [roundingMode=roundToFullQuarters] - Whether to round times to nearest quarter
  * @returns {string} Formatted string with travel times
  */
-function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, wrapInBrackets = false, roundToNearestQuarter = false) {
+function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, wrapInBrackets = false, roundingMode = "roundToFullQuarters") {
 
     const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(distanceString);
-    const slowNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorSlow))) : Math.abs(truncToTenth(Number(value / conversionFactorSlow)));
-    const normalNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorNormal))) : Math.abs(truncToTenth(Number(value / conversionFactorNormal)));
-    const fastNum = roundToNearestQuarter ? Math.abs(floorToQuarter(Number(value / conversionFactorFast))) : Math.abs(truncToTenth(Number(value / conversionFactorFast)));
+
+    const slowNum = roundTravelTimes(Number(value / conversionFactorSlow),roundingMode);
+    const normalNum = roundTravelTimes(Number(value / conversionFactorNormal),roundingMode);
+    const fastNum = roundTravelTimes(Number(value / conversionFactorFast),roundingMode);
 
     const slow = formatWithSeparators(slowNum, decimalSep, thousandSep, true);
     const normal = formatWithSeparators(normalNum, decimalSep, thousandSep, true);

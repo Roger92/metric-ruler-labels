@@ -250,13 +250,20 @@ function registerSettings() {
         type: Boolean,
         default: false,
     });
-    game.settings.register("metric-ruler-labels", "travelTimeRoundToFullQuarters", {
-        name: "metric-ruler-labels.settings.travelTimeRoundToFullQuarters.name",
-        hint: "metric-ruler-labels.settings.travelTimeRoundToFullQuarters.hint",
-        scope: "client",
+    game.settings.register("metric-ruler-labels", "travelTimeRoundingMode", {
+        name: "metric-ruler-labels.settings.travelTimeRoundingMode.name",
+        hint: "metric-ruler-labels.settings.travelTimeRoundingMode.hint",
+        scope: "world",
         config: true,
-        type: Boolean,
-        default: true,
+        type: String,
+        default: "roundToFullQuarters",
+        choices:{
+            "roundToFullTenths": "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullTenths",
+            "roundToFullQuarters" : "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullQuarters",
+            "roundToFullHalves" : "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullHalves",
+            "roundToFull" : "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFull",
+            "noSpecialRounding" : "metric-ruler-labels.settings.travelTimeRoundingMode.noSpecialRounding"
+        }
     });
     game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
         name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
