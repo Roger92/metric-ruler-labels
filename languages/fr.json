@@ -1,0 +1,103 @@
+{
+    "metric-ruler-labels": {
+        "settings": {
+            "dragRulerSupport": {
+                "name": "Prise en charge des modules DragRuler",
+                "hint": "Ceci active la prise en charge de certain modules Drag Ruler. ex. DragRuler (par Stäbchenfisch) ou PF2e Token Drag Ruler (par 7H3LaughingMan). Les modules comme Elevation Ruler (par caewok) devraient également être pris en charge dès qu'ils seront disponibles. Les changements prennent effet après rechargement.",
+                "disabled": "Désactive",
+                "dragRuler":"Drag Ruler (par Staebchenfish)",
+                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (par 7H3LaughingMan)"
+            },
+            "measureTemplateSupport": {
+                "name": "Afficher sur les mesures des gabarits",
+                "hint": "Si c'est activé, les unités métriques supplémentaires seront aussi montrées lorsque vous utilisez les gabarits de mesure (cercle, cône, rayon, rectangle)."
+            },
+            "disableBuiltInConversion": {
+                "name": "Désactiver les conversions intégrées",
+                "hint": "Si c'est activé, les conversions métriques intégrées de ce module seront désactivées."
+            },
+            "hideFoundryMeasurement": {
+                "name": "Cache les mesures de Foundry",
+                "hint": "Si c'est activé, la mesure originelle provenant de Foundry seront cachées. Vous ne pouvez pas afficher deux conversions si c'est activé."
+            },
+            "useCustomConversions": {
+                "name": "Active les conversions personnalisées",
+                "hint": "Active les conversions que le MJ peut définir. Si les conversions intégrées ne sont pas désactivées, alors elles seront montrées en plus des conversions métriques."
+            },
+            "enableTravelTime": {
+                "name": "Active les étiquettes du temps de voyage",
+                "hint": "Active les étiquettes du temps de voyage sur la règle normale au format jourLent | jourNormal | jourRapide."
+            },
+            "travelTimeRoundToFullQuarters": {
+              "name": "Affiche le temps de voyage en quart de journées",
+              "hint": "Affiche le temps de voyage en quart de journées (Ex. 0.2 jour -> 0 jour, 1.1 jour -> 1 jour, 1.3 days -> 1.25 jours). Autrement, le temps de voyage aura 1 décimale."
+            },
+            "travelTimeOnlyTotalTimeLastSegment": {
+                "name": "Montre seulement le temps de voyage sur le dernier segment",
+                "hint": "Si c'est activé, seul le temps de voyage total (la partie qui est normalement entre crochets) sera montrée sur le dernier segment d'une règle. De cette manière, vous préservez de la place sur l'écran."
+            },
+            "travelTimeDistanceLabel": {
+                "name": "L'étiquette de distance de la règle.",
+                "hint": "La partie pour laquelle le module doit calculer le temps de trajet (l'étiquette de distance qui est configurée sur le scène). Avec ceci, le temps de voyage ne devrait être montrée que sur une scène qui utilise des miles. Ceci se réfère à l'étiquette qui est utilisée par Foundry ou celle qui est placée en première position sur votre règle. Vous pouvez ajouter plus d'une étiquette sous forme de chaîne séparée par des virgules (sans espaces)."
+            },
+            "travelTime-TimeUnit": {
+                "name": "L'unité de temps du temps de voyage",
+                "hint": "L'unité de temps qui sera affichée sur la règle pour le temps de voyage. (Par défaut : jour)"
+            },
+            "travelTimePerUnitSlow": {
+                "name": "Distance par unité de temps - Lent",
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse réduite par unité de temps (Par défaut : jour)."
+            },
+            "travelTimePerUnitNormal": {
+                "name": "Distance par unité de temps - Normal",
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse normale par unité de temps (Par défaut : jour)."
+            },
+            "travelTimePerUnitFast": {
+                "name": "Distance par unité de temps - Rapide",
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse rapide par unité de temps (Par défaut : jour)."
+            },
+            "customConversionOriginalLabelsSmall": {
+                "name": "Étiquette d'unité originale : Petite unité",
+                "hint": "Les étiquettes de la petite unité originale que le module devrait convertir. Ce sont les étiquettes que vous voyez apparaître actuellement sur la règle. Vous pouvez ajouter plus d'une étiquette sous forme de chaine séparée par une virgule (sans espace). Si vous voulez convertir des pieds, une entrée possible devrait être 'ft.,feet' en fonction du système que vous utilisez et qui est configuré sur la scène."
+            },
+            "customConversionOriginalLabelsBig": {
+                "name": "Étiquette d'unité originale : Grande unité",
+                "hint": "Les étiquettes de la grande unité originale que le module devrait convertir. Ce sont les étiquettes que vous voyez apparaître actuellement sur la règle. Vous pouvez ajouter plus d'une étiquette sous forme de chaine séparée par une virgule (sans espace). Si vous voulez convertir des miles, une entrée possible devrait être 'mi.,miles' en fonction du système que vous utilisez et qui est configuré sur la scène."
+            },
+            "customConversionFactorSmall": {
+                "name": "Facteur de conversion : Petite unité",
+                "hint": "Le facteur de conversionpour la petite unité (ex. pieds vers mètrs devrait donner 0.3)."
+            },
+            "customConversionFactorBig": {
+                "name": "Facteur de conversion : Grande unité",
+                "hint": "Le facteur de conversion pour la grande unité (ex. Miles vers kilomètres devrait être 1.61 ou 1.5 sur le système PF2e)"
+            },
+            "customConversionLabelSmall": {
+                "name": "Étiquette de conversion : Petite unité",
+                "hint": "L'étiquette le conversion de la plus petite unité  (ex. m pour afficher les mètres)"
+            },
+            "customConversionLabelBig": {
+                "name": "Étiquette de conversion : Grande unité",
+                "hint": "L'étiquette le conversion de la plus grande unité  (ex. km pour afficher les kilomètres)"
+            }
+        },
+        "dependencies": {
+            "libWrapper": {
+                "title": "Dépendance libWrapper n'est pas trouvée !",
+                "infotext": "Le module 'Roger's Additional Metric Ruler Labels' nécessite que le module 'libWrapper' soit installé et activé."
+            }
+        },
+        "incompatibility": {
+            "title": "La version de foundry installée n'est pas prise en charge !",
+            "infotext": "Ce module ne prend pas en charge officiellement votre veersion de foundry actuelle. Le module pourrait donc ne pas fonctionner correctement. Voyez s'il y a des mises à jour disponibles."
+        },
+        "warnings": {
+            "customConversionNoValues": {
+                "text": "Aucune valeur de conversion n'a été trouvée dans les règlages"
+            },
+            "travelTimeNoValues": {
+                "text": "Aucune valeur de conversion de temps de voyage n'a été trouvée dans les règlages"
+            }
+        }
+    }
+}
