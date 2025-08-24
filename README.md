@@ -116,6 +116,10 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.4**
+- French Localization (thanks to @rectulo)
+- Added selection for rounding mode for travel times
+
 **v4.1.3**
 - Changed handling for V13 CSS
 - Improved the handling when multiple rulers are visible. Now every ruler is handled separately, when it comes to CSS updates.
