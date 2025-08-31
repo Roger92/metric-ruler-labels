@@ -1,7 +1,8 @@
-[![Version (latest)](https://img.shields.io/github/v/release/Roger92/metric-ruler-labels)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
+[![GitHub issues](https://img.shields.io/github/issues/Roger92/metric-ruler-labels?label=Issues)](https://github.com/Roger92/metric-ruler-labels/issues)
+[![Version (latest)](https://img.shields.io/github/v/release/Roger92/metric-ruler-labels?label=Release)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
 [![Foundry Version](https://img.shields.io/badge/dynamic/json.svg?url=https://github.com/Roger92/metric-ruler-labels/releases/latest/download/module.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=blueviolet)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
-![All Time Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/total?colorB=green)
-![Latest Release Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/latest/module.zip?colorB=green)
+![All Time Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/module.zip?colorB=blue&label=All%20Time%20Downloads)
+![Latest Release Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/latest/module.zip?colorB=blue&label=Downloads@Latest)
 [![Forge Install Base](https://img.shields.io/badge/dynamic/json?label=Forge%20Install%20Base&query=package.installs&suffix=%&url=https://forge-vtt.com/api/bazaar/package/metric-ruler-labels&colorB=brightgreen)](https://forge-vtt.com/)
 [![Ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coffee-%23FF5E5B?logo=Ko-fi&logoColor=white)](https://ko-fi.com/roger92)
 # Roger's Additional Metric Ruler Labels
