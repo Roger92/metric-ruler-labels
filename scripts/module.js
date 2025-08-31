@@ -335,14 +335,6 @@ function registerSettings() {
         type: String,
         default: "ft.,ft,feet",
     });
-    game.settings.register("metric-ruler-labels", "customConversionOriginalLabelsBig", {
-        name: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.name",
-        hint: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.hint",
-        scope: "world",
-        config: true,
-        type: String,
-        default: "mi.,mi,miles",
-    });
     game.settings.register("metric-ruler-labels", "customConversionFactorSmall", {
         name: "metric-ruler-labels.settings.customConversionFactorSmall.name",
         hint: "metric-ruler-labels.settings.customConversionFactorSmall.hint",
@@ -350,14 +342,6 @@ function registerSettings() {
         config: true,
         type: Number,
         default: 0.3,
-    });
-    game.settings.register("metric-ruler-labels", "customConversionFactorBig", {
-        name: "metric-ruler-labels.settings.customConversionFactorBig.name",
-        hint: "metric-ruler-labels.settings.customConversionFactorBig.hint",
-        scope: "world",
-        config: true,
-        type: Number,
-        default: 1.61,
     });
     game.settings.register("metric-ruler-labels", "customConversionLabelSmall", {
         name: "metric-ruler-labels.settings.customConversionLabelSmall.name",
@@ -367,6 +351,14 @@ function registerSettings() {
         type: String,
         default: "m",
     });
+    game.settings.register("metric-ruler-labels", "customConversionOriginalLabelsBig", {
+        name: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.name",
+        hint: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.hint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "mi.,mi,miles",
+    });
     game.settings.register("metric-ruler-labels", "customConversionLabelBig", {
         name: "metric-ruler-labels.settings.customConversionLabelBig.name",
         hint: "metric-ruler-labels.settings.customConversionLabelBig.hint",
@@ -374,6 +366,14 @@ function registerSettings() {
         config: true,
         type: String,
         default: "km",
+    });
+    game.settings.register("metric-ruler-labels", "customConversionFactorBig", {
+        name: "metric-ruler-labels.settings.customConversionFactorBig.name",
+        hint: "metric-ruler-labels.settings.customConversionFactorBig.hint",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 1.61,
     });
 }
 
