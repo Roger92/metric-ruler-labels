@@ -6,12 +6,17 @@ import {
  * Adds metric labels to a given text by converting distances in the first line of the text.
  *
  * This function checks if built-in metric conversions are enabled and, if so, converts any distances
- * found in the first line of the input text from imperial units ("ft.","ft","feet" and "ft.","ft","feet") to metric units ("m" and "km").
+ * found in the first line of the input text from imperial units to metric units:
+ * - "ft.", "ft", "feet" -> "m"
+ * - "mi.", "mi", "miles" -> "km"
  * The converted values are appended as additional lines to the original text.
  *
  * @param {string} text - The text that contains the distances (e.g. the ruler label)
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
- * @returns {{text: string, usedConversionFactor: number, converted: boolean}} Object containing the modified text and conversion information
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @returns {{text: string, usedConversionFactor: number, converted: boolean}} Object containing:
+ *   - text: The modified text with metric conversions added
+ *   - usedConversionFactor: The conversion factor that was applied (0.3 for feet->meters, 1.61 for miles->km, or 1 if no conversion)
+ *   - converted: Whether any conversion was performed
  */
 function addMetricLabels(text, useBreakInsteadOfNewline = false) {
     let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
@@ -44,11 +49,15 @@ function addMetricLabels(text, useBreakInsteadOfNewline = false) {
  * Adds custom conversion labels to a given text based on user-defined conversion settings.
  *
  * This function retrieves custom conversion factors and labels from game settings and applies
- * these conversions to the first line of the input text. If conversions are applicable, they
- * are appended as additional lines to the original text.
+ * these conversions to the first line of the input text. The converted values are appended
+ * as additional lines to the original text.
  *
- * @param {string} text -  The text that contains the distances (e.g. the ruler label)
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
+ * @param {string} text - The text containing the distances (e.g. the ruler label)
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @returns {{text: string, usedConversionFactor: number, converted: boolean}} Object containing:
+ *   - text: The modified text with custom conversions added
+ *   - usedConversionFactor: The custom conversion factor that was applied, or 1 if no conversion
+ *   - converted: Whether any conversion was performed
  */
 function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
     let conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
@@ -96,15 +105,22 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
 /**
  * Adds travel time calculations to the given text based on the travel distance.
  *
- * This function checks if the travel time feature is enabled in the game settings, and if so,
- * it calculates the travel time for a given distance using different speed factors (slow, normal, fast).
- * The calculated travel times are added to the input text as a new line. The function also handles segment-based travel
- * time calculations, if applicable.
+ * This function calculates travel times for a given distance using different speed factors:
+ * - Slow speed
+ * - Normal speed
+ * - Fast speed
+ * The calculated times are added as a new line to the text.
  *
- * @param {string} text - The input text, typically containing a distance with a specific travel time label.
- * @param {boolean} [hasSegments=false] - A flag indicating whether the input text contains segments (optional).
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
- * @returns {{text: string, converted: boolean}} Object containing the modified text and conversion information
+ * For multi-segment paths, it can calculate:
+ * - Individual segment travel times
+ * - Total travel time for the complete path
+ *
+ * @param {string} text - The input text containing a distance measurement
+ * @param {boolean} [hasSegments=false] - Whether the measurement has multiple segments
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The modified text with travel times added
+ *   - converted: Whether travel times were added
  */
 function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = false) {
     const conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
@@ -132,17 +148,17 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
 
         } else if (regexResult && regexResult.length === 3 && regexResult[1] && (hasSegments === false || regexResult[2] === undefined)) {
             // One Segment
-            text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundingMode));
+            text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, travelTimeRoundingMode, false, false, false));
             text = text.replaceAll("Infinity", "-");
             converted = true;
 
         } else if (regexResult && regexResult.length === 3 && regexResult[2] && hasSegments) {
             // Multiple Segments
             if (travelTimeOnlyTotalTimeLastSegment === false) {
-                text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, false,travelTimeRoundingMode));
+                text = appendLine(text, separator, buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, travelTimeRoundingMode, false, false, false));
             }
             // Total Time
-            text = appendLine(text, separator, buildTravelTimeLine(regexResult[2], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, true,travelTimeRoundingMode));
+            text = appendLine(text, separator, buildTravelTimeLine(regexResult[2], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, travelTimeRoundingMode, true, false, false));
             text = text.replaceAll("Infinity", "-");
             converted = true;
         }
@@ -151,36 +167,117 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
 }
 
 /**
- * Converts the delta of a measurement or elevation to a new string with a given separator.
+ * Converts travel time measurements for v13 of Foundry VTT.
  *
- * @param {string} text - The input text containing the measurement or elevation delta.
- * @param {number} conversionFactor - The conversion factor to be used for the conversion.
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
- * @returns {string} The input text with the Foundry label hidden, if applicable.
+ * Extracts distance values from the text and converts them to travel times using the
+ * configured speed factors and time units.
+ *
+ * @param {string} text - The text containing the distance measurement
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [isDeltaString=false] - Whether this is a delta measurement (e.g. elevation change)
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The converted travel time text
+ *   - converted: Whether the conversion was successful
  */
-function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false) {
-    let separator = useBreakInsteadOfNewline ? "<br><br>" : "\n\n";
+function convertToTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
+    const conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
+    const conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
+    const conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
+    const travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
+    const timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
+    const travelTimeRoundingMode = game.settings.get("metric-ruler-labels", "travelTimeRoundingMode");
+    const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+
+    let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
+    let converted = false;
+
+    if (travelTimeActivated) {
+        travelTimeLabel = travelTimeLabel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        travelTimeLabel = travelTimeLabel.replaceAll(",", "|");
+
+        let regex = "";
+        if (isDeltaString) {
+            regex = new RegExp("(-?\\+?[\\d.,]+)\\s?");
+        } else {
+            regex = new RegExp("(-?[\\d.,]+)\\s?(?:" + travelTimeLabel + ")");
+        }
+        let regexResult = regex.exec(text.split(separator)[0]);
+
+        if (!travelTimeLabel) {
+            text = game.i18n.localize("metric-ruler-labels.warnings.travelTimeNoValues.text");
+            converted = true;
+
+        } else if (regexResult && regexResult[1]) {
+            text = buildTravelTimeLine(regexResult[1], conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, travelTimeRoundingMode, false, isDeltaString, isDeltaString);
+            text = text.replaceAll("Infinity", "-");
+            converted = true;
+        }
+    }
+    return {text, converted};
+}
+
+/**
+ * Converts travel time measurements for v13 of Foundry VTT and appends them to the given text.
+ * The function adds the converted travel time measurements after the original text, separated by the specified separator.
+ *
+ * @param {string} text - The text containing the distance measurement
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [isDeltaString=false] - Whether this is a delta measurement
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The text with travel times appended
+ *   - converted: Always true since text is always modified
+ */
+function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
+    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    text = appendLine(text, separator, convertToTravelTimeV13(text, useBreakInsteadOfNewline, isDeltaString).text);
+    let converted = true;
+    return {text, converted};
+}
+
+/**
+ * Converts a measurement delta (like elevation changes) and appends it to the text.
+ *
+ * Can either:
+ * - Convert the delta using a distance conversion factor, or
+ * - Convert it to travel times if useTravelTimeConversion is true
+ *
+ * @param {string} text - The text containing the delta measurement
+ * @param {number} conversionFactor - Factor to multiply the delta value by
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useTravelTimeConversion=false] - Convert to travel times instead of using conversionFactor
+ * @returns {string} The text with converted delta appended
+ */
+function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false, useTravelTimeConversion = false) {
+    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let textSplitted = text.split(separator);
     if (textSplitted.length >= 1) {
-        let conversion = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
-        return text + separator + conversion
+        let conversion = "";
+        if (useTravelTimeConversion) {
+            conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true).text;
+        } else {
+            conversion = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
+        }
+        return appendLine(text, separator, conversion);
     } else {
         return text;
     }
 }
 
 /**
- * Removes the first line (which is the Foundry measurement label) from the given text if the corresponding setting is enabled.
+ * Removes the first line (Foundry measurement label) if enabled in settings.
  *
- * This function checks if the "hideFoundryMeasurement" setting is enabled. If it is, it removes
- * the first line of the input text, unless it starts with the special "↕" character used by the elevation ruler.
- * IMPORTANT: This function should only be called after all label conversions are done
+ * Checks the "hideFoundryMeasurement" setting. If enabled:
+ * - Removes the first line unless it starts with "↕" (elevation ruler)
+ * - Also removes any empty lines at the start
  *
- * @param {string} text - The input text containing the measurement label to be potentially hidden.
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n
- * @returns {{text: string, converted: boolean}} Object containing the modified text and conversion information
+ * IMPORTANT: Must be called AFTER all other label conversions
+ *
+ * @param {string} text - The input text containing measurement labels
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The text with first line potentially removed
+ *   - converted: Whether any lines were removed
  */
-//IMPORTANT... ONLY USE AS LAST FUNCTION CALL
 function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let elevationRulerActive = game.modules.get('elevationruler')?.active;
@@ -191,6 +288,13 @@ function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
         if (labelLines[0].startsWith(" ") === false) {
             if (!elevationRulerActive || (elevationRulerActive && !labelLines[0].startsWith("↕"))) {
                 labelLines.shift();
+                for (let i = 0; i < labelLines.length; i++) {
+                    if (labelLines[0] === "") {
+                        labelLines.shift();
+                    } else {
+                        break;
+                    }
+                }
             }
         }
         converted = true;
@@ -201,19 +305,23 @@ function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
 }
 
 /**
- * Converts distance strings within a text from one unit to another using a conversion factor.
+ * Converts distances in text from one unit to another using a conversion factor.
  *
- * @param {string} text - The text that contains the distances (e.g. the ruler label)
- * @param {string[]} searchLabels - An array of units to search for in the text (e.g., ["ft", "ft.", "feet"]).
- * @param {string} newLabel - The new unit label to replace the found units with (e.g., "meter").
- * @param {number} conversionFactor - The factor by which to multiply the numeric distance values for conversion. (e.g. 3 for the conversion from feet to meters)
- * @returns {string} The modified text with the converted distance values and new unit labels.
+ * The function:
+ * - Searches for numbers followed by any of the searchLabels
+ * - Multiplies the numbers by the conversionFactor
+ * - Replaces the old label with newLabel
+ * - Preserves the original number formatting (decimal/thousand separators)
+ *
+ * @param {string} text - The text containing distance measurements
+ * @param {string[]} searchLabels - Unit labels to search for (e.g. ["ft", "ft.", "feet"])
+ * @param {string} newLabel - Unit label to replace with (e.g. "m")
+ * @param {number} conversionFactor - Factor to multiply values by (e.g. 0.3 for ft to m)
+ * @returns {string} Text with converted distances
  *
  * @example
- * // Example usage:
- * const text = "5 ft [5 ft] x 5 ft [5 ft]";
- * const result = convertDistanceString(text, ["ft", "ft.", "feet"], "meter", 3);
- * console.log(result); // "1.50 m [1.50 m] x 1.50 m [1.50 m]"
+ * convertDistanceString("5 ft [10 ft]", ["ft", "ft."], "m", 0.3)
+ * // Returns "1.5 m [3 m]"
  */
 function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
     //Sort labels so that more specific ones come first
@@ -237,18 +345,19 @@ function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
     });
 }
 
-
 /**
  * Rounds travel time values based on the specified rounding mode.
  *
- * @param {number} value - The travel time value to round
- * @param {string} roundingMode - The rounding mode to use:
- *   - "roundToFullTenths" - Truncates to nearest tenth
- *   - "roundToFullQuarters" - Rounds down to nearest quarter
- *   - "roundToFullHalves" - Rounds down to nearest half
- *   - "roundToFull" - Truncates to whole number
- *   - "noSpecialRounding" - Rounds to one decimal place
- * @returns {number} The rounded absolute value
+ * Available rounding modes:
+ * - "roundToFullTenths" - Truncates to nearest tenth (e.g. 1.23 -> 1.2)
+ * - "roundToFullQuarters" - Rounds down to nearest quarter (e.g. 1.7 -> 1.5)
+ * - "roundToFullHalves" - Rounds down to nearest half (e.g. 1.7 -> 1.5)
+ * - "roundToFull" - Truncates to whole number (e.g. 1.7 -> 1)
+ * - "noSpecialRounding" - Rounds to one decimal place
+ *
+ * @param {number} value - Travel time value to round
+ * @param {string} roundingMode - Rounding mode to use
+ * @returns {number} Rounded absolute value
  */
 function roundTravelTimes(value, roundingMode) {
     switch (roundingMode) {
@@ -267,23 +376,21 @@ function roundTravelTimes(value, roundingMode) {
     }
 }
 
-
-
 /**
  * Rounds a number to one decimal place.
  *
- * @param {number} value - The number to round
- * @returns {number} The number rounded to one decimal place
+ * @param {number} value - Number to round
+ * @returns {number} Rounded to one decimal place
  */
 function roundToOneDecimal(value) {
     return Math.round((value + Number.EPSILON) * 10) / 10
 }
 
 /**
- * Truncates a number to a whole number by removing decimal places.
+ * Truncates a number to a whole number.
  *
- * @param {number} value - The number to truncate
- * @returns {number} The truncated whole number
+ * @param {number} value - Number to truncate
+ * @returns {number} Truncated whole number
  */
 function truncToFull(value) {
     return Math.trunc(value);
@@ -292,9 +399,13 @@ function truncToFull(value) {
 /**
  * Rounds a number down to the nearest half.
  *
- * @param {number} value - The number to round down
- * @param {number} [fractionDigits=2] - Number of decimal places to round to
- * @returns {number} The number rounded down to nearest half
+ * Examples:
+ * - 1.7 -> 1.5
+ * - 1.2 -> 1.0
+ *
+ * @param {number} value - Number to round down
+ * @param {number} [fractionDigits=2] - Decimal places in output
+ * @returns {number} Value rounded down to nearest half
  */
 function floorToHalf(value, fractionDigits = 2) {
     // Small EPSILON to handle floating-point inaccuracies
@@ -304,9 +415,13 @@ function floorToHalf(value, fractionDigits = 2) {
 /**
  * Rounds a number down to the nearest quarter.
  *
- * @param {number} value - The number to round down
- * @param {number} [fractionDigits=2] - Number of decimal places to round to
- * @returns {number} The number rounded down to nearest quarter
+ * Examples:
+ * - 1.7 -> 1.5
+ * - 1.3 -> 1.25
+ *
+ * @param {number} value - Number to round down
+ * @param {number} [fractionDigits=2] - Decimal places in output
+ * @returns {number} Value rounded down to nearest quarter
  */
 function floorToQuarter(value, fractionDigits = 2) {
     // Small EPSILON to handle floating-point inaccuracies
@@ -316,49 +431,65 @@ function floorToQuarter(value, fractionDigits = 2) {
 /**
  * Truncates a number to one decimal place.
  *
- * @param {number} value - The number to truncate
- * @returns {number} The truncated number
+ * Examples:
+ * - 1.23 -> 1.2
+ * - 1.78 -> 1.7
+ *
+ * @param {number} value - Number to truncate
+ * @returns {number} Value truncated to one decimal
  */
 function truncToTenth(value) {
     return Number(Math.trunc(value * 10) / 10);
 }
 
 /**
- * Builds a traveltime line string showing slow, normal and fast travel times.
+ * Builds a travel time line showing slow, normal and fast speeds.
  *
- * @param {string} distanceString - The distance to calculate travel times for
- * @param {number} conversionFactorSlow - Conversion factor for slow travel speed
- * @param {number} conversionFactorNormal - Conversion factor for normal travel speed
- * @param {number} conversionFactorFast - Conversion factor for fast travel speed
- * @param {string} timeUnit - The time unit to display (e.g. "h" for hours)
- * @param {boolean} [wrapInBrackets=false] - Whether to wrap the result in brackets
- * @param {string} [roundingMode=roundToFullQuarters] - Whether to round times to nearest quarter
- * @returns {string} Formatted string with travel times
+ * Creates a formatted string like: "1.5 | 1.0 | 0.75 h"
+ * Can optionally:
+ * - Wrap in brackets: "[1.5 | 1.0 | 0.75 h]"
+ * - Wrap in parentheses: "(1.5 | 1.0 | 0.75 h)"
+ * - Omit the time unit: "1.5 | 1.0 | 0.75"
+ *
+ * @param {string} distanceString - Distance to calculate times for
+ * @param {number} conversionFactorSlow - Factor for slow speed
+ * @param {number} conversionFactorNormal - Factor for normal speed
+ * @param {number} conversionFactorFast - Factor for fast speed
+ * @param {string} timeUnit - Time unit label (e.g. "h")
+ * @param {string} [roundingMode="roundToFullQuarters"] - How to round the times
+ * @param {boolean} [wrapInSquareBrackets=false] - Wrap in square brackets
+ * @param {boolean} [wrapInRoundBrackets=false] - Wrap in round brackets
+ * @param {boolean} [dontAddTimeUnit=false] - Omit the time unit
+ * @returns {string} Formatted travel time line
  */
-function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, wrapInBrackets = false, roundingMode = "roundToFullQuarters") {
+function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFactorNormal, conversionFactorFast, timeUnit, roundingMode = "roundToFullQuarters", wrapInSquareBrackets = false, wrapInRoundBrackets = false, dontAddTimeUnit = false) {
 
     const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(distanceString);
 
-    const slowNum = roundTravelTimes(Number(value / conversionFactorSlow),roundingMode);
-    const normalNum = roundTravelTimes(Number(value / conversionFactorNormal),roundingMode);
-    const fastNum = roundTravelTimes(Number(value / conversionFactorFast),roundingMode);
+    const slowNum = roundTravelTimes(Number(value / conversionFactorSlow), roundingMode);
+    const normalNum = roundTravelTimes(Number(value / conversionFactorNormal), roundingMode);
+    const fastNum = roundTravelTimes(Number(value / conversionFactorFast), roundingMode);
 
     const slow = formatWithSeparators(slowNum, decimalSep, thousandSep, true);
     const normal = formatWithSeparators(normalNum, decimalSep, thousandSep, true);
     const fast = formatWithSeparators(fastNum, decimalSep, thousandSep, true);
 
-    const line = `${slow} | ${normal} | ${fast} ${timeUnit}`;
-    return wrapInBrackets ? `[${line}]` : line;
+    const line = `${slow} | ${normal} | ${fast}${dontAddTimeUnit ? '' : ' ' + timeUnit}`;
+    if (wrapInSquareBrackets) return `[${line}]`;
+    else if (wrapInRoundBrackets) return `(${line})`;
+    else return line;
 
 }
 
 /**
- * Appends a new line to text with the specified separator.
+ * Appends a line to text with the specified separator.
  *
- * @param {string} text - The original text
- * @param {string} separator - The separator to use between lines
- * @param {string} line - The line to append
- * @returns {string} The text with appended line
+ * Adds a space before and after the separator when joining lines.
+ *
+ * @param {string} text - Original text
+ * @param {string} separator - Separator between lines
+ * @param {string} line - Line to append
+ * @returns {string} Text with line appended
  */
 function appendLine(text, separator, line) {
     return text + " " + separator + " " + line;
@@ -369,6 +500,7 @@ export {
     addMetricLabels,
     addCustomConversionLabels,
     addTravelTime,
+    addTravelTimeV13,
     hideFoundryLabel,
     convertDeltaStrings,
     convertDistanceString

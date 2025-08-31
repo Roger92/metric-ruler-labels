@@ -2,6 +2,7 @@ import {
     addCustomConversionLabels,
     addMetricLabels,
     addTravelTime,
+    addTravelTimeV13,
     convertDeltaStrings,
     hideFoundryLabel
 } from "./conversionHandlers.js";
@@ -21,6 +22,7 @@ import { getCurrentMinWidth, setCurrentMinWidth, cleanUpMinWidths } from "../hel
  * representing the rulers in the Foundry VTT interface.
  */
 function handleFoundryV13Rulers(rulers){
+    let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let numberOfActiveConversions = 0;
     for (let i = 0; i < rulers.length; i++) {
         let rulerSegments = rulers[i].childNodes.length > 0 ? rulers[i].childNodes : rulers[i];
@@ -61,8 +63,11 @@ function handleFoundryV13Rulers(rulers){
                             numberOfActiveConversions++;
                         }
                         //TRAVEL TIME
-                        conversion = addTravelTime(measurement.total.innerHTML,rulerSegments.length > 1,true)
+                        conversion = addTravelTimeV13(measurement.total.innerHTML,true,false)
                         measurement.total.innerHTML = conversion.text;
+                        if(measurement.delta && conversion.converted){
+                            measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true, true);
+                        }
                         if(conversion.converted){
                             numberOfActiveConversions++;
                         }
@@ -75,7 +80,7 @@ function handleFoundryV13Rulers(rulers){
                         }
                         if(getCurrentMinWidth(rulers[i].id) < measurement.total.parentNode.clientWidth){
                             setCurrentMinWidth(rulers[i].id,measurement.total.parentNode.clientWidth);
-                            adjustLabelCSS(rulers[i].id,numberOfActiveConversions,8,getCurrentMinWidth(rulers[i].id));
+                            adjustLabelCSS(rulers[i].id,numberOfActiveConversions,8,getCurrentMinWidth(rulers[i].id),hideFoundry);
                         }
                     }
                 }

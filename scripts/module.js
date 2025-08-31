@@ -193,6 +193,9 @@ function initializeV13RulerCSSV2() {
     updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;min-width: var(--waypoint-label-min-width, 0px) !important;height: var(--waypoint-label-height) !important")
     updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
     updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
+    updateRuntimeRule("#measurement .delta-measurement","line-height: 2.0 !important");
+    updateRuntimeRule("#measurement .delta-elevation","line-height: 2.0 !important");
+
 }
 /**
  * Registers all module settings in Foundry VTT.
@@ -265,14 +268,17 @@ function registerSettings() {
             "noSpecialRounding" : "metric-ruler-labels.settings.travelTimeRoundingMode.noSpecialRounding"
         }
     });
-    game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
-        name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
-        hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: false,
-    });
+    if(foundryGeneration < 13) {
+
+        game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
+            name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
+            hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
+            scope: "client",
+            config: true,
+            type: Boolean,
+            default: false,
+        });
+    }
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
