@@ -116,6 +116,11 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.5**
+- Fixed a bug where travel times were not displayed correctly when they were the only label
+- Fixed a bug where spacing was off when foundry labels were hidden
+- Fixed styling of delta labels when you have multiple ruler segments
+
 **v4.1.4**
 - French Localization (thanks to @rectulo)
 - Added selection for rounding mode for travel times
