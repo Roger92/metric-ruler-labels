@@ -193,6 +193,9 @@ function initializeV13RulerCSSV2() {
     updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;min-width: var(--waypoint-label-min-width, 0px) !important;height: var(--waypoint-label-height) !important")
     updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
     updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
+    updateRuntimeRule("#measurement .delta-measurement","line-height: 2.0 !important");
+    updateRuntimeRule("#measurement .delta-elevation","line-height: 2.0 !important");
+
 }
 /**
  * Registers all module settings in Foundry VTT.
@@ -265,14 +268,17 @@ function registerSettings() {
             "noSpecialRounding" : "metric-ruler-labels.settings.travelTimeRoundingMode.noSpecialRounding"
         }
     });
-    game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
-        name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
-        hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
-        scope: "client",
-        config: true,
-        type: Boolean,
-        default: false,
-    });
+    if(foundryGeneration < 13) {
+
+        game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
+            name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
+            hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
+            scope: "client",
+            config: true,
+            type: Boolean,
+            default: false,
+        });
+    }
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
@@ -329,14 +335,6 @@ function registerSettings() {
         type: String,
         default: "ft.,ft,feet",
     });
-    game.settings.register("metric-ruler-labels", "customConversionOriginalLabelsBig", {
-        name: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.name",
-        hint: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.hint",
-        scope: "world",
-        config: true,
-        type: String,
-        default: "mi.,mi,miles",
-    });
     game.settings.register("metric-ruler-labels", "customConversionFactorSmall", {
         name: "metric-ruler-labels.settings.customConversionFactorSmall.name",
         hint: "metric-ruler-labels.settings.customConversionFactorSmall.hint",
@@ -344,14 +342,6 @@ function registerSettings() {
         config: true,
         type: Number,
         default: 0.3,
-    });
-    game.settings.register("metric-ruler-labels", "customConversionFactorBig", {
-        name: "metric-ruler-labels.settings.customConversionFactorBig.name",
-        hint: "metric-ruler-labels.settings.customConversionFactorBig.hint",
-        scope: "world",
-        config: true,
-        type: Number,
-        default: 1.61,
     });
     game.settings.register("metric-ruler-labels", "customConversionLabelSmall", {
         name: "metric-ruler-labels.settings.customConversionLabelSmall.name",
@@ -361,6 +351,14 @@ function registerSettings() {
         type: String,
         default: "m",
     });
+    game.settings.register("metric-ruler-labels", "customConversionOriginalLabelsBig", {
+        name: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.name",
+        hint: "metric-ruler-labels.settings.customConversionOriginalLabelsBig.hint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "mi.,mi,miles",
+    });
     game.settings.register("metric-ruler-labels", "customConversionLabelBig", {
         name: "metric-ruler-labels.settings.customConversionLabelBig.name",
         hint: "metric-ruler-labels.settings.customConversionLabelBig.hint",
@@ -368,6 +366,14 @@ function registerSettings() {
         config: true,
         type: String,
         default: "km",
+    });
+    game.settings.register("metric-ruler-labels", "customConversionFactorBig", {
+        name: "metric-ruler-labels.settings.customConversionFactorBig.name",
+        hint: "metric-ruler-labels.settings.customConversionFactorBig.hint",
+        scope: "world",
+        config: true,
+        type: Number,
+        default: 1.61,
     });
 }
 
