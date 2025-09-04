@@ -225,13 +225,15 @@ function convertToTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaS
  * @param {boolean} [isDeltaString=false] - Whether this is a delta measurement
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The text with travel times appended
- *   - converted: Always true since text is always modified
- */
+ *   - converted: Whether the conversion was successful
+ *  */
 function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
-    text = appendLine(text, separator, convertToTravelTimeV13(text, useBreakInsteadOfNewline, isDeltaString).text);
-    let converted = true;
-    return {text, converted};
+    let conversion = convertToTravelTimeV13(text, useBreakInsteadOfNewline, isDeltaString);
+    if(conversion.converted) {
+        text = appendLine(text, separator, conversion.text);
+    }
+    return {text:text, converted: conversion.converted};
 }
 
 /**
@@ -245,21 +247,28 @@ function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString 
  * @param {number} conversionFactor - Factor to multiply the delta value by
  * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
  * @param {boolean} [useTravelTimeConversion=false] - Convert to travel times instead of using conversionFactor
- * @returns {string} The text with converted delta appended
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The text with travel times appended
+ *   - converted: Whether the conversion was successful
  */
 function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false, useTravelTimeConversion = false) {
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let textSplitted = text.split(separator);
+    let converted = false;
     if (textSplitted.length >= 1) {
-        let conversion = "";
+        let conversion;
         if (useTravelTimeConversion) {
-            conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true).text;
+            conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true);
         } else {
-            conversion = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
+            conversion.text = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
+            if(conversion.text !== textSplitted[0]) {
+                conversion.converted = true;
+            }
         }
-        return appendLine(text, separator, conversion);
+        text = conversion.converted ? appendLine(text, separator, conversion.text) : text;
+        return {text: text, converted: conversion.converted};
     } else {
-        return text;
+        return {text:text, converted: converted};
     }
 }
 

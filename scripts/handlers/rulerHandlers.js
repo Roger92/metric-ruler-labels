@@ -46,7 +46,7 @@ function handleFoundryV13Rulers(rulers){
                         numberOfActiveConversions = 0;
                         //METRIC
                         conversion = addMetricLabels(measurement.total.innerHTML,true)
-                        measurement.total.innerHTML = conversion.text;
+                        measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta  && conversion.converted){
                             measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
                         }
@@ -55,7 +55,7 @@ function handleFoundryV13Rulers(rulers){
                         }
                         //CUSTOM CONVERSION
                         conversion = addCustomConversionLabels(measurement.total.innerHTML,true)
-                        measurement.total.innerHTML = conversion.text;
+                        measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta && conversion.converted){
                             measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
                         }
@@ -64,7 +64,7 @@ function handleFoundryV13Rulers(rulers){
                         }
                         //TRAVEL TIME
                         conversion = addTravelTimeV13(measurement.total.innerHTML,true,false)
-                        measurement.total.innerHTML = conversion.text;
+                        measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta && conversion.converted){
                             measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true, true);
                         }
@@ -73,8 +73,8 @@ function handleFoundryV13Rulers(rulers){
                         }
                         //HIDE FOUNDRY LABEL
                         conversion = hideFoundryLabel(measurement.total.innerHTML,true);
-                        measurement.total.innerHTML = conversion.text;
-                        if(measurement.delta){
+                        measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
+                        if(measurement.delta ){
                             conversion = hideFoundryLabel(measurement.delta.innerHTML,true);
                             measurement.delta.innerHTML = conversion.text;
                         }
