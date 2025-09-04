@@ -256,7 +256,7 @@ function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = 
     let textSplitted = text.split(separator);
     let converted = false;
     if (textSplitted.length >= 1) {
-        let conversion;
+        let conversion = {};
         if (useTravelTimeConversion) {
             conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true);
         } else {
