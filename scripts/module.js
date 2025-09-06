@@ -192,9 +192,10 @@ function initializeV13RulerCSSV2() {
     initializeRuntimeStyle();
     updateRuntimeRule("#measurement .waypoint-label", "align-items: flex-start !important;padding-top: 8px !important;padding-bottom: 8px !important;min-width: var(--waypoint-label-min-width, 0px) !important;height: var(--waypoint-label-height) !important")
     updateRuntimeRule("#measurement .waypoint-label .icon", "align-self: center !important")
-    updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important")
-    updateRuntimeRule("#measurement .delta-measurement","line-height: 2.0 !important");
-    updateRuntimeRule("#measurement .delta-elevation","line-height: 2.0 !important");
+    updateRuntimeRule("#measurement .waypoint-label div.img", "align-self: center !important;flex: 0 0 20px !important")
+    updateRuntimeRule("#measurement .delta-measurement","line-height: 2.0 !important;flex-grow: 1 !important;white-space: nowrap !important;");
+    updateRuntimeRule("#measurement .delta-elevation","line-height: 2.0 !important;flex-grow: 1 !important;white-space: nowrap !important;");
+    updateRuntimeRule("#measurement .total-measurement","flex-grow: 1 !important;white-space: nowrap !important;");
 
 }
 /**
