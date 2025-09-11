@@ -1,6 +1,6 @@
-.waypoint-label i{
-    margin-right: 10px;
+#measurement .delta-measurement{
+    line-height: 2.0 !important;
 }
-.waypoint-label span{
-    min-width: 90px;
+#measurement .delta-elevation{
+    line-height: 2.0 !important;
 }

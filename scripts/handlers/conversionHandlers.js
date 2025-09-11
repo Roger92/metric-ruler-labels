@@ -230,10 +230,10 @@ function convertToTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaS
 function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let conversion = convertToTravelTimeV13(text, useBreakInsteadOfNewline, isDeltaString);
-    if(conversion.converted) {
+    if (conversion.converted) {
         text = appendLine(text, separator, conversion.text);
     }
-    return {text:text, converted: conversion.converted};
+    return {text: text, converted: conversion.converted};
 }
 
 /**
@@ -254,21 +254,20 @@ function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString 
 function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false, useTravelTimeConversion = false) {
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let textSplitted = text.split(separator);
-    let converted = false;
+    let conversion = {converted: false};
     if (textSplitted.length >= 1) {
-        let conversion = {};
         if (useTravelTimeConversion) {
             conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true);
         } else {
             conversion.text = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
-            if(conversion.text !== textSplitted[0]) {
+            if (conversion.text !== textSplitted[0] || (conversionFactor === 1 && conversion.text === textSplitted[0])) {
                 conversion.converted = true;
             }
         }
         text = conversion.converted ? appendLine(text, separator, conversion.text) : text;
         return {text: text, converted: conversion.converted};
     } else {
-        return {text:text, converted: converted};
+        return {text: text, converted: converted};
     }
 }
 

@@ -116,6 +116,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.7**
+- The V13 ruler labels are now handled better and dont cause flickering or wrong styling anymore
+
 **v4.1.6**
 - Fixed a bug where a label could be doubled
 
