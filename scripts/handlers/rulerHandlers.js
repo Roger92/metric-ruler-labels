@@ -6,9 +6,6 @@ import {
     convertDeltaStrings,
     hideFoundryLabel
 } from "./conversionHandlers.js";
-import {setCssVarById,removeCssVarById} from "../helpers/cssHelper.js";
-import { getCurrentMinWidth, setCurrentMinWidth, cleanUpMinWidths } from "../helpers/cssHelper.js";
-
 /**
  /**
  * Handles the modification and formatting of Foundry V13 ruler and token-drag measurements.
@@ -22,7 +19,6 @@ import { getCurrentMinWidth, setCurrentMinWidth, cleanUpMinWidths } from "../hel
  * representing the rulers in the Foundry VTT interface.
  */
 function handleFoundryV13Rulers(rulers){
-    let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let numberOfActiveConversions = 0;
     for (let i = 0; i < rulers.length; i++) {
         let rulerSegments = rulers[i].childNodes.length > 0 ? rulers[i].childNodes : rulers[i];
@@ -37,7 +33,7 @@ function handleFoundryV13Rulers(rulers){
                 total: rulerSegments[j].getElementsByClassName("total-elevation")[0],
                 delta: rulerSegments[j].getElementsByClassName("delta-elevation")[0]
             })
-            let conversion,splittedRulerLabel;
+            let conversion,deltaConversion,splittedRulerLabel;
 
             measurements.forEach(measurement => {
                 if(measurement.total){
@@ -48,7 +44,8 @@ function handleFoundryV13Rulers(rulers){
                         conversion = addMetricLabels(measurement.total.innerHTML,true)
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta  && conversion.converted){
-                            measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
+                            deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
+                            measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
                         }
                         if(conversion.converted){
                             numberOfActiveConversions++;
@@ -57,7 +54,8 @@ function handleFoundryV13Rulers(rulers){
                         conversion = addCustomConversionLabels(measurement.total.innerHTML,true)
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta && conversion.converted){
-                            measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
+                            deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
+                            measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
                         }
                         if(conversion.converted){
                             numberOfActiveConversions++;
@@ -66,7 +64,8 @@ function handleFoundryV13Rulers(rulers){
                         conversion = addTravelTimeV13(measurement.total.innerHTML,true,false)
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta && conversion.converted){
-                            measurement.delta.innerHTML = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true, true);
+                            deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true, true);
+                            measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
                         }
                         if(conversion.converted){
                             numberOfActiveConversions++;
@@ -75,12 +74,8 @@ function handleFoundryV13Rulers(rulers){
                         conversion = hideFoundryLabel(measurement.total.innerHTML,true);
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta ){
-                            conversion = hideFoundryLabel(measurement.delta.innerHTML,true);
-                            measurement.delta.innerHTML = conversion.text;
-                        }
-                        if(getCurrentMinWidth(rulers[i].id) < measurement.total.parentNode.clientWidth){
-                            setCurrentMinWidth(rulers[i].id,measurement.total.parentNode.clientWidth);
-                            adjustLabelCSS(rulers[i].id,numberOfActiveConversions,8,getCurrentMinWidth(rulers[i].id),hideFoundry);
+                            deltaConversion = hideFoundryLabel(measurement.delta.innerHTML,true);
+                            measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
                         }
                     }
                 }
@@ -174,40 +169,9 @@ function handleV10ToV12Ruler(wrappedResult) {
     return wrappedResult;
 }
 
-/**
- * Adjusts CSS styling for ruler labels based on specified parameters.
- *
- * @param {string} elementID - The ID of the element to adjust CSS for
- * @param {number|null} numberOfActiveConversions - Number of active unit conversions (determines label height). Null means no height adjustment.
- * @param {number} paddingPx - Padding in pixels to add to the height calculation. Default 0.
- * @param {number|null} minWidthPx - Minimum width in pixels for the label. Null means no min-width set.
- * @param {boolean} hideFoundryLabel - Whether the Foundry label is hidden. Default false.
- * @returns {void} This function does not return a value. It directly modifies CSS variables.
- */
-function adjustLabelCSS(elementID, numberOfActiveConversions = null, paddingPx = 0, minWidthPx = null, hideFoundryLabel = false) {
-    let cssHeight = numberOfActiveConversions ? (numberOfActiveConversions * 30) + (2 * paddingPx) : null
-    if (cssHeight && hideFoundryLabel === false) {
-        cssHeight += 30;
-    }
-
-    if (cssHeight) {
-        setCssVarById(elementID, "--waypoint-label-height", cssHeight + "px")
-    }
-    if (minWidthPx) {
-        setCssVarById(elementID, "--waypoint-label-min-width", minWidthPx + "px")
-    } else {
-        removeCssVarById(elementID, "--waypoint-label-min-width");
-    }
-}
-
-
 export {
     handleFoundryV13Rulers,
     handlePreV10Ruler,
     handleV10ToV12Ruler,
-    handleV10To12DragRuler,
-    getCurrentMinWidth,
-    setCurrentMinWidth,
-    cleanUpMinWidths,
-    adjustLabelCSS
+    handleV10To12DragRuler
 };

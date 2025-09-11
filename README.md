@@ -19,16 +19,13 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
-## SOON
-The occasional flickering of the ruler should be gone soon (mid-end of September). I found a way to get rid of the foundry measurements being visible or aligning themselves again for a fraction of a second, which causes some annoying flickering of the labels.
-
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
 Compatability with V13 and localized numbers, that use a comma as decimal separator!!!
+Flickering of V13 ruler labels should be gone now :)
 
 ## V13 - Compatability
 The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
-There might be some not 100% smooth UI behaviors with the new ruler labels of V13, but I will try to minimize weird behavior in later minor releases
 
 Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9, but it's not officially supported)
 
@@ -121,6 +118,9 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.1.7**
+- The V13 ruler labels are now handled better and don't cause flickering or wrong styling anymore
+
 **v4.1.6**
 - Fixed a bug where a label could be doubled
 
