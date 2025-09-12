@@ -26,11 +26,12 @@
       },
       "travelTimeRoundingMode": {
         "name": "Rundungsmodus für Reisezeiten",
-        "hint": "Der Art der Rundung, welche für die Reisezeiten durchgeführt wird. WICHTIG: Es wird nicht normal gerundet, sondern immer auf VOLLE Teileinheiten abgerundet. Es werden also die Tage dargestellt, welche auf der Wegstrecke wirklich vergangen sind. (Beispiel Viertel Tage:  0,2 Tage -> 0 Tage, 1,1 Tage -> 1 Tag, 1,3 Tage -> 1,25 Tage).",
+        "hint": "Der Art der Rundung, welche für die Reisezeiten durchgeführt wird.",
         "roundToFullTenths": "Zehntel",
         "roundToFullQuarters": "Viertel",
         "roundToFullHalves": "Halbe",
         "roundToFull": "Volle",
+        "roundToOneDecimal": "Eine Dezimalstelle",
         "noSpecialRounding": "Kein spezielles Runden"
       },
       "travelTimeOnlyTotalTimeLastSegment": {
@@ -84,6 +85,22 @@
       "customConversionLabelBig": {
         "name": "Umgewandeltes Textlabel: Große Maßeinheit",
         "hint": "Das Textlabel für die umgewandelte große Maßeinheit (z.B. km für Kilometer)"
+      },
+      "distanceRoundingMode": {
+        "name": "Rundungsmodus für Distanzen",
+        "hint": "Die Art der Rundung, die auf konvertierte Distanzen angewendet wird."
+      },
+      "roundingMode": {
+        "roundToFullTenths": "Zehntel",
+        "roundToFullQuarters": "Viertel",
+        "roundToFullHalves": "Halbe",
+        "roundToFull": "Volle",
+        "roundToOneDecimal": "Eine Dezimalstelle",
+        "noSpecialRounding": "Kein spezielles Runden"
+      },
+      "applyRoundingToFoundryLabel": {
+        "name": "Rundung auf Foundry-Label anwenden",
+        "hint": "Wenn aktiviert, wird auch der Wert des Foundry Distanzlabels gerundet."
       }
     }
   },

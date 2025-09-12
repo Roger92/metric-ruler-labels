@@ -30,11 +30,12 @@
             },
             "travelTimeRoundingMode": {
                 "name": "Modalità di arrotondamento per i tempi di viaggio",
-                "hint": "Il tipo di arrotondamento applicato ai tempi di viaggio. IMPORTANTE: non è un arrotondamento normale; si arrotonda sempre per difetto alle sotto-unità intere. Vengono quindi mostrati i giorni effettivamente trascorsi sul percorso. (Esempio quarti di giorno: 0,2 giorni -> 0 giorni, 1,1 giorni -> 1 giorno, 1,3 giorni -> 1,25 giorni).",
+                "hint": "Il tipo di arrotondamento applicato ai tempi di viaggio.",
                 "roundToFullTenths": "Decimi",
                 "roundToFullQuarters": "Quarti",
                 "roundToFullHalves": "Mezzi",
                 "roundToFull": "Interi",
+                "roundToOneDecimal": "Una cifra decimale",
                 "noSpecialRounding": "Nessun arrotondamento speciale"
             },
             "travelTimeOnlyTotalTimeLastSegment": {
@@ -84,6 +85,22 @@
             "customConversionLabelBig": {
                 "name": "Etichetta convertita: Unità grande",
                 "hint": "L'etichetta per l'unità più grande convertita (ad esempio km per chilometri)"
+            },
+            "distanceRoundingMode": {
+                "name": "Modalità di arrotondamento per le distanze",
+                "hint": "Il tipo di arrotondamento applicato alle distanze convertite."
+            },
+            "roundingMode": {
+                "roundToFullTenths": "Decimi",
+                "roundToFullQuarters": "Quarti",
+                "roundToFullHalves": "Mezzi",
+                "roundToFull": "Interi",
+                "roundToOneDecimal": "Una cifra decimale",
+                "noSpecialRounding": "Nessun arrotondamento speciale"
+            },
+            "applyRoundingToFoundryLabel": {
+                "name": "Applica arrotondamento all'etichetta di Foundry",
+                "hint": "Se abilitato, anche il valore dell'etichetta della distanza di Foundry viene arrotondato."
             }
         },
         "dependencies": {

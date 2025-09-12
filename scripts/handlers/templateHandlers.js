@@ -1,4 +1,4 @@
-import {addCustomConversionLabels, addMetricLabels, hideFoundryLabel} from "./conversionHandlers.js";
+import {addCustomConversionLabels, addMetricLabels, hideFoundryLabel, roundFoundryLabel} from "./conversionHandlers.js";
 
 /**
  * Processes and updates pre-version 10 measurement templates.
@@ -55,6 +55,15 @@ function handleV13MeasurementTemplates() {
         for (let j = 0; j < templatesArrays[i].children.length; j++) {
             let template = templatesArrays[i].children[j];
             if (template.ruler && template.ruler.text.split("\n").length === 1) {
+                // Optionally round the Foundry label itself before appending other labels
+                const applyRounding = game.settings.get("metric-ruler-labels", "applyRoundingToFoundryLabel");
+                if (applyRounding) {
+                    const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
+                    const rounded = roundFoundryLabel(template.ruler.text, roundingMode, false);
+                    if (rounded.converted) {
+                        template.ruler.text = rounded.text;
+                    }
+                }
                 template.ruler.text = addMetricLabels(template.ruler.text).text;
                 template.ruler.text = addCustomConversionLabels(template.ruler.text).text;
                 template.ruler.text = hideFoundryLabel(template.ruler.text).text;

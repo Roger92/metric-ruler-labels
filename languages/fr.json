@@ -28,9 +28,15 @@
                 "name": "Active les étiquettes du temps de voyage",
                 "hint": "Active les étiquettes du temps de voyage sur la règle normale au format jourLent | jourNormal | jourRapide."
             },
-            "travelTimeRoundToFullQuarters": {
-              "name": "Affiche le temps de voyage en quart de journées",
-              "hint": "Affiche le temps de voyage en quart de journées (Ex. 0.2 jour -> 0 jour, 1.1 jour -> 1 jour, 1.3 days -> 1.25 jours). Autrement, le temps de voyage aura 1 décimale."
+            "travelTimeRoundingMode": {
+              "name": "Mode d'arrondi pour les temps de voyage",
+              "hint": "Type d'arrondi appliqué aux temps de voyage. ",
+              "roundToFullTenths": "Dixièmes",
+              "roundToFullQuarters": "Quarts",
+              "roundToFullHalves": "Demi",
+              "roundToFull": "Entiers",
+              "roundToOneDecimal": "Une décimale",
+              "noSpecialRounding": "Pas d'arrondi spécial"
             },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Montre seulement le temps de voyage sur le dernier segment",
@@ -79,6 +85,22 @@
             "customConversionLabelBig": {
                 "name": "Étiquette de conversion : Grande unité",
                 "hint": "L'étiquette le conversion de la plus grande unité  (ex. km pour afficher les kilomètres)"
+            },
+            "distanceRoundingMode": {
+                "name": "Mode d'arrondi pour les distances",
+                "hint": "Type d'arrondi appliqué aux distances converties."
+            },
+            "roundingMode": {
+                "roundToFullTenths": "Dixièmes",
+                "roundToFullQuarters": "Quarts",
+                "roundToFullHalves": "Demi",
+                "roundToFull": "Entiers",
+                "roundToOneDecimal": "Une décimale",
+                "noSpecialRounding": "Pas d'arrondi spécial"
+            },
+            "applyRoundingToFoundryLabel": {
+                "name": "Appliquer l'arrondi à l'étiquette Foundry",
+                "hint": "Si activé, la valeur de l'étiquette de distance de Foundry est également arrondie."
             }
         },
         "dependencies": {

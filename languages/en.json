@@ -30,11 +30,12 @@
             },
             "travelTimeRoundingMode": {
                 "name": "Rounding mode for travel times",
-                "hint": "The type of rounding applied to travel times. IMPORTANT: This is not standard rounding; values are always rounded down to full sub-units. This shows the days that actually elapsed along the route. (Example quarter days: 0.2 days -> 0 days, 1.1 days -> 1 day, 1.3 days -> 1.25 days).",
+                "hint": "The type of rounding applied to travel times.",
                 "roundToFullTenths": "Tenths",
                 "roundToFullQuarters": "Quarters",
                 "roundToFullHalves": "Halves",
                 "roundToFull": "Full",
+                "roundToOneDecimal": "One decimal",
                 "noSpecialRounding": "No special rounding"
             },
             "travelTimeOnlyTotalTimeLastSegment": {
@@ -84,6 +85,22 @@
             "customConversionLabelBig": {
                 "name": "Converted Label: Big Unit",
                 "hint": "The label for the converted bigger unit (e.g. km for kilometers)"
+            },
+            "distanceRoundingMode": {
+                "name": "Rounding mode for distances",
+                "hint": "The type of rounding applied to converted distances."
+            },
+            "roundingMode": {
+                "roundToFullTenths": "Tenths",
+                "roundToFullQuarters": "Quarters",
+                "roundToFullHalves": "Halves",
+                "roundToFull": "Full",
+                "roundToOneDecimal": "One decimal",
+                "noSpecialRounding": "No special rounding"
+            },
+            "applyRoundingToFoundryLabel": {
+                "name": "Apply rounding to Foundry label",
+                "hint": "If enabled, the value of Foundry's distance label is also rounded."
             }
         },
         "dependencies": {

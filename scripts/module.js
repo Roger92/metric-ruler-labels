@@ -1,13 +1,9 @@
 import {
-    handlePreV10MeasurementTemplates,
-    handleV10MeasurementTemplates,
-    handleV13MeasurementTemplates,
-    handleV11ToV12MeasurementTemplates,
-    handlePreV11TemplatePreview
+    handleV13MeasurementTemplates
 } from './handlers/templateHandlers.js';
 import {addMetricLabels} from "./handlers/conversionHandlers.js";
 import {
-    handleFoundryV13Rulers, handlePreV10Ruler, handleV10To12DragRuler, handleV10ToV12Ruler
+    handleFoundryV13Rulers
 } from "./handlers/rulerHandlers.js";
 import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
 
@@ -17,6 +13,19 @@ Hooks.on("init", () => {
         getRulerData: getRulerData
     }
 });
+
+Hooks.on("refreshObject", (a) => {
+    console.log("Additional-Metric-Ruler | Canvas Draw");
+    console.log(a)
+});
+
+Hooks.on("updateDocument", (a) => {
+    console.log("Additional-Metric-Ruler | Canvas Draw");
+    console.log(a)
+});
+//=============================================================================
+// RULER AND TOKEN-DRAG
+//=============================================================================
 Hooks.on("canvasReady", () => {
     // Select the measurement node you want to observe for Ruler and Token Drag Changes
     const targetNode = document.getElementById('measurement');
@@ -49,7 +58,7 @@ Hooks.on("canvasReady", () => {
     //Start observing the target node for configured mutations
     observer.observe(targetNode, config);
 
-    console.log("[Additional-Metric-Ruler] MutationObserver is now watching the #measurement element.");
+    console.log("Additional-Metric-Ruler | MutationObserver is now watching the #measurement element.");
 });
 
 Hooks.once('ready', () => {
@@ -73,57 +82,7 @@ Hooks.once('ready', () => {
         // MEASUREMENT TEMPLATES
         //=============================================================================
 
-        if (foundryGeneration < 10) {
-            //Handling of MeasureTemplate Drop (Only needed before V10)
-            libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftDrop", async function (wrapped, ...args) {
-                let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                if (measureTemplateSupport) {
-                    return handlePreV10MeasurementTemplates(wrappedResult);
-                } else {
-                    return wrappedResult;
-                }
-            }, 'MIXED');
-            //Handling of MeasureTemplate Preview
-            libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftMove", async function (wrapped, ...args) {
-                let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                if (measureTemplateSupport) {
-                    wrappedResult = handlePreV11TemplatePreview(foundryGeneration, wrappedResult);
-                }
-                return wrappedResult;
-            }, 'WRAPPER');
-
-        } else if (foundryGeneration === 10) {
-            //Handling of MeasureTemplate Drag (V10)
-            libWrapper.register("metric-ruler-labels", "CONFIG.MeasuredTemplate.layerClass.prototype._onDragLeftDrop", async function (wrapped, ...args) {
-                let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                if (measureTemplateSupport) {
-                    handleV10MeasurementTemplates();
-                }
-                return wrappedResult;
-            }, 'MIXED');
-            //Handling of MeasureTemplate Preview
-            libWrapper.register("metric-ruler-labels", "TemplateLayer.prototype._onDragLeftMove", async function (wrapped, ...args) {
-                let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                if (measureTemplateSupport) {
-                    wrappedResult = handlePreV11TemplatePreview(foundryGeneration, wrappedResult);
-                }
-                return wrappedResult;
-            }, 'WRAPPER');
-        } else if (foundryGeneration === 11 || foundryGeneration === 12) {
-            //Handling of MeasureTemplate Drag and Drop (V11/12)
-            libWrapper.register("metric-ruler-labels", "MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
-                let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
-                if (measureTemplateSupport) {
-                    handleV11ToV12MeasurementTemplates();
-                }
-                return wrappedResult;
-            }, 'MIXED');
-        } else if (foundryGeneration >= 13) {
+        if (foundryGeneration >= 13) {
             //Handling of MeasureTemplate Drag and Drop (V13)
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
@@ -135,49 +94,6 @@ Hooks.once('ready', () => {
             }, 'WRAPPER');
         }
 
-        //=============================================================================
-        // RULERS
-        //=============================================================================
-
-        if (foundryGeneration < 13) {
-            //Handling of Ruler + Elevation Ruler
-            libWrapper.register("metric-ruler-labels", "Ruler.prototype.measure", function (wrapped, ...args) {
-                let wrappedResult = wrapped(...args);
-                let dragRulerSupport = game.settings.get("metric-ruler-labels", "dragRulerSupport");
-                let foundryGeneration = game.release.generation;
-
-                if (foundryGeneration < 10) {
-                    wrappedResult = handlePreV10Ruler(wrappedResult, dragRulerSupport);
-                } else {
-                    wrappedResult = handleV10ToV12Ruler(wrappedResult);
-                }
-
-                return wrappedResult;
-            }, 'WRAPPER');
-        }
-
-        //=============================================================================
-        // TOKEN DRAG
-        //=============================================================================
-
-        if (foundryGeneration >= 10 && foundryGeneration < 13) {
-            //Dragruler + p2fe Drag Measurement
-            let dragRulerSupport = game.settings.get("metric-ruler-labels", "dragRulerSupport")
-            if (dragRulerSupport !== "noDragRulerSupport") {
-                //Handling of DragRuler V10
-                libWrapper.register("metric-ruler-labels", "Token.prototype._onDragLeftMove", function (wrapped, ...args) {
-                    let wrappedResult = wrapped(...args);
-                    let elevationRulerActive = game.modules.get('elevationruler')?.active;
-
-                    //Delay, so that drag-ruler does not overwrite
-                    setTimeout(function () {
-                        handleV10To12DragRuler(dragRulerSupport, elevationRulerActive);
-                    }, 60);
-
-                    return wrappedResult;
-                }, 'WRAPPER');
-            }
-        }
     }
 });
 
@@ -197,22 +113,6 @@ function registerSettings() {
         type: Boolean,
         default: true,
     });
-    if (foundryGeneration < 13) {
-        game.settings.register("metric-ruler-labels", "dragRulerSupport", {
-            name: "metric-ruler-labels.settings.dragRulerSupport.name",
-            hint: "metric-ruler-labels.settings.dragRulerSupport.hint",
-            scope: "client",
-            config: true,
-            type: String,
-            default: "dragRulerSupport",
-            choices: {
-                "noDragRulerSupport": "metric-ruler-labels.settings.dragRulerSupport.disabled",
-                "dragRulerSupport": "metric-ruler-labels.settings.dragRulerSupport.dragRuler",
-                "pf2eDragRulerSupport": "metric-ruler-labels.settings.dragRulerSupport.pf2eTokenDragRuler"
-            }
-        });
-    }
-
     game.settings.register("metric-ruler-labels", "hideFoundryMeasurement", {
         name: "metric-ruler-labels.settings.hideFoundryMeasurement.name",
         hint: "metric-ruler-labels.settings.hideFoundryMeasurement.hint",
@@ -224,6 +124,30 @@ function registerSettings() {
     game.settings.register("metric-ruler-labels", "disableBuiltInConversion", {
         name: "metric-ruler-labels.settings.disableBuiltInConversion.name",
         hint: "metric-ruler-labels.settings.disableBuiltInConversion.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: false,
+    });
+    game.settings.register("metric-ruler-labels", "distanceRoundingMode", {
+        name: "metric-ruler-labels.settings.distanceRoundingMode.name",
+        hint: "metric-ruler-labels.settings.distanceRoundingMode.hint",
+        scope: "world",
+        config: true,
+        type: String,
+        default: "noSpecialRounding",
+        choices: {
+            "roundToFullTenths": "metric-ruler-labels.settings.roundingMode.roundToFullTenths",
+            "roundToFullQuarters": "metric-ruler-labels.settings.roundingMode.roundToFullQuarters",
+            "roundToFullHalves": "metric-ruler-labels.settings.roundingMode.roundToFullHalves",
+            "roundToFull": "metric-ruler-labels.settings.roundingMode.roundToFull",
+            "roundToOneDecimal": "metric-ruler-labels.settings.roundingMode.roundToOneDecimal",
+            "noSpecialRounding": "metric-ruler-labels.settings.roundingMode.noSpecialRounding"
+        }
+    });
+    game.settings.register("metric-ruler-labels", "applyRoundingToFoundryLabel", {
+        name: "metric-ruler-labels.settings.applyRoundingToFoundryLabel.name",
+        hint: "metric-ruler-labels.settings.applyRoundingToFoundryLabel.hint",
         scope: "client",
         config: true,
         type: Boolean,
@@ -245,24 +169,14 @@ function registerSettings() {
         type: String,
         default: "roundToFullQuarters",
         choices: {
-            "roundToFullTenths": "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullTenths",
-            "roundToFullQuarters": "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullQuarters",
-            "roundToFullHalves": "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFullHalves",
-            "roundToFull": "metric-ruler-labels.settings.travelTimeRoundingMode.roundToFull",
-            "noSpecialRounding": "metric-ruler-labels.settings.travelTimeRoundingMode.noSpecialRounding"
+            "roundToFullTenths": "metric-ruler-labels.settings.roundingMode.roundToFullTenths",
+            "roundToFullQuarters": "metric-ruler-labels.settings.roundingMode.roundToFullQuarters",
+            "roundToFullHalves": "metric-ruler-labels.settings.roundingMode.roundToFullHalves",
+            "roundToFull": "metric-ruler-labels.settings.roundingMode.roundToFull",
+            "roundToOneDecimal": "metric-ruler-labels.settings.roundingMode.roundToOneDecimal",
+            "noSpecialRounding": "metric-ruler-labels.settings.roundingMode.noSpecialRounding"
         }
     });
-    if (foundryGeneration < 13) {
-
-        game.settings.register("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment", {
-            name: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.name",
-            hint: "metric-ruler-labels.settings.travelTimeOnlyTotalTimeLastSegment.hint",
-            scope: "client",
-            config: true,
-            type: Boolean,
-            default: false,
-        });
-    }
     game.settings.register("metric-ruler-labels", "travelTimeDistanceLabel", {
         name: "metric-ruler-labels.settings.travelTimeDistanceLabel.name",
         hint: "metric-ruler-labels.settings.travelTimeDistanceLabel.hint",
