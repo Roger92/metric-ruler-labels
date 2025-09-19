@@ -19,7 +19,8 @@ import {
  *   - converted: Whether any conversion was performed
  */
 function addMetricLabels(text, useBreakInsteadOfNewline = false) {
-    let dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
+    const dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
+    const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let usedConversionFactor = 1;
     const textLines = text ? text.split(separator) : "";
@@ -27,13 +28,13 @@ function addMetricLabels(text, useBreakInsteadOfNewline = false) {
 
 
     if (dontUseMetricConversions === false && textLines.length > 0) {
-        let convertedText = convertDistanceString(textLines[0], ["ft.", "ft", "feet"], "m", 0.3);
+        let convertedText = convertDistanceString(textLines[0], ["ft.", "ft", "feet"], "m", 0.3, roundingMode);
         if (convertedText !== textLines[0]) {
             text = appendLine(text, separator, convertedText);
             usedConversionFactor = 0.3;
             converted = true;
         }
-        convertedText = convertDistanceString(textLines[0], ["mi.", "mi", "miles"], "km", 1.61);
+        convertedText = convertDistanceString(textLines[0], ["mi.", "mi", "miles"], "km", 1.61, roundingMode);
         if (convertedText !== textLines[0]) {
             text = appendLine(text, separator, convertedText);
             usedConversionFactor = 1.61;
@@ -60,13 +61,14 @@ function addMetricLabels(text, useBreakInsteadOfNewline = false) {
  *   - converted: Whether any conversion was performed
  */
 function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
-    let conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
-    let conversionFactorBig = game.settings.get("metric-ruler-labels", "customConversionFactorBig");
-    let customConversionLabelSmall = game.settings.get("metric-ruler-labels", "customConversionLabelSmall");
-    let customConversionLabelBig = game.settings.get("metric-ruler-labels", "customConversionLabelBig");
+    const conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
+    const conversionFactorBig = game.settings.get("metric-ruler-labels", "customConversionFactorBig");
+    const customConversionLabelSmall = game.settings.get("metric-ruler-labels", "customConversionLabelSmall");
+    const customConversionLabelBig = game.settings.get("metric-ruler-labels", "customConversionLabelBig");
+    const useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
+    const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
     let originalLabelsSmall = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsSmall");
     let originalLabelsBig = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsBig");
-    let useCustomConversions = game.settings.get("metric-ruler-labels", "useCustomConversions");
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let usedConversionFactor = 1;
     let converted = false;
@@ -80,7 +82,7 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
             text = appendLine(text, separator, game.i18n.localize("metric-ruler-labels.warnings.customConversionNoValues.text"));
         } else if (textLines.length > 0) {
             if (originalLabelsSmall && conversionFactorSmall) {
-                let convertedText = convertDistanceString(textLines[0], originalLabelsSmall, customConversionLabelSmall, conversionFactorSmall);
+                let convertedText = convertDistanceString(textLines[0], originalLabelsSmall, customConversionLabelSmall, conversionFactorSmall, roundingMode);
                 if (convertedText !== textLines[0]) {
                     text = appendLine(text, separator, convertedText);
                     usedConversionFactor = conversionFactorSmall;
@@ -88,7 +90,7 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
                 }
             }
             if (originalLabelsBig && conversionFactorBig) {
-                let convertedText = convertDistanceString(textLines[0], originalLabelsBig, customConversionLabelBig, conversionFactorBig);
+                let convertedText = convertDistanceString(textLines[0], originalLabelsBig, customConversionLabelBig, conversionFactorBig, roundingMode);
                 if (convertedText !== textLines[0]) {
                     text = appendLine(text, separator, convertedText);
                     usedConversionFactor = conversionFactorBig;
@@ -252,6 +254,7 @@ function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString 
  *   - converted: Whether the conversion was successful
  */
 function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false, useTravelTimeConversion = false) {
+    const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
     let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
     let textSplitted = text.split(separator);
     let conversion = {converted: false};
@@ -259,7 +262,7 @@ function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = 
         if (useTravelTimeConversion) {
             conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true);
         } else {
-            conversion.text = convertDistanceString(textSplitted[0], [""], "", conversionFactor);
+            conversion.text = convertDistanceString(textSplitted[0], [""], "", conversionFactor, roundingMode);
             if (conversion.text !== textSplitted[0] || (conversionFactor === 1 && conversion.text === textSplitted[0])) {
                 conversion.converted = true;
             }
@@ -331,7 +334,7 @@ function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
  * convertDistanceString("5 ft [10 ft]", ["ft", "ft."], "m", 0.3)
  * // Returns "1.5 m [3 m]"
  */
-function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
+function convertDistanceString(text, searchLabels, newLabel, conversionFactor, roundingMode = "noSpecialRounding") {
     //Sort labels so that more specific ones come first
     searchLabels.sort((a, b) => b.length - a.length);
 
@@ -346,7 +349,10 @@ function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
     return text.replace(regex, (match, distance, whiteSpaces) => {
         const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(distance);
         if (isNaN(value)) return match; // fallback: don't change if parsing failed
-        const converted = Number(value * conversionFactor);
+        let converted = Number(value * conversionFactor);
+        if (roundingMode) {
+            converted = roundDistance(converted, roundingMode);
+        }
         const convertedDistance = formatWithSeparators(converted, decimalSep, thousandSep, hadThousandSep);
         //Return the converted string with the same format as the old one
         return convertedDistance + whiteSpaces + newLabel;
@@ -354,30 +360,29 @@ function convertDistanceString(text, searchLabels, newLabel, conversionFactor) {
 }
 
 /**
- * Rounds travel time values based on the specified rounding mode.
+ * Rounds distance values based on the specified rounding mode.
  *
- * Available rounding modes:
- * - "roundToFullTenths" - Truncates to nearest tenth (e.g. 1.23 -> 1.2)
- * - "roundToFullQuarters" - Rounds down to nearest quarter (e.g. 1.7 -> 1.5)
- * - "roundToFullHalves" - Rounds down to nearest half (e.g. 1.7 -> 1.5)
- * - "roundToFull" - Truncates to whole number (e.g. 1.7 -> 1)
- * - "noSpecialRounding" - Rounds to one decimal place
- *
- * @param {number} value - Travel time value to round
- * @param {string} roundingMode - Rounding mode to use
+ * @param {number} value - Distance value to round
+ * @param {string} roundingMode - Rounding mode to use:
+ *   - "roundToFullTenths" - Round up to the next tenth (e.g. 1.21 -> 1.3; 1.2 stays 1.2)
+ *   - "roundToFullQuarters" - Round up to the next quarter (e.g. 1.26 -> 1.5; 1.25 stays 1.25)
+ *   - "roundToFullHalves" - Round up to the next half (e.g. 1.26 -> 1.5; 1.5 stays 1.5)
+ *   - "roundToFull" - Round up to the next whole number (e.g. 1.2 -> 2; 2 stays 2)
+ *   - "roundToOneDecimal" - Round to one decimal place
+ *   - If no mode specified or invalid mode, returns absolute value with no rounding
  * @returns {number} Rounded absolute value
  */
-function roundTravelTimes(value, roundingMode) {
+function roundDistance(value, roundingMode) {
     switch (roundingMode) {
         case "roundToFullTenths":
-            return Math.abs(truncToTenth(value));
+            return Math.abs(ceilToTenth(value));
         case "roundToFullQuarters":
-            return Math.abs(floorToQuarter(value));
+            return Math.abs(ceilToQuarter(value));
         case "roundToFullHalves":
-            return Math.abs(floorToHalf(value));
+            return Math.abs(ceilToHalf(value));
         case "roundToFull":
-            return Math.abs(truncToFull(value));
-        case "noSpecialRounding":
+            return Math.abs(ceilToFull(value));
+        case "roundToOneDecimal":
             return Math.abs(roundToOneDecimal(value));
         default:
             return Math.abs(value);
@@ -437,6 +442,56 @@ function floorToQuarter(value, fractionDigits = 2) {
 }
 
 /**
+ * Rounds a number up to the nearest half.
+ * Examples:
+ * - 1.26 -> 1.5
+ * - 1.5 -> 1.5
+ * @param {number} value
+ * @param {number} [fractionDigits=2]
+ * @returns {number}
+ */
+function ceilToHalf(value, fractionDigits = 2) {
+    return Number((Math.ceil((value - Number.EPSILON) * 2) / 2).toFixed(fractionDigits));
+}
+
+/**
+ * Rounds a number up to the nearest quarter.
+ * Examples:
+ * - 1.26 -> 1.5
+ * - 1.25 -> 1.25
+ * @param {number} value
+ * @param {number} [fractionDigits=2]
+ * @returns {number}
+ */
+function ceilToQuarter(value, fractionDigits = 2) {
+    return Number((Math.ceil((value - Number.EPSILON) * 4) / 4).toFixed(fractionDigits));
+}
+
+/**
+ * Rounds a number up to the nearest tenth.
+ * Examples:
+ * - 1.21 -> 1.3
+ * - 1.2 -> 1.2
+ * @param {number} value
+ * @returns {number}
+ */
+function ceilToTenth(value) {
+    return Number((Math.ceil((value - Number.EPSILON) * 10) / 10).toFixed(2));
+}
+
+/**
+ * Rounds a number up to the nearest whole number.
+ * Examples:
+ * - 1.2 -> 2
+ * - 2.0 -> 2
+ * @param {number} value
+ * @returns {number}
+ */
+function ceilToFull(value) {
+    return Math.ceil(value - Number.EPSILON);
+}
+
+/**
  * Truncates a number to one decimal place.
  *
  * Examples:
@@ -474,9 +529,9 @@ function buildTravelTimeLine(distanceString, conversionFactorSlow, conversionFac
 
     const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(distanceString);
 
-    const slowNum = roundTravelTimes(Number(value / conversionFactorSlow), roundingMode);
-    const normalNum = roundTravelTimes(Number(value / conversionFactorNormal), roundingMode);
-    const fastNum = roundTravelTimes(Number(value / conversionFactorFast), roundingMode);
+    const slowNum = roundDistance(Number(value / conversionFactorSlow), roundingMode);
+    const normalNum = roundDistance(Number(value / conversionFactorNormal), roundingMode);
+    const fastNum = roundDistance(Number(value / conversionFactorFast), roundingMode);
 
     const slow = formatWithSeparators(slowNum, decimalSep, thousandSep, true);
     const normal = formatWithSeparators(normalNum, decimalSep, thousandSep, true);
@@ -504,6 +559,44 @@ function appendLine(text, separator, line) {
 }
 
 
+/**
+ * Rounds Foundry's measurement label values based on specified rounding mode.
+ *
+ * @param {string} text - Text containing the measurement label
+ * @param {string} [roundingMode="noSpecialRounding"] - Rounding mode to use:
+ *   - "noSpecialRounding": Defaults to "roundToOneDecimal"
+ *   - "roundToFullTenths": Round up to next tenth (e.g. 1.21 -> 1.3)
+ *   - "roundToFullQuarters": Round up to next quarter (e.g. 1.26 -> 1.5)
+ *   - "roundToFullHalves": Round up to next half (e.g. 1.26 -> 1.5)
+ *   - "roundToFull": Round up to next whole number (e.g. 1.2 -> 2)
+ *   - "roundToOneDecimal": Round to one decimal place
+ * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @returns {{text: string, converted: boolean}} Object containing:
+ *   - text: The text with rounded values
+ *   - converted: Whether any values were rounded
+ */
+function roundFoundryLabel(text, roundingMode = "noSpecialRounding", useBreakInsteadOfNewline = false) {
+    const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    const parts = (text ?? "").split(separator);
+    if (parts.length === 0) return {text, converted: false};
+
+    let line = parts[0];
+    const match = /(-?[\d.,]+)/.exec(line);
+    if (!match) return {text, converted: false};
+
+    const {value, decimalSep, thousandSep, hadThousandSep} = parseLocalizedNumber(match[1]);
+    if (isNaN(value)) return {text, converted: false};
+
+    const mode = roundingMode === "noSpecialRounding" ? "roundToOneDecimal" : roundingMode;
+    const rounded = roundDistance(Number(value), mode);
+    const formatted = formatWithSeparators(rounded, decimalSep, thousandSep, hadThousandSep);
+
+    // Replace only the first numeric occurrence we matched
+    line = line.replace(match[1], formatted);
+    parts[0] = line;
+    return {text: parts.join(separator), converted: true};
+}
+
 export {
     addMetricLabels,
     addCustomConversionLabels,
@@ -511,7 +604,8 @@ export {
     addTravelTimeV13,
     hideFoundryLabel,
     convertDeltaStrings,
-    convertDistanceString
+    convertDistanceString,
+    roundFoundryLabel
 };
 
 // Node/CommonJS compatibility for simple test runner

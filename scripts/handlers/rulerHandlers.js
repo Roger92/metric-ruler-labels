@@ -4,7 +4,8 @@ import {
     addTravelTime,
     addTravelTimeV13,
     convertDeltaStrings,
-    hideFoundryLabel
+    hideFoundryLabel,
+    roundFoundryLabel
 } from "./conversionHandlers.js";
 /**
  /**
@@ -39,6 +40,15 @@ function handleFoundryV13Rulers(rulers){
                 if(measurement.total){
                     splittedRulerLabel = measurement.total.innerHTML.split("<br>");
                     if(splittedRulerLabel.length === 1){
+                        // Optionally round the Foundry label itself before appending other labels
+                        const applyRounding = game.settings.get("metric-ruler-labels", "applyRoundingToFoundryLabel");
+                        if (applyRounding) {
+                            const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
+                            const rounded = roundFoundryLabel(measurement.total.innerHTML, roundingMode, true);
+                            if (rounded.converted) {
+                                measurement.total.innerHTML = rounded.text;
+                            }
+                        }
                         numberOfActiveConversions = 0;
                         //METRIC
                         conversion = addMetricLabels(measurement.total.innerHTML,true)
@@ -170,8 +180,5 @@ function handleV10ToV12Ruler(wrappedResult) {
 }
 
 export {
-    handleFoundryV13Rulers,
-    handlePreV10Ruler,
-    handleV10ToV12Ruler,
-    handleV10To12DragRuler
+    handleFoundryV13Rulers
 };
