@@ -118,6 +118,10 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v4.2.0**
+- Rounding options can be chosen in the settings
+- this and newer versions are only compatible with V13 upwards
+
 **v4.1.7**
 - The V13 ruler labels are now handled better and don't cause flickering or wrong styling anymore
 
