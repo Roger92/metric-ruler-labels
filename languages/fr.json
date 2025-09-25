@@ -46,15 +46,15 @@
             },
             "travelTimePerUnitSlow": {
                 "name": "Distance par unité de temps - Lent",
-                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse réduite par unité de temps (Par défaut : jour)."
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse réduite par unité de temps."
             },
             "travelTimePerUnitNormal": {
                 "name": "Distance par unité de temps - Normal",
-                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse normale par unité de temps (Par défaut : jour)."
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse normale par unité de temps."
             },
             "travelTimePerUnitFast": {
                 "name": "Distance par unité de temps - Rapide",
-                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse rapide par unité de temps (Par défaut : jour)."
+                "hint": "La distance de l'étiquette ci-dessus, que votre groupe devrait franchir à une vitesse rapide par unité de temps."
             },
             "customConversionOriginalLabelsSmall": {
                 "name": "Étiquette d'unité originale : Petite unité",

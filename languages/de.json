@@ -42,15 +42,15 @@
       },
       "travelTimePerUnitSlow": {
         "name": "Distanz pro Zeiteinheit - Langsam",
-        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit langsamer Geschwindigkeit zurücklegt."
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit mit langsamer Geschwindigkeit zurücklegt."
       },
       "travelTimePerUnitNormal": {
         "name": "Distanz pro Zeiteinheit - Normal",
-        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit normaler Geschwindigkeit zurücklegt."
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit mit normaler Geschwindigkeit zurücklegt."
       },
       "travelTimePerUnitFast": {
         "name": "Distanz pro Zeiteinheit - Schnell",
-        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit (Default: Tag) mit schneller Geschwindigkeit zurücklegt."
+        "hint": "Die Distanz des oben genannten Labels, welche die Gruppe für eine Zeiteinheit mit schneller Geschwindigkeit zurücklegt."
       },
       "useCustomConversions": {
         "name": "Aktiviere Eigene Umwandlungen",
