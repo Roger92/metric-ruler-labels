@@ -46,15 +46,15 @@
             },
             "travelTimePerUnitSlow": {
                 "name": "Distance per time unit - Slow",
-                "hint": "The distance of the above label, that your group would travel at a small speed per time unit (Default: Day)."
+                "hint": "The distance of the above label, that your group would travel at a small speed per time unit."
             },
             "travelTimePerUnitNormal": {
                 "name": "Distance per time unit - Normal",
-                "hint": "he distance of the above label, that your group would travel at a normal speed per time unit (Default: Day)."
+                "hint": "he distance of the above label, that your group would travel at a normal speed per time unit."
             },
             "travelTimePerUnitFast": {
                 "name": "Distance per time unit - Fast",
-                "hint": "he distance of the above label, that your group would travel at a Fast speed per time unit (Default: Day)."
+                "hint": "he distance of the above label, that your group would travel at a Fast speed per time unit."
             },
             "customConversionOriginalLabelsSmall": {
                 "name": "Original Unit Labels: Small Unit",
