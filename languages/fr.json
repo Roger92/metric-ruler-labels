@@ -30,13 +30,7 @@
             },
             "travelTimeRoundingMode": {
               "name": "Mode d'arrondi pour les temps de voyage",
-              "hint": "Type d'arrondi appliqué aux temps de voyage. ",
-              "roundToFullTenths": "Dixièmes",
-              "roundToFullQuarters": "Quarts",
-              "roundToFullHalves": "Demi",
-              "roundToFull": "Entiers",
-              "roundToOneDecimal": "Une décimale",
-              "noSpecialRounding": "Pas d'arrondi spécial"
+              "hint": "Type d'arrondi appliqué aux temps de voyage. "
             },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Montre seulement le temps de voyage sur le dernier segment",
@@ -91,12 +85,12 @@
                 "hint": "Type d'arrondi appliqué aux distances converties."
             },
             "roundingMode": {
-                "roundToFullTenths": "Dixièmes",
-                "roundToFullQuarters": "Quarts",
-                "roundToFullHalves": "Demi",
-                "roundToFull": "Entiers",
-                "roundToOneDecimal": "Une décimale",
-                "noSpecialRounding": "Pas d'arrondi spécial"
+                "roundToFullTenths": "Dixièmes (arrondi supérieur)",
+                "roundToFullQuarters": "Quarts (arrondi supérieur)",
+                "roundToFullHalves": "Demi (arrondi supérieur)",
+                "roundToFull": "Entiers (arrondi supérieur)",
+                "roundToOneDecimal": "Une décimale (arrondi standard)",
+                "noSpecialRounding": "Pas d'arrondi supplémentaire"
             },
             "applyRoundingToFoundryLabel": {
                 "name": "Appliquer l'arrondi à l'étiquette Foundry",
