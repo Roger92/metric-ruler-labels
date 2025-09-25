@@ -30,13 +30,7 @@
             },
             "travelTimeRoundingMode": {
                 "name": "Rounding mode for travel times",
-                "hint": "The type of rounding applied to travel times.",
-                "roundToFullTenths": "Tenths",
-                "roundToFullQuarters": "Quarters",
-                "roundToFullHalves": "Halves",
-                "roundToFull": "Full",
-                "roundToOneDecimal": "One decimal",
-                "noSpecialRounding": "No special rounding"
+                "hint": "The type of rounding applied to travel times."
             },
             "travelTimeOnlyTotalTimeLastSegment": {
                 "name": "Only show total travel time on last Segment",
@@ -91,12 +85,12 @@
                 "hint": "The type of rounding applied to converted distances."
             },
             "roundingMode": {
-                "roundToFullTenths": "Tenths",
-                "roundToFullQuarters": "Quarters",
-                "roundToFullHalves": "Halves",
-                "roundToFull": "Full",
-                "roundToOneDecimal": "One decimal",
-                "noSpecialRounding": "No special rounding"
+                "roundToFullTenths": "Tenths (round up)",
+                "roundToFullQuarters": "Quarters (round up)",
+                "roundToFullHalves": "Halves (round up)",
+                "roundToFull": "Full (round up)",
+                "roundToOneDecimal": "One decimal (standard rounding)",
+                "noSpecialRounding": "No additional rounding"
             },
             "applyRoundingToFoundryLabel": {
                 "name": "Apply rounding to Foundry label",

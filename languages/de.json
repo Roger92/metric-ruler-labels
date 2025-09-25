@@ -26,13 +26,7 @@
       },
       "travelTimeRoundingMode": {
         "name": "Rundungsmodus für Reisezeiten",
-        "hint": "Der Art der Rundung, welche für die Reisezeiten durchgeführt wird.",
-        "roundToFullTenths": "Zehntel",
-        "roundToFullQuarters": "Viertel",
-        "roundToFullHalves": "Halbe",
-        "roundToFull": "Volle",
-        "roundToOneDecimal": "Eine Dezimalstelle",
-        "noSpecialRounding": "Kein spezielles Runden"
+        "hint": "Der Art der Rundung, welche für die Reisezeiten durchgeführt wird."
       },
       "travelTimeOnlyTotalTimeLastSegment": {
         "name": "Zeige nur Gesamtzeit an letztem Segment",
@@ -91,12 +85,12 @@
         "hint": "Die Art der Rundung, die auf konvertierte Distanzen angewendet wird."
       },
       "roundingMode": {
-        "roundToFullTenths": "Zehntel",
-        "roundToFullQuarters": "Viertel",
-        "roundToFullHalves": "Halbe",
-        "roundToFull": "Volle",
-        "roundToOneDecimal": "Eine Dezimalstelle",
-        "noSpecialRounding": "Kein spezielles Runden"
+        "roundToFullTenths": "Zehntel (aufrunden)",
+        "roundToFullQuarters": "Viertel (aufrunden)",
+        "roundToFullHalves": "Halbe (aufrunden)",
+        "roundToFull": "Volle (aufrunden)",
+        "roundToOneDecimal": "Eine Dezimalstelle (normales runden)",
+        "noSpecialRounding": "Kein zusätzliches Runden"
       },
       "applyRoundingToFoundryLabel": {
         "name": "Rundung auf Foundry-Label anwenden",
