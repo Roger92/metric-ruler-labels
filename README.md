@@ -1,6 +1,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/Roger92/metric-ruler-labels?label=Issues)](https://github.com/Roger92/metric-ruler-labels/issues)
 [![Version (latest)](https://img.shields.io/github/v/release/Roger92/metric-ruler-labels?label=Release)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
-[![Foundry Version](https://img.shields.io/badge/dynamic/json.svg?url=https://github.com/Roger92/metric-ruler-labels/releases/latest/download/module.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=blueviolet)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
+[![Foundry Version](https://img.shields.io/badge/dynamic/json.svg?url=https://github.com/Roger92/metric-ruler-labels/releases/latest/download/module.json&label=Foundry%20Version&query=$.compatibility.maximum&colorB=blueviolet)](https://github.com/Roger92/metric-ruler-labels/releases/latest)
 ![All Time Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/module.zip?colorB=blue&label=All%20Time%20Downloads)
 ![Latest Release Downloads](https://img.shields.io/github/downloads/Roger92/metric-ruler-labels/latest/module.zip?colorB=blue&label=Downloads@Latest)
 [![Forge Install Base](https://img.shields.io/badge/dynamic/json?label=Forge%20Install%20Base&query=package.installs&suffix=%&url=https://forge-vtt.com/api/bazaar/package/metric-ruler-labels&colorB=brightgreen)](https://forge-vtt.com/)
