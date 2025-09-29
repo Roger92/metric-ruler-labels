@@ -26,8 +26,7 @@ Flickering of V13 ruler labels should be gone now :)
 
 ## V13 - Compatability
 The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
-
-Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9, but it's not officially supported)
+Releases before 4.2.0 are also compatible down to Foundry V9.
 
 ## Table of Contents
 
