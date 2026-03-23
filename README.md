@@ -102,6 +102,7 @@ To install, follow these instructions:
 
 ## Compatibility
 Works with V9 to V14
+Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9, but it's not officially supported)
 
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
@@ -110,7 +111,6 @@ Also thanks to ruipin for the libWrapper and Stäbchenfisch for the DragRuler mo
 
 ## Planned
 Feel free to recommend enhancements.
- - Maybe better support for elevation ruler if my users see a need there :)
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
