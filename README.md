@@ -19,14 +19,13 @@ GM:
 This module will help you to better understand distances. <br>
 It adds additional labels for the metric measurements to your ruler. It is not changing any systems etc. It only applies an additional label to the UI.
 
+## V14 - Compatability
+The latest version is compatible with V14. If you find problems with future subversions of V14, then please let me know.
+
 ## NEW --- NEW --- NEW
 You can now add your [Customizable Measurement Conversions](#customizable-conversions) and [Travel times](#travel-times) if you want :) Have fun!
-Compatability with V13 and localized numbers, that use a comma as decimal separator!!!
+Compatability with V14 and localized numbers, that use a comma as decimal separator!!!
 Flickering of V13 ruler labels should be gone now :)
-
-## V13 - Compatability
-The latest version is compatible with V13. If you find problems with future subversions of V13, then please let me know.
-Releases before 4.2.0 are also compatible down to Foundry V9.
 
 ## Table of Contents
 
@@ -101,7 +100,7 @@ To install, follow these instructions:
 3. Click Install and wait for installation to complete.
 
 ## Compatibility
-Works with V9 to V13
+Works with V9 to V14
 
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
@@ -116,9 +115,12 @@ Feel free to recommend enhancements.
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+
+**v5.0.0**
+- V14 compatible
+
 **v4.2.2**
 - Russian localization (fixed treiling comma)
-
 
 **v4.2.1**
 - Russian localization (thanks to @nPocToI4eJI)

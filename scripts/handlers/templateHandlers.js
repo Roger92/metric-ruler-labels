@@ -73,6 +73,33 @@ function handleV13MeasurementTemplates() {
 }
 
 /**
+ * Processes measurement templates/Regions on the canvas (version 14) and updates their labels by adding metric labels,
+ * custom conversion labels, and hiding the default Foundry label if applicable.
+ * This function iterates through all templates and modifies the text displayed on their ruler property.
+ *
+ * @return {void} This function does not return a value. It performs in-place updates to the measurement templates.
+ */
+function handleV14Regions(measurementLabels) {
+    for (let i = measurementLabels.length - 1; i >= 0; i--) {
+        let preciseText = measurementLabels[i];
+        if (preciseText && preciseText._text && preciseText._text.split("\n").length === 1) {
+            // Optionally round the Foundry label itself before appending other labels
+            const applyRounding = game.settings.get("metric-ruler-labels", "applyRoundingToFoundryLabel");
+            if (applyRounding) {
+                const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
+                const rounded = roundFoundryLabel(preciseText._text, roundingMode, false);
+                if (rounded.converted) {
+                    preciseText._text = rounded.text;
+                }
+            }
+            preciseText._text = addMetricLabels(preciseText._text).text;
+            preciseText._text = addCustomConversionLabels(preciseText._text).text;
+            preciseText._text = hideFoundryLabel(preciseText._text).text;
+        }
+    }
+}
+
+/**
  * Updates measurement templates on the canvas from version 11 to version 12 by modifying ruler text labels.
  * It processes all child templates, ensuring rulers with a single line of text
  * are updated to include metric labels, custom conversion labels, and properly formatted text.
@@ -122,6 +149,7 @@ export {
     handlePreV10MeasurementTemplates,
     handleV10MeasurementTemplates,
     handleV13MeasurementTemplates,
+    handleV14Regions,
     handleV11ToV12MeasurementTemplates,
     handlePreV11TemplatePreview
 };
