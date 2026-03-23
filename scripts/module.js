@@ -1,5 +1,5 @@
 import {
-    handleV13MeasurementTemplates
+    handleV13MeasurementTemplates,handleV14Regions
 } from './handlers/templateHandlers.js';
 import {addMetricLabels} from "./handlers/conversionHandlers.js";
 import {
@@ -82,7 +82,7 @@ Hooks.once('ready', () => {
         // MEASUREMENT TEMPLATES
         //=============================================================================
 
-        if (foundryGeneration >= 13) {
+        if (foundryGeneration === 13) {
             //Handling of MeasureTemplate Drag and Drop (V13)
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
@@ -92,6 +92,12 @@ Hooks.once('ready', () => {
                 }
                 return wrappedResult;
             }, 'WRAPPER');
+        }else if(foundryGeneration >= 14) {
+            Hooks.on("refreshRegion", (region) => {
+                if(region._measurementLabels && region._measurementLabels.children.length > 0) {
+                    handleV14Regions(region._measurementLabels.children);
+                }
+            });
         }
 
     }
