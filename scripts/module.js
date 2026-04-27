@@ -14,15 +14,6 @@ Hooks.on("init", () => {
     }
 });
 
-Hooks.on("refreshObject", (a) => {
-    console.log("Additional-Metric-Ruler | Canvas Draw");
-    console.log(a)
-});
-
-Hooks.on("updateDocument", (a) => {
-    console.log("Additional-Metric-Ruler | Canvas Draw");
-    console.log(a)
-});
 //=============================================================================
 // RULER AND TOKEN-DRAG
 //=============================================================================
@@ -64,17 +55,12 @@ Hooks.on("canvasReady", () => {
 Hooks.once('ready', () => {
     let foundryGeneration = game.release.generation;
 
-    if (!game.modules.get('lib-wrapper')?.active && game.user.isGM) {
-        if (foundryGeneration >= 13) {
-            libWrapperNotFoundDialogV2();
-        } else {
-            libWrapperNotFoundDialog();
-        }
+    if (foundryGeneration === 13 && !game.modules.get('lib-wrapper')?.active && game.user.isGM) {
+        libWrapperNotFoundDialogV2();
     } else {
 
-
         //Check foundry generation
-        if (foundryGeneration < 9 || foundryGeneration > 14) {
+        if (foundryGeneration < 13 || foundryGeneration > 14) {
             showIncompatibilityDialog(foundryGeneration);
         }
 
