@@ -116,6 +116,9 @@ If you find a bug or have any feedback for me just add an issue in the [issuetra
 
 ## Changelog
 
+**v5.0.1**
+- Removed debug messages, fixed incompatibility check and fixed libwrapper dependency check
+
 **v5.0.0**
 - V14 compatible
 
