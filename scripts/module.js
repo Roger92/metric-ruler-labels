@@ -74,7 +74,7 @@ Hooks.once('ready', () => {
 
 
         //Check foundry generation
-        if (foundryGeneration < 9 || foundryGeneration > 13) {
+        if (foundryGeneration < 9 || foundryGeneration > 14) {
             showIncompatibilityDialog(foundryGeneration);
         }
 
