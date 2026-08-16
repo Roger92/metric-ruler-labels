@@ -13,8 +13,8 @@
                 "hint": "When enabled and the Hover Distance module is active, metric conversions will be applied to token hover distance tooltips."
             },
             "measureTemplateSupport": {
-                "name": "Show on Measure Templates",
-                "hint": "When enabled, additional metric units are also shown when using the measure templates (circle, cone, ray, rectangle)."
+                "name": "Show on Measure Templates / Regions",
+                "hint": "When enabled, additional metric units are also shown when using measure templates (circle, cone, ray, rectangle) or scene regions."
             },
             "disableBuiltInConversion": {
                 "name": "Disable Built-In Conversions",

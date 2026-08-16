@@ -13,8 +13,8 @@
         "hint": "Falls aktiviert und das Hover Distance Modul aktiv ist, werden Umwandlungen bei den Hover-Distanz-Tooltips von Tokens angewendet."
       },
       "measureTemplateSupport": {
-        "name": "Anzeige bei Schablonen",
-        "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung der Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) angezeigt."
+        "name": "Anzeige bei Schablonen / Regionen",
+        "hint": "Falls aktiviert, werden zusätzliche metrische Angaben bei Benutzung von Schablonen/Formen (Kegel, Kreis, Rechteck, Strahl) oder Szenenregionen angezeigt."
       },
       "disableBuiltInConversion": {
         "name": "Deaktiviere eingebaute Umwandlung",

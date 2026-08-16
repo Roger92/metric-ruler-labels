@@ -13,8 +13,8 @@
                 "hint": "Si c'est activé et que le module Hover Distance est actif, les conversions métriques seront appliquées aux info-bulles de distance de survol des jetons."
             },
             "measureTemplateSupport": {
-                "name": "Afficher sur les mesures des gabarits",
-                "hint": "Si c'est activé, les unités métriques supplémentaires seront aussi montrées lorsque vous utilisez les gabarits de mesure (cercle, cône, rayon, rectangle)."
+                "name": "Afficher sur les gabarits de mesure / régions",
+                "hint": "Si c'est activé, les unités métriques supplémentaires seront aussi montrées lorsque vous utilisez les gabarits de mesure (cercle, cône, rayon, rectangle) ou les régions de scène."
             },
             "disableBuiltInConversion": {
                 "name": "Désactiver les conversions intégrées",

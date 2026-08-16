@@ -70,9 +70,18 @@ Hooks.once('ready', () => {
         //=============================================================================
 
         let hoverDistanceSupport = game.settings.get("metric-ruler-labels", "hoverDistanceSupport");
-        if (game.modules.get('hover-distance')?.active && hoverDistanceSupport) {
-            Hooks.on("hoverToken", (token, hovered) => {
-                hoverDistanceHandler(token);
+        if (game.modules.get('hover-distance')?.active) {
+            Hooks.on("hoverToken", (token) => {
+                if (hoverDistanceSupport) {
+                    hoverDistanceHandler(token);
+                }
+            });
+            Hooks.on("highlightObjects", () => {
+                if (hoverDistanceSupport) {
+                    canvas.tokens.placeables.forEach(token => {
+                        hoverDistanceHandler(token);
+                    });
+                }
             });
         }
 
@@ -81,11 +90,11 @@ Hooks.once('ready', () => {
         // MEASUREMENT TEMPLATES
         //=============================================================================
 
+        let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
         if (foundryGeneration === 13) {
             //Handling of MeasureTemplate Drag and Drop (V13)
             libWrapper.register("metric-ruler-labels", "foundry.canvas.placeables.MeasuredTemplate.prototype._refreshRulerText", async function (wrapped, ...args) {
                 let wrappedResult = await wrapped(...args);
-                let measureTemplateSupport = game.settings.get("metric-ruler-labels", "measureTemplateSupport");
                 if (measureTemplateSupport) {
                     handleV13MeasurementTemplates();
                 }
@@ -93,7 +102,7 @@ Hooks.once('ready', () => {
             }, 'WRAPPER');
         } else if (foundryGeneration >= 14) {
             Hooks.on("refreshRegion", (region) => {
-                if (region._measurementLabels && region._measurementLabels.children.length > 0) {
+                if (measureTemplateSupport && region._measurementLabels && region._measurementLabels.children.length > 0) {
                     handleV14Regions(region._measurementLabels.children);
                 }
             });
