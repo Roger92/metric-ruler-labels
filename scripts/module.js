@@ -1,12 +1,12 @@
 import {
-    handleV13MeasurementTemplates,handleV14Regions
+    handleV13MeasurementTemplates, handleV14Regions
 } from './handlers/templateHandlers.js';
-import {addMetricLabels} from "./handlers/conversionHandlers.js";
+import { addMetricLabels } from "./handlers/conversionHandlers.js";
 import {
     handleFoundryV13Rulers
 } from "./handlers/rulerHandlers.js";
-import {hoverDistanceHandler} from "./handlers/hoverDistanceHandler.js";
-import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
+import { hoverDistanceHandler } from "./handlers/hoverDistanceHandler.js";
+import { libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog } from "./Dialogs.js";
 
 Hooks.on("init", () => {
     registerSettings();
@@ -69,10 +69,12 @@ Hooks.once('ready', () => {
         // HOVER DISTANCE
         //=============================================================================
 
-        if(game.modules.get('hover-distance')?.active)
-        Hooks.on("hoverToken", (token, hovered) => {
-            hoverDistanceHandler(token);
-        })
+        let hoverDistanceSupport = game.settings.get("metric-ruler-labels", "hoverDistanceSupport");
+        if (game.modules.get('hover-distance')?.active && hoverDistanceSupport) {
+            Hooks.on("hoverToken", (token, hovered) => {
+                hoverDistanceHandler(token);
+            });
+        }
 
 
         //=============================================================================
@@ -89,9 +91,9 @@ Hooks.once('ready', () => {
                 }
                 return wrappedResult;
             }, 'WRAPPER');
-        }else if(foundryGeneration >= 14) {
+        } else if (foundryGeneration >= 14) {
             Hooks.on("refreshRegion", (region) => {
-                if(region._measurementLabels && region._measurementLabels.children.length > 0) {
+                if (region._measurementLabels && region._measurementLabels.children.length > 0) {
                     handleV14Regions(region._measurementLabels.children);
                 }
             });
@@ -115,6 +117,15 @@ function registerSettings() {
         config: true,
         type: Boolean,
         default: true,
+    });
+    game.settings.register("metric-ruler-labels", "hoverDistanceSupport", {
+        name: "metric-ruler-labels.settings.hoverDistanceSupport.name",
+        hint: "metric-ruler-labels.settings.hoverDistanceSupport.hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true,
+        requiresReload: true,
     });
     game.settings.register("metric-ruler-labels", "hideFoundryMeasurement", {
         name: "metric-ruler-labels.settings.hideFoundryMeasurement.name",

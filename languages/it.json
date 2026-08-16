@@ -8,6 +8,10 @@
                 "dragRuler":"Drag Ruler (by Staebchenfish)",
                 "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
             },
+            "hoverDistanceSupport": {
+                "name": "Mostra in Hover Distance",
+                "hint": "Se abilitato e il modulo Hover Distance è attivo, le conversioni metriche verranno applicate ai tooltip della distanza al passaggio del mouse sui token."
+            },
             "measureTemplateSupport": {
                 "name": "Mostra in Measure Templates",
                 "hint": "Se abilitato, vengono visualizzate anche unità metriche aggiuntive quando si utilizzano i modelli di misura (cerchio, cono, raggio, rettangolo)."

@@ -11,6 +11,9 @@ import {
  * @param {Object} token - The token object.
  */
 export function hoverDistanceHandler(token) {
+    const hoverDistanceSupport = game.settings.get("metric-ruler-labels", "hoverDistanceSupport");
+    if (!hoverDistanceSupport) return;
+
     if (token.distanceTooltip?.children?.[0]?._text) {
         let text = token.distanceTooltip.children[0]._text;
 
