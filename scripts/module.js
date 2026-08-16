@@ -69,19 +69,14 @@ Hooks.once('ready', () => {
         // HOVER DISTANCE
         //=============================================================================
 
-        let hoverDistanceSupport = game.settings.get("metric-ruler-labels", "hoverDistanceSupport");
         if (game.modules.get('hover-distance')?.active) {
             Hooks.on("hoverToken", (token) => {
-                if (hoverDistanceSupport) {
-                    hoverDistanceHandler(token);
-                }
+                hoverDistanceHandler(token);
             });
             Hooks.on("highlightObjects", () => {
-                if (hoverDistanceSupport) {
-                    canvas.tokens.placeables.forEach(token => {
-                        hoverDistanceHandler(token);
-                    });
-                }
+                canvas.tokens.placeables.forEach(token => {
+                    hoverDistanceHandler(token);
+                });
             });
         }
 
