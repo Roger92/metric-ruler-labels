@@ -9,8 +9,8 @@
                 "pf2eTokenDragRuler": "PF2e Token Drag Ruler (par 7H3LaughingMan)"
             },
             "hoverDistanceSupport": {
-                "name": "Afficher sur Hover Distance",
-                "hint": "Si c'est activé et que le module Hover Distance est actif, les conversions métriques seront appliquées aux info-bulles de distance de survol des jetons."
+                "name": "Afficher sur Hover Distance (par TheRipper93)",
+                "hint": "Si c'est activé et que le module Hover Distance (par TheRipper93) est actif, les conversions métriques seront appliquées aux info-bulles de distance de survol des jetons."
             },
             "measureTemplateSupport": {
                 "name": "Afficher sur les gabarits de mesure / régions",

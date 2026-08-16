@@ -9,8 +9,8 @@
         "pf2eTokenDragRuler": "'PF2e Token Drag Ruler' (от 7H3LaughingMan)"
       },
       "hoverDistanceSupport": {
-        "name": "Показывать в Hover Distance",
-        "hint": "Если включено и модуль Hover Distance активен, метрические преобразования будут применяться к подсказкам расстояния при наведении на токен."
+        "name": "Показывать в Hover Distance (от TheRipper93)",
+        "hint": "Если включено и модуль Hover Distance (от TheRipper93) активен, метрические преобразования будут применяться к подсказкам расстояния при наведении на токен."
       },
       "measureTemplateSupport": {
         "name": "Показывать в Шаблонах измерения / Регионах",

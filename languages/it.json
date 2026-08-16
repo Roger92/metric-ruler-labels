@@ -9,8 +9,8 @@
                 "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
             },
             "hoverDistanceSupport": {
-                "name": "Mostra in Hover Distance",
-                "hint": "Se abilitato e il modulo Hover Distance è attivo, le conversioni metriche verranno applicate ai tooltip della distanza al passaggio del mouse sui token."
+                "name": "Mostra in Hover Distance (di TheRipper93)",
+                "hint": "Se abilitato e il modulo Hover Distance (di TheRipper93) è attivo, le conversioni metriche verranno applicate ai tooltip della distanza al passaggio del mouse sui token."
             },
             "measureTemplateSupport": {
                 "name": "Mostra in Measure Templates / Regioni",
