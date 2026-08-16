@@ -5,6 +5,7 @@ import {addMetricLabels} from "./handlers/conversionHandlers.js";
 import {
     handleFoundryV13Rulers
 } from "./handlers/rulerHandlers.js";
+import {hoverDistanceHandler} from "./handlers/hoverDistanceHandler.js";
 import {libWrapperNotFoundDialog, libWrapperNotFoundDialogV2, showIncompatibilityDialog} from "./Dialogs.js";
 
 Hooks.on("init", () => {
@@ -63,6 +64,16 @@ Hooks.once('ready', () => {
         if (foundryGeneration < 13 || foundryGeneration > 14) {
             showIncompatibilityDialog(foundryGeneration);
         }
+
+        //=============================================================================
+        // HOVER DISTANCE
+        //=============================================================================
+
+        if(game.modules.get('hover-distance')?.active)
+        Hooks.on("hoverToken", (token, hovered) => {
+            hoverDistanceHandler(token);
+        })
+
 
         //=============================================================================
         // MEASUREMENT TEMPLATES

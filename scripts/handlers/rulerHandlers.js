@@ -20,7 +20,6 @@ import {
  * representing the rulers in the Foundry VTT interface.
  */
 function handleFoundryV13Rulers(rulers){
-    let numberOfActiveConversions = 0;
     for (let i = 0; i < rulers.length; i++) {
         let rulerSegments = rulers[i].childNodes.length > 0 ? rulers[i].childNodes : rulers[i];
         for (let j = 0; j < rulerSegments.length; j++) {
@@ -49,16 +48,12 @@ function handleFoundryV13Rulers(rulers){
                                 measurement.total.innerHTML = rounded.text;
                             }
                         }
-                        numberOfActiveConversions = 0;
                         //METRIC
                         conversion = addMetricLabels(measurement.total.innerHTML,true)
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta  && conversion.converted){
                             deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
                             measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
-                        }
-                        if(conversion.converted){
-                            numberOfActiveConversions++;
                         }
                         //CUSTOM CONVERSION
                         conversion = addCustomConversionLabels(measurement.total.innerHTML,true)
@@ -67,18 +62,12 @@ function handleFoundryV13Rulers(rulers){
                             deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true);
                             measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
                         }
-                        if(conversion.converted){
-                            numberOfActiveConversions++;
-                        }
                         //TRAVEL TIME
                         conversion = addTravelTimeV13(measurement.total.innerHTML,true,false)
                         measurement.total.innerHTML =  conversion.converted ? conversion.text : measurement.total.innerHTML;
                         if(measurement.delta && conversion.converted){
                             deltaConversion = convertDeltaStrings(measurement.delta.innerHTML,conversion.usedConversionFactor, true, true);
                             measurement.delta.innerHTML = deltaConversion.converted ? deltaConversion.text : measurement.delta.innerHTML;
-                        }
-                        if(conversion.converted){
-                            numberOfActiveConversions++;
                         }
                         //HIDE FOUNDRY LABEL
                         conversion = hideFoundryLabel(measurement.total.innerHTML,true);
