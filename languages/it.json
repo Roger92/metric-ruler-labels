@@ -1,13 +1,6 @@
 {
     "metric-ruler-labels": {
         "settings": {
-            "dragRulerSupport": {
-                "name": "Supporto per i moduli DragRuler",
-                "hint": "Questo attiva il supporto per alcuni moduli Drag Ruler. Ad esempio DragRuler (di Stäbchenfisch) o PF2e Token Drag Ruler (di 7H3LaughingMan). Moduli come Elevation Ruler (di caewok) dovrebbero funzionare subito. (Le modifiche si applicano dopo il riavvio) ",
-                "disabled": "Disattivato",
-                "dragRuler":"Drag Ruler (by Staebchenfish)",
-                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (by 7H3LaughingMan)"
-            },
             "hoverDistanceSupport": {
                 "name": "Mostra in Hover Distance (di TheRipper93)",
                 "hint": "Se abilitato e il modulo Hover Distance (di TheRipper93) è attivo, le conversioni metriche verranno applicate ai tooltip della distanza al passaggio del mouse sui token."

@@ -1,13 +1,6 @@
 {
   "metric-ruler-labels": {
     "settings": {
-      "dragRulerSupport": {
-        "name": "Поддержка модулей 'Drag Ruler'",
-        "hint": "Включает поддержку некоторых модулей 'Drag Ruler'. Например, 'Drag Ruler' (от Stäbchenfisch) или 'PF2e Token Drag Ruler' (от 7H3LaughingMan). Такие модули, как 'Elevation Ruler' (от caewok) должны работать и без этой функции. Изменения вступают в силу после перезагрузки.",
-        "disabled": "Выключено",
-        "dragRuler":"'Drag Ruler' (от Staebchenfish)",
-        "pf2eTokenDragRuler": "'PF2e Token Drag Ruler' (от 7H3LaughingMan)"
-      },
       "hoverDistanceSupport": {
         "name": "Показывать в Hover Distance (от TheRipper93)",
         "hint": "Если включено и модуль Hover Distance (от TheRipper93) активен, метрические преобразования будут применяться к подсказкам расстояния при наведении на токен."
