@@ -1,16 +1,13 @@
 {
     "metric-ruler-labels": {
         "settings": {
-            "dragRulerSupport": {
-                "name": "Prise en charge des modules DragRuler",
-                "hint": "Ceci active la prise en charge de certain modules Drag Ruler. ex. DragRuler (par Stäbchenfisch) ou PF2e Token Drag Ruler (par 7H3LaughingMan). Les modules comme Elevation Ruler (par caewok) devraient également être pris en charge dès qu'ils seront disponibles. Les changements prennent effet après rechargement.",
-                "disabled": "Désactive",
-                "dragRuler":"Drag Ruler (par Staebchenfish)",
-                "pf2eTokenDragRuler": "PF2e Token Drag Ruler (par 7H3LaughingMan)"
+            "hoverDistanceSupport": {
+                "name": "Afficher sur Hover Distance (par TheRipper93)",
+                "hint": "Si c'est activé et que le module Hover Distance (par TheRipper93) est actif, les conversions métriques seront appliquées aux info-bulles de distance de survol des jetons."
             },
             "measureTemplateSupport": {
-                "name": "Afficher sur les mesures des gabarits",
-                "hint": "Si c'est activé, les unités métriques supplémentaires seront aussi montrées lorsque vous utilisez les gabarits de mesure (cercle, cône, rayon, rectangle)."
+                "name": "Afficher sur les gabarits de mesure / régions",
+                "hint": "Si c'est activé, les unités métriques supplémentaires seront aussi montrées lorsque vous utilisez les gabarits de mesure (cercle, cône, rayon, rectangle) ou les régions de scène."
             },
             "disableBuiltInConversion": {
                 "name": "Désactiver les conversions intégrées",

@@ -12,16 +12,16 @@ import {
  * The converted values are appended as additional lines to the original text.
  *
  * @param {string} text - The text that contains the distances (e.g. the ruler label)
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @returns {{text: string, usedConversionFactor: number, converted: boolean}} Object containing:
  *   - text: The modified text with metric conversions added
  *   - usedConversionFactor: The conversion factor that was applied (0.3 for feet->meters, 1.61 for miles->km, or 1 if no conversion)
  *   - converted: Whether any conversion was performed
  */
-function addMetricLabels(text, useBreakInsteadOfNewline = false) {
+function addMetricLabels(text, useHtmlBreak = false) {
     const dontUseMetricConversions = game.settings.get("metric-ruler-labels", "disableBuiltInConversion");
     const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    let separator = useHtmlBreak ? "<br>" : "\n";
     let usedConversionFactor = 1;
     const textLines = text ? text.split(separator) : "";
     let converted = false;
@@ -54,13 +54,13 @@ function addMetricLabels(text, useBreakInsteadOfNewline = false) {
  * as additional lines to the original text.
  *
  * @param {string} text - The text containing the distances (e.g. the ruler label)
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @returns {{text: string, usedConversionFactor: number, converted: boolean}} Object containing:
  *   - text: The modified text with custom conversions added
  *   - usedConversionFactor: The custom conversion factor that was applied, or 1 if no conversion
  *   - converted: Whether any conversion was performed
  */
-function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
+function addCustomConversionLabels(text, useHtmlBreak = false) {
     const conversionFactorSmall = game.settings.get("metric-ruler-labels", "customConversionFactorSmall");
     const conversionFactorBig = game.settings.get("metric-ruler-labels", "customConversionFactorBig");
     const customConversionLabelSmall = game.settings.get("metric-ruler-labels", "customConversionLabelSmall");
@@ -69,7 +69,7 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
     const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
     let originalLabelsSmall = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsSmall");
     let originalLabelsBig = game.settings.get("metric-ruler-labels", "customConversionOriginalLabelsBig");
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    let separator = useHtmlBreak ? "<br>" : "\n";
     let usedConversionFactor = 1;
     let converted = false;
 
@@ -119,12 +119,12 @@ function addCustomConversionLabels(text, useBreakInsteadOfNewline = false) {
  *
  * @param {string} text - The input text containing a distance measurement
  * @param {boolean} [hasSegments=false] - Whether the measurement has multiple segments
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The modified text with travel times added
  *   - converted: Whether travel times were added
  */
-function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = false) {
+function addTravelTime(text, hasSegments = false, useHtmlBreak = false) {
     const conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
     const conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
     const conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
@@ -132,7 +132,7 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
     const timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
     const travelTimeOnlyTotalTimeLastSegment = game.settings.get("metric-ruler-labels", "travelTimeOnlyTotalTimeLastSegment");
     const travelTimeRoundingMode = game.settings.get("metric-ruler-labels", "travelTimeRoundingMode");
-    const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    const separator = useHtmlBreak ? "<br>" : "\n";
 
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
     let converted = false;
@@ -175,20 +175,20 @@ function addTravelTime(text, hasSegments = false, useBreakInsteadOfNewline = fal
  * configured speed factors and time units.
  *
  * @param {string} text - The text containing the distance measurement
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @param {boolean} [isDeltaString=false] - Whether this is a delta measurement (e.g. elevation change)
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The converted travel time text
  *   - converted: Whether the conversion was successful
  */
-function convertToTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
+function convertToTravelTimeV13(text, useHtmlBreak = false, isDeltaString = false) {
     const conversionFactorSlow = game.settings.get("metric-ruler-labels", "travelTimePerUnitSlow");
     const conversionFactorNormal = game.settings.get("metric-ruler-labels", "travelTimePerUnitNormal");
     const conversionFactorFast = game.settings.get("metric-ruler-labels", "travelTimePerUnitFast");
     const travelTimeActivated = game.settings.get("metric-ruler-labels", "enableTravelTime");
     const timeUnit = game.settings.get("metric-ruler-labels", "travelTime-TimeUnit");
     const travelTimeRoundingMode = game.settings.get("metric-ruler-labels", "travelTimeRoundingMode");
-    const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    const separator = useHtmlBreak ? "<br>" : "\n";
 
     let travelTimeLabel = game.settings.get("metric-ruler-labels", "travelTimeDistanceLabel");
     let converted = false;
@@ -223,15 +223,15 @@ function convertToTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaS
  * The function adds the converted travel time measurements after the original text, separated by the specified separator.
  *
  * @param {string} text - The text containing the distance measurement
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @param {boolean} [isDeltaString=false] - Whether this is a delta measurement
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The text with travel times appended
  *   - converted: Whether the conversion was successful
  *  */
-function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString = false) {
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
-    let conversion = convertToTravelTimeV13(text, useBreakInsteadOfNewline, isDeltaString);
+function addTravelTimeV13(text, useHtmlBreak = false, isDeltaString = false) {
+    let separator = useHtmlBreak ? "<br>" : "\n";
+    let conversion = convertToTravelTimeV13(text, useHtmlBreak, isDeltaString);
     if (conversion.converted) {
         text = appendLine(text, separator, conversion.text);
     }
@@ -247,20 +247,20 @@ function addTravelTimeV13(text, useBreakInsteadOfNewline = false, isDeltaString 
  *
  * @param {string} text - The text containing the delta measurement
  * @param {number} conversionFactor - Factor to multiply the delta value by
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @param {boolean} [useTravelTimeConversion=false] - Convert to travel times instead of using conversionFactor
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The text with travel times appended
  *   - converted: Whether the conversion was successful
  */
-function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = false, useTravelTimeConversion = false) {
+function convertDeltaStrings(text, conversionFactor, useHtmlBreak = false, useTravelTimeConversion = false) {
     const roundingMode = game.settings.get("metric-ruler-labels", "distanceRoundingMode");
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    let separator = useHtmlBreak ? "<br>" : "\n";
     let textSplitted = text.split(separator);
     let conversion = {converted: false};
     if (textSplitted.length >= 1) {
         if (useTravelTimeConversion) {
-            conversion = convertToTravelTimeV13(textSplitted[0], useBreakInsteadOfNewline, true);
+            conversion = convertToTravelTimeV13(textSplitted[0], useHtmlBreak, true);
         } else {
             conversion.text = convertDistanceString(textSplitted[0], [""], "", conversionFactor, roundingMode);
             if (conversion.text !== textSplitted[0] || (conversionFactor === 1 && conversion.text === textSplitted[0])) {
@@ -284,15 +284,15 @@ function convertDeltaStrings(text, conversionFactor, useBreakInsteadOfNewline = 
  * IMPORTANT: Must be called AFTER all other label conversions
  *
  * @param {string} text - The input text containing measurement labels
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The text with first line potentially removed
  *   - converted: Whether any lines were removed
  */
-function hideFoundryLabel(text, useBreakInsteadOfNewline = false) {
+function hideFoundryLabel(text, useHtmlBreak = false) {
     let hideFoundry = game.settings.get("metric-ruler-labels", "hideFoundryMeasurement");
     let elevationRulerActive = game.modules.get('elevationruler')?.active;
-    let separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+    let separator = useHtmlBreak ? "<br>" : "\n";
     let converted = false;
     if (hideFoundry) {
         let labelLines = text.split(separator);
@@ -570,13 +570,13 @@ function appendLine(text, separator, line) {
  *   - "roundToFullHalves": Round up to next half (e.g. 1.26 -> 1.5)
  *   - "roundToFull": Round up to next whole number (e.g. 1.2 -> 2)
  *   - "roundToOneDecimal": Round to one decimal place
- * @param {boolean} [useBreakInsteadOfNewline=false] - Use <br> instead of \n for line breaks
+ * @param {boolean} [useHtmlBreak=false] - If true, separates lines using `<br>` for HTML/DOM rendering; otherwise uses `\n` for canvas/plain-text rendering.
  * @returns {{text: string, converted: boolean}} Object containing:
  *   - text: The text with rounded values
  *   - converted: Whether any values were rounded
  */
-function roundFoundryLabel(text, roundingMode = "noSpecialRounding", useBreakInsteadOfNewline = false) {
-    const separator = useBreakInsteadOfNewline ? "<br>" : "\n";
+function roundFoundryLabel(text, roundingMode = "noSpecialRounding", useHtmlBreak = false) {
+    const separator = useHtmlBreak ? "<br>" : "\n";
     const parts = (text ?? "").split(separator);
     if (parts.length === 0) return {text, converted: false};
 

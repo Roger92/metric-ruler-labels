@@ -35,8 +35,9 @@ Flickering of V13 ruler labels should be gone now :)
   * [Works with FoundryVTT's MeasureTemplates](#works-with-foundryvtts-measuretemplates)
   * [Customizable Conversions](#customizable-conversions)
   * [Travel times](#travel-times)
+  * [Rounding Modes](#rounding-modes)
   * [Support for other packages](#support-for-other-packages)
-    +  [DragRuler](#dragruler)
+    +  [Hover Distance](#hover-distance)
   * [Installation](#installation)
   * [Compatibility](#compatibility)
   * [Dependencies](#dependencies)
@@ -44,36 +45,38 @@ Flickering of V13 ruler labels should be gone now :)
   * [Feedback](#feedback)
   * [Changelog](#changelog)
 
-## The following units are supported
+## The following units are supported with the built-in conversion
 
 - ft, ft. and feet will get converted to meters (5 ft -> 1,5 m)
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
 
 ## Example feet to meters
-![Ruler](https://user-images.githubusercontent.com/11605051/133685368-75476211-907a-43fb-8aa9-400e7aa9171c.gif)
+<img width="800" height="481" alt="Module-Ruler-Drag-Feet-Meter-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/cbfc8db3-034b-4a32-9295-74f5b7793216" />
 
 ## Example miles to kilometers 
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
+<img width="800" height="450" alt="Module-Ruler-Miles-kilometer-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/c7d50b34-328a-431e-baf3-25a211230523" />
 
 ## Works with FoundryVTT's MeasureTemplates
-![measureTemplates](https://user-images.githubusercontent.com/11605051/133858694-eea1b96e-3524-4725-b889-37dec98e2a74.gif)
+<img width="800" height="429" alt="Module-Ruler-Templates-Feet-Meter-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/8c51b181-9ae8-40e1-8df1-9aeff67dc3a0" />
+
 
 ## Customizable Conversions
-You can now add your own custom conversion with custom labels, etc. Just go to the settings and add all the information for your own conversion. 
+You can also add your own custom conversion with custom labels, etc. Just go to the settings and add all the information for your own conversion. 
 The module has the concept of a small and a big measurement unit. For example, feet and miles. Or meters and kilometers. That way you can support normal maps, as well
 as bigger travelmaps. Fill in the original labels so that the module can find the measurements that it should convert with your custom factor. That way you will receive your own custom measurement with a label of your choice.
 
 Your players then can decide if they want to see the built-in metric conversion for feet and miles or your custom one, or just BOTH :). If you want to get rid of the original foundry measurements, then there is an option too. I hope this helps all the people that have some different szenarios than imperial to metric. <br>
 
-![image](https://user-images.githubusercontent.com/11605051/181906692-b051eb17-a56d-40fa-b476-a30fb0db4e77.png) <br>
+<img width="1791" height="931" alt="Module-Custom-Conversions" src="https://github.com/user-attachments/assets/e79ca70f-68ea-4e04-a201-8b5b175c2483" /><br><br>
+### Foundry + Built-In + Custom Conversions <br>
+<img width="800" height="438" alt="Module-Ruler-All-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/3279d21c-3aec-459a-b0fb-30cc8185f1a2" /><br><br>
+### Built-In + Custom Conversions <br>
+<img width="800" height="435" alt="Module-Ruler-WithoutFoundry-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/76f3ab20-e345-4551-b6be-30bdaa9fbcf0" /><br><br>
+### Only Built-In Conversions <br>
+<img width="800" height="448" alt="Module-Ruler-OnlyBuiltIn-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/d5c8ce03-900c-4774-a7b4-089234d633c7" /><br><br>
+### Only Custom Conversions <br>
+<img width="800" height="438" alt="Module-Ruler-OnlyCustom-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/477c2ee6-5b6e-46fd-8365-a53a54119d08" /><br>
 
-![ThreeMeasurements](https://user-images.githubusercontent.com/11605051/166330492-28456d83-b469-489f-a2e4-e712a1bb1eeb.gif)<br>
-
-![TwoMeasurements](https://user-images.githubusercontent.com/11605051/166330502-27785408-efa2-4993-817c-1440f4cc61ec.gif)<br>
-
-![OneMeasurements](https://user-images.githubusercontent.com/11605051/166330507-911d8062-a191-491e-879d-e36fe5665cfd.gif)<br>
-
-![BigMeasureunit](https://user-images.githubusercontent.com/11605051/166330513-4dcf33fd-3672-4c7c-aa20-3ff9d8479647.gif)<br>
 
 ## Travel times
 You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
@@ -81,15 +84,37 @@ and then the distances for that measuring unit that your group would travel at a
 
 To save some space, you can also toggle on the option to only show the total travel time on the last segment of a ruler, instead of both the total and the travel time to this segment from the previous one.
 
-![image](https://user-images.githubusercontent.com/11605051/201475836-7053e1f9-991e-4727-b0e0-f308c194e757.png)
-![image](https://user-images.githubusercontent.com/11605051/200674864-8cab8a31-731b-47e0-9755-c9ca022793a9.png)
+<img width="689" height="732" alt="Module-Travel-Time-Settings" src="https://github.com/user-attachments/assets/e74b2ab4-8d8e-4cc9-ad32-d6f4daa1247f" /><br>
+
+<img width="800" height="473" alt="Module-Ruler-Travel-Times-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/ccf5eca4-4888-41ce-897c-5715efe2764e" />
+
+## Rounding Modes
+You can configure rounding behavior in the module settings for **converted distances** and **travel times**. Optionally, you can also apply the rounding mode to Foundry's original distance labels.
+
+The following rounding modes are available:
+
+| Rounding Mode | Description | Examples |
+| :--- | :--- | :--- |
+| **No additional rounding** | Keeps the calculated conversion without extra step rounding. | `1.23` &rarr; `1.23` |
+| **Tenths (round up)** | Rounds up to the nearest multiple of `0.1`. | `1.21` &rarr; `1.3`<br>`1.20` &rarr; `1.2`<br>`0.04` &rarr; `0.1` |
+| **Quarters (round up)** | Rounds up to the nearest multiple of `0.25`. | `1.05` &rarr; `1.25`<br>`1.25` &rarr; `1.25`<br>`1.26` &rarr; `1.50`<br>`1.60` &rarr; `1.75` |
+| **Halves (round up)** | Rounds up to the nearest multiple of `0.5`. | `1.01` &rarr; `1.5`<br>`1.50` &rarr; `1.5`<br>`1.51` &rarr; `2.0` |
+| **Full (round up)** | Rounds up to the nearest whole integer (`1.0`). | `1.01` &rarr; `2`<br>`1.80` &rarr; `2`<br>`2.00` &rarr; `2` |
+| **One decimal (standard rounding)** | Standard mathematical rounding to one decimal place. | `1.24` &rarr; `1.2`<br>`1.25` &rarr; `1.3`<br>`1.26` &rarr; `1.3` |
+
+### Related Settings
+
+- **Rounding mode for distances**: Controls how converted metric / custom distances are rounded (*default: No additional rounding*).
+- **Rounding mode for travel times**: Controls how travel times for slow, normal, and fast speeds are rounded (*default: Quarters (round up)*).
+- **Apply rounding to Foundry label**: When enabled, applies the selected distance rounding mode directly to Foundry's original distance label on the ruler.
 
 ## Support for other packages
-### DragRuler
-This module supports the [DragRuler](https://foundryvtt.com/packages/drag-ruler) module from Stäbchenfisch as well as the drag measurement from the PF2E system, and modules that built up on this.
-It should work with modules like [EasyRegions](https://foundryvtt.com/packages/easy-regions) or [PF2e Drag Measurement Action Icon](https://foundryvtt.com/packages/pf2e-drag-measurement-action-icon) You can enable/disable the labels in the settings. 
-![image](https://github.com/user-attachments/assets/79304046-6edd-4e05-ab28-0d3a9e6c3de0)
-![DragRuler](https://user-images.githubusercontent.com/11605051/133684447-e5f09288-7495-4987-a26e-f5300c811a72.gif)
+### Hover Distance
+This module supports the [HoverDistance](https://wiki.theripper93.com/premium/hover-distance) module from TheRipper93. 
+You can enable/disable the labels in the settings. 
+
+<img width="800" height="435" alt="Module-Hover-Distance-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/aa52ea1c-1797-4f20-8991-e65a2e082e6e" />
+
 
 
 ## Installation
@@ -101,20 +126,30 @@ To install, follow these instructions:
 
 ## Compatibility
 Works with V9 to V14
+Please note that Release 1.1.0 and above are not compatible with foundry versions below V9 :)(They might work with earlier versions than V9, but it's not officially supported)
+
+1.1.0 - 4.1.7 (V9 - V13) 
+
+4.2.0 - 4.2.2 (V13) 
+
+5.0.0 - current (V13 + V14) 
 
 ## Dependencies
 - libWrapper from ruipin https://foundryvtt.com/packages/lib-wrapper/
 
-Also thanks to ruipin for the libWrapper and Stäbchenfisch for the DragRuler module :)
+Also thanks to ruipin for the libWrapper and TheRipper93 for the Hover Distance module :)
 
 ## Planned
 Feel free to recommend enhancements.
- - Maybe better support for elevation ruler if my users see a need there :)
 
 ## Feedback
 If you find a bug or have any feedback for me just add an issue in the [issuetracker](https://github.com/Roger92/metric-ruler-labels/issues). Thx alot and i hope this module helps you in your game :)
 
 ## Changelog
+**v5.1.0**
+- Added support for TheRipper93's Hover Distance Module
+- Removed Drag-Ruler settings, as measurements on drags are now part of base foundry
+- Updated some labels in the settings.
 
 **v5.0.1**
 - Removed debug messages, fixed incompatibility check and fixed libwrapper dependency check
