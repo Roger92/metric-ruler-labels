@@ -51,13 +51,13 @@ Flickering of V13 ruler labels should be gone now :)
 - mi, mi., and miles will be converted to kilometers (1 mile -> 1,61 km)
 
 ## Example feet to meters
-![Ruler](https://user-images.githubusercontent.com/11605051/133685368-75476211-907a-43fb-8aa9-400e7aa9171c.gif)
+<img width="800" height="481" alt="Module-Ruler-Drag-Feet-Meter-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/cbfc8db3-034b-4a32-9295-74f5b7793216" />
 
 ## Example miles to kilometers 
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/11605051/133089023-0cf26ee0-e310-491e-ba12-80990d1e3598.gif)
+<img width="800" height="450" alt="Module-Ruler-Miles-kilometer-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/c7d50b34-328a-431e-baf3-25a211230523" />
 
 ## Works with FoundryVTT's MeasureTemplates
-![measureTemplates](https://user-images.githubusercontent.com/11605051/133858694-eea1b96e-3524-4725-b889-37dec98e2a74.gif)
+<img width="800" height="429" alt="Module-Ruler-Templates-Feet-Meter-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/8c51b181-9ae8-40e1-8df1-9aeff67dc3a0" />
 
 
 ## Customizable Conversions
@@ -67,15 +67,16 @@ as bigger travelmaps. Fill in the original labels so that the module can find th
 
 Your players then can decide if they want to see the built-in metric conversion for feet and miles or your custom one, or just BOTH :). If you want to get rid of the original foundry measurements, then there is an option too. I hope this helps all the people that have some different szenarios than imperial to metric. <br>
 
-![image](https://user-images.githubusercontent.com/11605051/181906692-b051eb17-a56d-40fa-b476-a30fb0db4e77.png) <br>
+<img width="1791" height="931" alt="Module-Custom-Conversions" src="https://github.com/user-attachments/assets/e79ca70f-68ea-4e04-a201-8b5b175c2483" /><br><br>
+### Foundry + Built-In + Custom Conversions <br>
+<img width="800" height="438" alt="Module-Ruler-All-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/3279d21c-3aec-459a-b0fb-30cc8185f1a2" /><br><br>
+### Built-In + Custom Conversions <br>
+<img width="800" height="435" alt="Module-Ruler-WithoutFoundry-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/76f3ab20-e345-4551-b6be-30bdaa9fbcf0" /><br><br>
+### Only Built-In Conversions <br>
+<img width="800" height="448" alt="Module-Ruler-OnlyBuiltIn-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/d5c8ce03-900c-4774-a7b4-089234d633c7" /><br><br>
+### Only Custom Conversions <br>
+<img width="800" height="438" alt="Module-Ruler-OnlyCustom-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/477c2ee6-5b6e-46fd-8365-a53a54119d08" /><br>
 
-![ThreeMeasurements](https://user-images.githubusercontent.com/11605051/166330492-28456d83-b469-489f-a2e4-e712a1bb1eeb.gif)<br>
-
-![TwoMeasurements](https://user-images.githubusercontent.com/11605051/166330502-27785408-efa2-4993-817c-1440f4cc61ec.gif)<br>
-
-![OneMeasurements](https://user-images.githubusercontent.com/11605051/166330507-911d8062-a191-491e-879d-e36fe5665cfd.gif)<br>
-
-![BigMeasureunit](https://user-images.githubusercontent.com/11605051/166330513-4dcf33fd-3672-4c7c-aa20-3ff9d8479647.gif)<br>
 
 ## Travel times
 You can now add travel times to the ruler. Just go to the settings and add all the information for your own conversion. You will need to define the label that the module should look for (e.g. miles) 
@@ -83,8 +84,9 @@ and then the distances for that measuring unit that your group would travel at a
 
 To save some space, you can also toggle on the option to only show the total travel time on the last segment of a ruler, instead of both the total and the travel time to this segment from the previous one.
 
-![image](https://user-images.githubusercontent.com/11605051/201475836-7053e1f9-991e-4727-b0e0-f308c194e757.png)
-![image](https://user-images.githubusercontent.com/11605051/200674864-8cab8a31-731b-47e0-9755-c9ca022793a9.png)
+<img width="689" height="732" alt="Module-Travel-Time-Settings" src="https://github.com/user-attachments/assets/e74b2ab4-8d8e-4cc9-ad32-d6f4daa1247f" /><br>
+
+<img width="800" height="473" alt="Module-Ruler-Travel-Times-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/ccf5eca4-4888-41ce-897c-5715efe2764e" />
 
 ## Rounding Modes
 You can configure rounding behavior in the module settings for **converted distances** and **travel times**. Optionally, you can also apply the rounding mode to Foundry's original distance labels.
@@ -111,7 +113,7 @@ The following rounding modes are available:
 This module supports the [HoverDistance](https://wiki.theripper93.com/premium/hover-distance) module from TheRipper93. 
 You can enable/disable the labels in the settings. 
 
-![HoverDistanceExample](https://github.com/user-attachments/assets/f937dd7c-1a39-418f-9de5-7ee15cb822b2)
+<img width="800" height="435" alt="Module-Hover-Distance-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/aa52ea1c-1797-4f20-8991-e65a2e082e6e" />
 
 
 
