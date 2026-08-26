@@ -111,6 +111,9 @@ The following rounding modes are available:
 This module supports the [HoverDistance](https://wiki.theripper93.com/premium/hover-distance) module from TheRipper93. 
 You can enable/disable the labels in the settings. 
 
+![HoverDistanceExample](https://github.com/user-attachments/assets/f937dd7c-1a39-418f-9de5-7ee15cb822b2)
+
+
 
 ## Installation
 To install, follow these instructions:
